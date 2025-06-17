@@ -1,0 +1,80 @@
+{
+    "workbench.settings.applyToAllProfiles": [
+        "editor.fontFamily",
+        "terminal.integrated.fontFamily",
+        "editor.fontLigatures",
+        "editor.fontSize",
+        "workbench.iconTheme",
+        "workbench.productIconTheme",
+        "workbench.colorTheme",
+        "editor.rulers",
+        "editor.lineNumbers",
+        "workbench.editor.empty.hint",
+        "explorer.confirmDelete",
+        "telemetry.telemetryLevel",
+        "security.workspace.trust.untrustedFiles",
+        "diffEditor.ignoreTrimWhitespace",
+        "editor.minimap.autohide",
+        "chat.commandCenter.enabled",
+        "workbench.editorAssociations",
+        "editor.formatOnSave",
+        "terminal.external.windowsExec",
+        "terminal.integrated.defaultProfile.windows",
+        "git.openRepositoryInParentFolders",
+        "git.enableSmartCommit",
+        "git.confirmSync",
+        "git.openAfterClone",
+        "git.timeline.showUncommitted",
+        "git.autofetch",
+        "errorLens.gutterIconsEnabled",
+        "errorLens.fontStyleItalic",
+        "errorLens.followCursor",
+        "errorLens.messageTemplate",
+        "extensions.experimental.affinity"
+    ],
+
+    "editor.fontFamily": "'Maple Mono NF CN'",
+    "terminal.integrated.fontFamily": "'Maple Mono NF CN'",
+    "editor.fontLigatures": "'cv01','cv03','cv96','cv97','ss03','ss05','ss08'",
+    "editor.fontSize": 16,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.rulers": [
+        80,
+        120
+    ],
+
+    "editor.lineNumbers": "relative",
+    "workbench.editor.empty.hint": "hidden",
+    "explorer.confirmDelete": false,
+    "telemetry.telemetryLevel": "off",
+    "security.workspace.trust.untrustedFiles": "open",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.minimap.autohide": true,
+    "chat.commandCenter.enabled": false,
+    "workbench.editorAssociations": {
+        "{hexdiff}:/**/*.*": "hexEditor.hexedit",
+        "*.hex": "hexEditor.hexedit"
+    },
+    "editor.formatOnSave": true,
+    "terminal.external.windowsExec": "Nushell",
+    "terminal.integrated.defaultProfile.windows": "Nushell",
+
+    "git.openRepositoryInParentFolders": "never",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.openAfterClone": "alwaysNewWindow",
+    "git.timeline.showUncommitted": true,
+    "git.autofetch": true,
+
+    "errorLens.gutterIconsEnabled": true,
+    "errorLens.fontStyleItalic": true,
+    "errorLens.followCursor": "activeLine",
+    "errorLens.messageTemplate": "$message $source($code)",
+
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    }
+
+}

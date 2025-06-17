@@ -1,0 +1,199 @@
+# 此文件由i3-config-wizard(1)自动生成。
+# 它不会被覆盖，所以可以根据喜好进行编辑。
+#
+# 如果您更改了键盘布局，请删除
+# 此文件并重新运行i3-config-wizard(1)。
+#
+
+# i3配置文件（v4）
+#
+# 请参阅https://i3wm.org/docs/userguide## 调整窗口大小（您也可以使用鼠标进行此操作）
+
+set $mod Mod4
+
+# 窗口标题的字体。除非在下面的bar {}块中使用了不同的字体，
+# 否则也将被bar使用。
+font pango:Source Han Sans SC 10
+
+# 这种字体被广泛安装，提供了大量的Unicode符号，从右到左的
+# 文本渲染以及视网膜/HiDPI显示器上的可伸缩性（感谢pango）。
+#font pango:DejaVu Sans Mono 8
+
+# 使用dex启动XDG自动启动.desktop文件。另请参阅
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# xss-lock、nm-applet和pactl的组合是一个流行的选择，
+# 因此它们作为示例包含在这里。根据需要进行修改。
+
+# xss-lock获取logind挂起抑制锁，并将使用i3lock在挂起前
+# 锁定屏幕。使用loginctl lock-session锁定屏幕。
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager是Linux上管理无线网络的最流行方式，
+# nm-applet是其桌面环境独立的系统托盘GUI。
+#exec --no-startup-id nm-applet
+
+# 设置壁纸
+exec --no-startup-id sleep 1 && feh --bg-fill ~/.config/i3/wallpaper.jpg
+
+# 使用pactl调整PulseAudio的音量。
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# 使用Mouse+$mod拖动浮动窗口到想要的位置
+floating_modifier $mod
+
+# 通过左击标题栏或按住浮动修饰键左击窗口任意位置，
+# 可以通过拖放来移动平铺窗口。
+tiling_drag modifier titlebar
+
+# 启动终端
+bindsym $mod+Return exec wezterm
+
+# 关闭聚焦的窗口
+bindsym $mod+Shift+q kill
+
+# 启动rofi（程序启动器）
+bindsym $mod+d exec rofi -modi drun -show drun
+
+
+# 改变焦点
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# 另外，您也可以使用光标键：
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# 移动聚焦的窗口
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# 另外，您也可以使用光标键：
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# 水平分割方向
+bindsym $mod+h split h
+
+# 垂直分割方向
+bindsym $mod+v split v
+
+# 为聚焦的容器进入全屏模式
+bindsym $mod+f fullscreen toggle
+
+# 更改容器布局（堆叠、标签页、切换分割）
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# 切换平铺/浮动
+bindsym $mod+Shift+space floating toggle
+
+# 在平铺/浮动窗口之间切换焦点
+bindsym $mod+space focus mode_toggle
+
+# 聚焦父容器
+bindsym $mod+a focus parent
+
+# 聚焦子容器
+#bindsym $mod+d focus child
+
+# 为稍后配置键绑定的默认工作区定义名称。
+# 我们使用变量以避免在多个地方重复名称。
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# 切换到工作区
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# 将聚焦的容器移动到工作区
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# 重新加载配置文件
+bindsym $mod+Shift+c reload
+# 重新启动i3（保留您的布局/会话，可用于升级i3）
+bindsym $mod+Shift+r restart
+# 退出i3（注销您的X会话）
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '您按下了退出快捷键。您真的想要退出i3吗？这将结束您的X会话。' -B '是的，退出i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # 相同的绑定，但用于方向键
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # 返回正常：Enter或Escape或$mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# 启动i3bar显示工作区栏（以及i3status
+# 找到的系统信息，如果可用）
+bar {
+	font pango: Source Han Sans SC , Material Design Icons 12
+	status_command i3status-rs 
+        # workspace_command 
+        position top
+
+        strip_workspace_numbers yes
+        workspace_min_width 30
+}
+
+default_border pixel
+smart_borders on
+smart_gaps on

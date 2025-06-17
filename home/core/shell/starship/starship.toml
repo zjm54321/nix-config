@@ -1,0 +1,155 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+$status $directory ($git_branch )
+"""
+
+right_format = """
+($c )\ 
+($cpp )\ 
+($cmake )\ 
+($dart )\ 
+($docker_context )\ 
+($dotnet )\ 
+($gcloud )\ 
+($golang )\ 
+($haskell )\ 
+($java )\ 
+($kotlin )\ 
+($lua )\ 
+($nodejs )\ 
+($php )\ 
+($python )\ 
+($ruby )\ 
+($rust )\ 
+($swift )\
+"""
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style)"
+truncation_length = 2
+truncation_symbol = '../'
+use_os_path_sep = false
+home_symbol = '󱂵 '
+read_only = ' 󰉐'
+read_only_style = "bold cyan"
+
+[status]
+disabled = false
+format = '[$symbol]($style)'
+symbol = ""
+style = "bold red"
+success_symbol = ""
+success_style = "bold green"
+
+# 编程环境
+
+[c]
+format = '[$symbol]($style)'
+symbol = ""
+
+[cpp]
+format = '[$symbol]($style)'
+symbol = ""
+
+[cmake] #[Todo) 无符号
+format = '[$symbol]($style)'
+symbol = "Cmake"
+
+[dart]
+format = '[$symbol]($style)'
+symbol = ""
+
+[docker_context]
+format = '[$symbol]($style)'
+symbol = "󰡨"
+
+[dotnet]
+format = '[$symbol]($style)'
+symbol = "󰪮"
+
+[gcloud]
+format = '[$symbol]($style)'
+symbol = "󱇶"
+
+[git_branch]
+format = '[$symbol $branch(:$remote_branch)]($style)'
+symbol = "󰊢"
+
+[golang]
+format = '[$symbol]($style)'
+symbol = "󰟓"
+
+[haskell]
+format = '[$symbol]($style)'
+symbol = "󰲒"
+
+[java]
+format = '[$symbol]($style)'
+symbol = "󰬷"
+
+[kotlin]
+format = '[$symbol]($style)'
+symbol = "󱈙"
+
+[lua]
+format = '[$symbol]($style)'
+symbol = "󰢱"
+
+[nodejs]
+format = '[$symbol]($style)'
+symbol = "󰎙"
+
+[php]
+format = '[$symbol]($style)'
+symbol = "󰌟"
+
+[python]
+format = '[$symbol]($style)'
+symbol = "󰌠"
+
+[ruby]
+format = '[$symbol]($style)'
+symbol = "󰴭"
+
+[rust]
+format = '[$symbol]($style)'
+symbol = "󱘗"
+
+[swift]
+format = '[$symbol]($style)'
+symbol = "󰛥"
+
+
+# 停用以下系统设置
+[fill]
+disabled = true
+
+[hostname]
+disabled = true
+
+[jobs]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[package]
+disabled = true
+
+[time]
+disabled = true
+
+[username]
+disabled = true
+
+#与nushell冲突
+[character]
+disabled = true
+success_symbol = '[$](bold green)'
+error_symbol = '[$](bold red)'

@@ -1,0 +1,45 @@
+icons_format = "{icon}"
+error_format = ""
+
+[theme]
+theme = "semi-native"
+
+[icons]
+icons = "material-nf"
+
+# [todo] 点击事件
+
+[[block]]
+block = "battery"
+merge_with_next = true
+format = " $icon"
+missing_format = ""
+
+[[block]]
+block = "net"
+merge_with_next = true
+format = " $icon"
+
+[[block]]
+block = "backlight"
+merge_with_next = true
+format = " $icon"
+missing_format = ""
+
+[[block]]
+block = "sound"
+format = " $icon "
+
+[[block]]
+block = "time"
+interval = 1
+format = " $timestamp.datetime(f:'%m-%d %H:%M:%S') "
+
+[[block]]
+block = "notify"
+[[block.click]]
+button = "left"
+action = "show"
+[[block.click]]
+button = "right"
+action = "toggle_paused"
