@@ -9,6 +9,7 @@ with lib;
     ./fonts.nix
     ./kmscon.nix
     ./ly.nix
+    ./keymap
   ];
 
   options = {
@@ -26,5 +27,7 @@ with lib;
     services.kmscon.enable = true;
     # 启用字体服务
     services.display.core.fonts.enable = true;
+    # 启用按键重映射
+    services.kanata.enable = true;
   };
 }

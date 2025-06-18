@@ -1,0 +1,134 @@
+#|
+  Kanata 键盘布局
+  2025-06-18
+  作者:ming
+|#
+
+(defsrc
+  esc         F1   F2   F3   F4   F5   F6   F7   F8   F9   F10  F11  F12   prnt   slck   pause
+  grv    1    2    3    4    5    6    7    8    9    0    -    =   bspc   ins    home   pgup      nlk    kp/    kp*    kp-
+  tab     q    w    e    r    t    y    u    i    o    p    [    ]    \    del    end    pgdn      kp7    kp8    kp9    kp+
+  caps     a    s    d    f    g    h    j    k    l    ;    '     enter                           kp4    kp5    kp6
+  lsft      z    x    c    v    b    n    m    ,    .    /        rshift           up              kp3    kp2    kp1    kprt
+  lctl  lmet  lalt          spc               ralt   rmet   menu   rctrl   left   down   rght      kp0           kp.
+)
+
+(deflayer base
+  esc       F1   F2   F3   F4   F5   F6   F7   F8   F9   F10  F11  F12   prnt   slck   pause
+  @`     @1   @2   @3   @4   @5   @6   @7   @8   @9   @0   @-   @=  bspc   ins    home   pgup      nlk    kp/    kp*    kp-
+  tab     @q   @w   @e   @r   @t   @y   @u   @i   @o   @p   @[   @]   @\   del    end    pgdn      kp7    kp8    kp9    kp+
+  @caps     @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @'    enter                           kp4    kp5    kp6
+  @lang     @z   @x   @c   @v   @b   @n   @m   @,   @.   @/       rshift           up              kp3    kp2    kp1    kprt
+  lctl  lmet  lalt          spc               ralt   rmet   @menu  rctrl   left   down   rght      kp0           kp.
+)
+
+(deflayermap none
+menu @menu
+)
+
+(deflayermap vim_input
+  caps (layer-switch vim_ctrl)
+  menu @menu
+)
+
+;; Vim layer map - 完整的 vim 功能映射
+(deflayermap vim_ctrl
+  h left                        ;; h - 左移
+  j down                        ;; j - 下移  
+  k up                          ;; k - 上移
+  l rght                        ;; l - 右移
+  x del                         ;; x - 删除字符
+  i (layer-switch vim_input)    ;; i - 进入插入模式
+  w C-rght                      ;; w - 下一个单词
+  b C-left                      ;; b - 上一个单词
+  0 home                        ;; 0 - 行首
+  4 end                         ;; 4 - 行尾 (使用4键代替$)
+  u C-z                         ;; u - 撤销
+  r C-y                         ;; r - 重做 (Ctrl+Y)
+  y C-c                         ;; y - 复制
+  p C-v                         ;; p - 粘贴
+  d C-x                         ;; d - 剪切
+  / C-f                         ;; / - 查找
+  n F3                          ;; n - 查找下一个
+  g home                        ;; g - 文档开头（简化）
+  o enter                       ;; o - 换行（简化版本）
+  esc (layer-switch vim_ctrl)   ;; ESC - 返回控制模式
+  menu @menu                    ;; menu - 切换键层
+  _ XX
+)
+
+(deflayermap navigation
+1 (layer-switch none)
+2 (layer-switch base) 
+3 (layer-switch vim_ctrl)
+_ XX
+)
+
+(defvar
+  tap-timeout   1
+  hold-timeout  160
+  tt            $tap-timeout
+  ht            $hold-timeout
+  lang          C-spc
+)
+
+(defalias
+  lang  (tap-hold $tt $ht $lang lsft)
+  menu  (tap-hold $tt $ht menu (layer-while-held navigation)) ;; 切换键层
+  caps  (tap-hold $tt $ht (tap-dance $ht (
+                          esc                 ;; 轻按一下:  ESC
+          (tap-hold $tt $ht  
+                          (caps-word 2000)    ;; 轻按两下:  大写锁定
+                          caps)))             ;; 轻按长按： 智能大写锁定
+                          lctl)               ;; 长按一下:  Ctrl
+)
+
+(defalias ;;自动大写
+  a (tap-hold $tt $ht a S-a)
+  b (tap-hold $tt $ht b S-b)
+  c (tap-hold $tt $ht c S-c)
+  d (tap-hold $tt $ht d S-d)
+  e (tap-hold $tt $ht e S-e)
+  f (tap-hold $tt $ht f S-f)
+  g (tap-hold $tt $ht g S-g)
+  h (tap-hold $tt $ht h S-h)
+  i (tap-hold $tt $ht i S-i)
+  j (tap-hold $tt $ht j S-j)
+  k (tap-hold $tt $ht k S-k)
+  l (tap-hold $tt $ht l S-l)
+  m (tap-hold $tt $ht m S-m)
+  n (tap-hold $tt $ht n S-n)
+  o (tap-hold $tt $ht o S-o)
+  p (tap-hold $tt $ht p S-p)
+  q (tap-hold $tt $ht q S-q)
+  r (tap-hold $tt $ht r S-r)
+  s (tap-hold $tt $ht s S-s)
+  t (tap-hold $tt $ht t S-t)
+  u (tap-hold $tt $ht u S-u)
+  v (tap-hold $tt $ht v S-v)
+  w (tap-hold $tt $ht w S-w)
+  x (tap-hold $tt $ht x S-x)
+  y (tap-hold $tt $ht y S-y)
+  z (tap-hold $tt $ht z S-z)
+  1 (tap-hold $tt $ht 1 S-1)
+  2 (tap-hold $tt $ht 2 S-2)
+  3 (tap-hold $tt $ht 3 S-3)
+  4 (tap-hold $tt $ht 4 S-4)
+  5 (tap-hold $tt $ht 5 S-5)
+  6 (tap-hold $tt $ht 6 S-6)
+  7 (tap-hold $tt $ht 7 S-7)
+  8 (tap-hold $tt $ht 8 S-8)
+  9 (tap-hold $tt $ht 9 S-9)
+  0 (tap-hold $tt $ht 0 S-0)
+  - (tap-hold $tt $ht - S--)
+  = (tap-hold $tt $ht = S-=)
+  [ (tap-hold $tt $ht [ S-[)
+  ] (tap-hold $tt $ht ] S-])
+  \ (tap-hold $tt $ht \ S-\)
+  ; (tap-hold $tt $ht ; S-;)
+  ' (tap-hold $tt $ht ' S-')
+  , (tap-hold $tt $ht , S-,)
+  . (tap-hold $tt $ht . S-.)
+  / (tap-hold $tt $ht / S-/)
+  ` (tap-hold $tt $ht grv S-grv)
+)
