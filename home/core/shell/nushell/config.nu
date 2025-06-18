@@ -23,5 +23,6 @@ $env.config.shell_integration = {
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
-#source auto-complete/git.nu
+# 添加自动补全
+source auto-complete/git.nu
 

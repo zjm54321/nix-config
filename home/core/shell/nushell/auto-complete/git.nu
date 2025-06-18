@@ -1,3 +1,5 @@
+# https://github.com/nushell/nu_scripts/blob/main/custom-completions/git/git-completions.nu
+
 # nu-version: 0.102.0
 
 module git-completion-utils {
@@ -551,6 +553,34 @@ export extern "git branch" [
   --track(-t)                                                    # 创建分支时设置上游
 ]
 
+# 列出配置文件中设置的所有变量及其值。
+export extern "git config list" [
+]
+
+# 输出指定键的值。
+export extern "git config get" [
+]
+
+# 为一个或多个配置选项设置值。
+export extern "git config set" [
+]
+
+# 取消设置一个或多个配置选项的值。
+export extern "git config unset" [
+]
+
+# 将给定部分重命名为新名称。
+export extern "git config rename-section" [
+]
+
+# 从配置文件中删除给定部分。
+export extern "git config remove-section" [
+]
+
+# 打开编辑器来修改指定的配置文件
+export extern "git config edit" [
+]
+
 # 列出或更改跟踪的存储库
 export extern "git remote" [
   --verbose(-v)                            # 显示远程的 URL
@@ -747,7 +777,7 @@ export extern "git help" [
   command?: string@"nu-complete git subcommands"       # 要显示帮助的子命令
 ]
 
-# git worktree
+# git 工作树
 export extern "git worktree" [
   --help(-h)            # 显示此命令的帮助消息
   ...args
