@@ -91,6 +91,31 @@
               }
             ];
           };
+
+        sgo3 =
+          let
+            vars = import ./vars;
+            specialArgs = { inherit inputs vars; };
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+
+            modules = [
+              ./host/sgo3
+              ./module
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.extraSpecialArgs = inputs // specialArgs;
+                home-manager.users.${vars.username} = import ./host/sgo3/home.nix;
+              }
+            ];
+          };
+
       };
     }
     // flake-utils.lib.eachDefaultSystem (
