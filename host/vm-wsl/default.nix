@@ -1,4 +1,9 @@
 {
+  lib,
+  ...
+}:
+with lib;
+{
   networking.hostName = "vm-wsl";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
@@ -12,5 +17,6 @@
   system.stateVersion = "25.05";
 
   services.display.desktop = "i3"; # Use the core desktop environment
+  services.kanata.enable = mkForce false; # wsl 下无需 kanata
 
 }
