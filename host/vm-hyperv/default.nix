@@ -9,6 +9,7 @@
 
   networking.hostName = "vm-hyperv"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.proxy.mihomo.enable = true; # 启用代理
 
   system.stateVersion = "25.05";
 
