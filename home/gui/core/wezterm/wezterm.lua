@@ -27,9 +27,6 @@ local config = {
   initial_cols = 80,
   initial_rows = 24,
 
-  window_background_opacity = 0,
-  win32_system_backdrop = 'Acrylic',
-
   tab_bar_at_bottom = true,
   use_fancy_tab_bar = false,
 
@@ -50,7 +47,7 @@ local config = {
   font_size = 16.0,
 
   -- 背景透明度
-  window_background_opacity = 0,
+  window_background_opacity = 0.7,
   -- 关闭时无需确认
   window_close_confirmation = 'NeverPrompt',
 
