@@ -45,6 +45,7 @@ with lib;
         # maple mono
         maple-mono.NF-CN
 
+        ibm-plex
       ];
 
       fontconfig.defaultFonts = {
