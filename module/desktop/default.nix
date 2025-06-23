@@ -36,7 +36,7 @@ in
       services.xserver.windowManager.i3.enable = true;
     })
     (mkIf (cfg == "niri") {
-      programs.niri.enable = true;
+      services.display.niri.enable = true;
     })
     (mkIf (cfg == "sway") {
       programs.sway.enable = true;
