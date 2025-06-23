@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -16,16 +15,7 @@ with lib;
 
   config = mkIf config.services.display.niri.enable {
     services.displayManager.defaultSession = "niri";
-    programs.niri = {
-      enable = true;
-    };
-    environment.systemPackages = with pkgs; [
-      anyrun # 应用程序启动器
-      mako # 通知守护程序
-      waybar # 状态栏
-      hyprlock # 屏幕锁定器
-      xwayland-satellite # XWayland 适配器
-    ];
-
+    programs.niri.enable = true;
+    security.pam.services.hyprlock = { };
   };
 }
