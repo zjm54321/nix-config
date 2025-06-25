@@ -1,6 +1,6 @@
 {
   imports = [
-    ./fcitx5
+    ./fcitx5.nix
     ./firefox
     ./vscode
     ./wezterm

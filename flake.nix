@@ -26,6 +26,10 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    # 你的 rime 配置
+    my-rime-config.url = "git+ssh://git@github.com/zjm54321/my-rime-config.git";
+    my-rime-config.flake = false;
   };
   outputs =
     inputs@{
