@@ -1,5 +1,5 @@
 {
-  pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -14,46 +14,12 @@
     };
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      waylandFrontend = true;
-      addons = with pkgs; [
-        # 用于rime中文输入法
-        fcitx5-rime
-        # 安装后需要使用配置工具启用 rime
-        fcitx5-configtool
-        fcitx5-chinese-addons
-        fcitx5-gtk # gtk 输入法模块
-      ];
-
-      settings = {
-        inputMethod = {
-          GroupOrder."0" = "Default";
-          "Groups/0" = {
-            Name = "Default";
-            "Default Layout" = "us";
-            DefaultIM = "rime";
-          };
-          "Groups/0/Items/0".Name = "rime";
-        };
-      };
-    };
+  home.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    INPUT_METHOD = "fcitx5";
   };
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      librime =
-        (prev.librime.override {
-          plugins = with pkgs; [
-            librime-lua
-            librime-octagram
-          ];
-        }).overrideAttrs
-          (old: {
-            buildInputs = (old.buildInputs or [ ]) ++ [ pkgs.luajit ]; # 用luajit
-          });
-    })
-  ];
+  # 不需要这个服务
+  systemd.user.services."app-org.fcitx.Fcitx5@autostart" = lib.mkForce { };
 }

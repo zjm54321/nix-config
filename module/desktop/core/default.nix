@@ -6,6 +6,7 @@
 with lib;
 {
   imports = [
+    ./fcitx5.nix
     ./fonts.nix
     ./kmscon.nix
     ./ly.nix
@@ -29,5 +30,7 @@ with lib;
     services.display.core.fonts.enable = true;
     # 启用按键重映射
     services.kanata.enable = mkDefault true;
+    # 启用输入法
+    services.input.enable = mkDefault true;
   };
 }

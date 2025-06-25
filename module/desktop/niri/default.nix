@@ -17,5 +17,6 @@ with lib;
     services.displayManager.defaultSession = "niri";
     programs.niri.enable = true;
     security.pam.services.hyprlock = { };
+    i18n.inputMethod.fcitx5.waylandFrontend = true;
   };
 }
