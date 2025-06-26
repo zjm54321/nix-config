@@ -4,6 +4,7 @@
 }:
 with lib;
 {
+  imports = [ ./wsl.nix ];
   networking.hostName = "vm-wsl";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 

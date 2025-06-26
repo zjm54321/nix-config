@@ -37,91 +37,36 @@
     inputs@{
       self,
       nixpkgs,
-      home-manager,
-      nixos-wsl,
       flake-utils,
       ...
     }:
+    let
+      vars = import ./vars;
+      system = "x86_64-linux";
+      mknixosConfigurations =
+        hostname:
+        let
+          specialArgs = { inherit inputs hostname vars; };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system specialArgs;
+          modules = [ ./module ];
+        };
+    in
     {
       nixosConfigurations = {
         vm-hyperv =
           let
-            vars = import ./vars;
-            specialArgs = { inherit inputs vars; };
+            hostname = "vm-hyperv";
+            specialArgs = { inherit inputs hostname vars; };
           in
           nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-
-            modules = [
-              ./host/vm-hyperv
-              ./module
-
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${vars.username} = import ./host/vm-hyperv/home.nix;
-              }
-            ];
+            inherit system specialArgs;
+            modules = [ ./module ];
           };
 
-        vm-wsl =
-          let
-            vars = import ./vars;
-            specialArgs = { inherit inputs vars; };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-
-            modules = [
-              ./host/vm-wsl
-              ./module
-
-              nixos-wsl.nixosModules.default
-              {
-                system.stateVersion = "25.05";
-                wsl.enable = true;
-                wsl.defaultUser = vars.username;
-              }
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${vars.username} = import ./host/vm-wsl/home.nix;
-              }
-            ];
-          };
-
-        sgo3 =
-          let
-            vars = import ./vars;
-            specialArgs = { inherit inputs vars; };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-
-            modules = [
-              ./host/sgo3
-              ./module
-
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${vars.username} = import ./host/sgo3/home.nix;
-              }
-            ];
-          };
-
+        vm-wsl = mknixosConfigurations "vm-wsl";
+        sgo3 = mknixosConfigurations "sgo3";
       };
     }
     // flake-utils.lib.eachDefaultSystem (

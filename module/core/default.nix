@@ -1,5 +1,11 @@
 {
+  hostname,
+  ...
+}:
+{
   imports = [
+    ../../host/${hostname}
+    ./home.nix
     ./i18n.nix
     ./misc.nix
     ./network.nix
