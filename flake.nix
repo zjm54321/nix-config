@@ -41,11 +41,11 @@
       ...
     }:
     let
-      vars = import ./vars;
-      system = "x86_64-linux";
       mknixosConfigurations =
         hostname:
         let
+          vars = import ./vars;
+          system = "x86_64-linux";
           specialArgs = { inherit inputs hostname vars; };
         in
         nixpkgs.lib.nixosSystem {
@@ -55,16 +55,7 @@
     in
     {
       nixosConfigurations = {
-        vm-hyperv =
-          let
-            hostname = "vm-hyperv";
-            specialArgs = { inherit inputs hostname vars; };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit system specialArgs;
-            modules = [ ./module ];
-          };
-
+        vm-hyperv = mknixosConfigurations "vm-hyperv";
         vm-wsl = mknixosConfigurations "vm-wsl";
         sgo3 = mknixosConfigurations "sgo3";
       };
