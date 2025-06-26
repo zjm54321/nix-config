@@ -10,6 +10,7 @@ with lib;
     ./fonts.nix
     ./kmscon.nix
     ./ly.nix
+    ./plymouth.nix
     ./keymap
   ];
 

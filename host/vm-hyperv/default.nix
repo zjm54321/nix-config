@@ -14,5 +14,6 @@
   system.stateVersion = "25.05";
 
   services.display.desktop = "sway"; # Use the core desktop environment
+  services.display.bootanmination.enable = true;
 
 }
