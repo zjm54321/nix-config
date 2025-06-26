@@ -94,11 +94,11 @@
     "my-rime-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1750839643,
-        "narHash": "sha256-d30f73IuD8vJwFb9hkaiDdF1i7JdcoAFt74etP5cQIY=",
+        "lastModified": 1750907490,
+        "narHash": "sha256-tzis06W468Ooilj5Y1XC27JixP3EjFFTpyg235zibsQ=",
         "ref": "refs/heads/main",
-        "rev": "880f9cb8311950bcb140de88c6570963907e5ccb",
-        "revCount": 258,
+        "rev": "bfb752e47955465a7fbc8dec2da71941c1480e94",
+        "revCount": 1,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/my-rime-config.git"
       },
@@ -229,6 +229,23 @@
         "type": "github"
       }
     },
+    "rime-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750564215,
+        "narHash": "sha256-k8JmrRKjp66qT5oWUsOb7nUPMGU6U9ReQUzgzNzFM3U=",
+        "owner": "Mintimate",
+        "repo": "oh-my-rime",
+        "rev": "3c1ec5a360282694d9f26ce1b70855d13d3f4ed3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mintimate",
+        "ref": "main",
+        "repo": "oh-my-rime",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -238,7 +255,8 @@
         "nix-vscode-server": "nix-vscode-server",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "rime-config": "rime-config"
       }
     },
     "systems": {
