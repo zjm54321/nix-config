@@ -13,6 +13,8 @@
   };
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -25,13 +27,13 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
-    # rime 配置
     rime-config.url = "github:Mintimate/oh-my-rime/main";
     my-rime-config.url = "git+ssh://git@github.com/zjm54321/my-rime-config.git";
     rime-config.flake = false;
     my-rime-config.flake = false;
+
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{

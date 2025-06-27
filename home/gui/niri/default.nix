@@ -21,4 +21,6 @@
   # 通知设置
   services.mako.enable = true;
 
+  programs.niri.config = builtins.readFile ./niri.kdl;
+
 }
