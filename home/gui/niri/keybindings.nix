@@ -22,14 +22,17 @@
 
     # 打开应用程序
     "Mod+Return" = {
+      repeat = false;
       hotkey-overlay.title = "打开终端: wezterm";
       action = spawn "wezterm";
     };
     "Mod+Space" = {
+      repeat = false;
       hotkey-overlay.title = "运行应用程序: anyrun";
       action = spawn "anyrun";
     };
     "Mod+Alt+L" = {
+      repeat = false;
       hotkey-overlay.title = "锁定屏幕: hyprlock";
       action = spawn "hyprlock";
     };
@@ -63,6 +66,10 @@
       hotkey-overlay.title = "截图";
       action = screenshot;
     };
+
+    # 鼠标控制
+    "Mod+WheelScrollUp".action = focus-column-left;
+    "Mod+WheelScrollDown".action = focus-column-right;
 
     # 窗口控制
     "Mod+H" = {
@@ -167,6 +174,23 @@
     "Mod+7".action = focus-workspace 7;
     "Mod+8".action = focus-workspace 8;
     "Mod+9".action = focus-workspace 9;
+
+    "Mod+U" = {
+      hotkey-overlay.title = "焦点移至下一工作区";
+      action = focus-workspace-down;
+    };
+    "Mod+I" = {
+      hotkey-overlay.title = "焦点移至上一工作区";
+      action = focus-workspace-up;
+    };
+    "Mod+Ctrl+U" = {
+      hotkey-overlay.title = "移动列至下一工作区";
+      action = move-column-to-workspace-down;
+    };
+    "Mod+Ctrl+I" = {
+      hotkey-overlay.title = "移动列至上一工作区";
+      action = move-column-to-workspace-up;
+    };
 
   };
 }

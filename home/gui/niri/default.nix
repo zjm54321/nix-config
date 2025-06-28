@@ -46,6 +46,7 @@
 
     # https://github.com/YaLTeR/niri/wiki/Configuration:-Input
     input.keyboard.numlock = true;
+    input.focus-follows-mouse.enable = true;
     # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
     layout = {
       gaps = 12;
