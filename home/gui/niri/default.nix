@@ -6,6 +6,7 @@
   imports = [
     ./keybindings.nix
 
+    ./hypridle.nix
     ./wlogout.nix
   ];
 
