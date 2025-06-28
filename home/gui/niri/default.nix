@@ -11,6 +11,7 @@
     anyrun # 应用程序启动器
     libnotify # 提供 notify-send 命令
     xwayland-satellite # XWayland 适配器
+    wlr-randr # 用于调整显示器设置
   ];
 
   programs.waybar = {
