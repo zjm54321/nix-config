@@ -5,6 +5,8 @@
 {
   imports = [
     ./keybindings.nix
+
+    ./wlogout.nix
   ];
 
   home.packages = with pkgs; [
