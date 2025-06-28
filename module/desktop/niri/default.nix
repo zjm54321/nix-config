@@ -9,6 +9,7 @@ with lib;
 {
   imports = [
     inputs.niri.nixosModules.niri
+    ./regreet.nix
   ];
 
   options = {
@@ -16,7 +17,11 @@ with lib;
   };
 
   config = mkIf config.services.display.niri.enable {
+    # 登录管理器
     services.displayManager.defaultSession = "niri";
+    services.displayManager.ly.enable = mkForce false;
+    services.regreet.enable = true;
+
     security.pam.services.hyprlock = { };
     i18n.inputMethod.fcitx5.waylandFrontend = true;
 

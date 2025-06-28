@@ -23,8 +23,8 @@ with lib;
 
   config = mkIf config.services.display.core.enable {
     # 启用登录管理器
-    services.displayManager.enable = true;
-    services.displayManager.ly.enable = true;
+    services.displayManager.enable = mkDefault true;
+    services.displayManager.ly.enable = mkDefault true;
     # 启用kmscon作为虚拟控制台
     services.kmscon.enable = true;
     # 启用字体服务
