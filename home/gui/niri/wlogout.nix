@@ -23,7 +23,7 @@
       }
       {
         label = "logout";
-        action = "systemctl --user logout";
+        action = "loginctl terminate-user $USER";
         text = "注销";
         keybind = "o";
       }
