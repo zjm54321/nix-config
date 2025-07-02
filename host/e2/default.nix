@@ -13,6 +13,7 @@
   system.stateVersion = "25.05";
 
   services.display.desktop = "niri";
+  services.secureboot.enable = true;
   services.display.bootanmination.enable = true;
   networking.proxy.mihomo.enable = true; # 启用代理
 }

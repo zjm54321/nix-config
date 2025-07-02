@@ -5,6 +5,7 @@
 {
   imports = [
     ../../host/${hostname}
+    ./encryption.nix
     ./home.nix
     ./i18n.nix
     ./misc.nix
