@@ -14,6 +14,7 @@
 
   services.display.desktop = "niri";
   services.secureboot.enable = true;
+  services.tpm2.enable = true;
   services.display.bootanmination.enable = true;
   networking.proxy.mihomo.enable = true; # 启用代理
 }
