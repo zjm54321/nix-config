@@ -60,6 +60,7 @@
         vm-hyperv = mknixosConfigurations "vm-hyperv";
         vm-wsl = mknixosConfigurations "vm-wsl";
         sgo3 = mknixosConfigurations "sgo3";
+        e2 = mknixosConfigurations "e2";
       };
     }
     // flake-utils.lib.eachDefaultSystem (
