@@ -5,13 +5,13 @@
 {
   imports = [
     ../../host/${hostname}
-    ./encryption.nix
     ./home.nix
     ./i18n.nix
     ./misc.nix
     ./network.nix
     ./nix.nix
     ./programs.nix
+    ./security.nix
     ./ssh.nix
     ./tailscale.nix
     ./user.nix
