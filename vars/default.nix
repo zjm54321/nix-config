@@ -1,7 +1,7 @@
 {
   username = "ming";
-  userfullname = "Zhang Jia Ming";
-  useremail = "changchiaming@qq.com"; # [todo] 修改为outlook
+  userfullname = "章家铭";
+  useremail = "zhang_jia_ming@outlook.com";
   initialHashedPassword = "$7$CU..../....vGtVLf5WylKSnJV2R4IaW1$nnsefqHmGiSxV.IIhh71G2VGBixLpYrORADhXAY8CtB";
   gpgAuthorizedKeys = [ "" ];
   sshAuthorizedKeys = [
