@@ -6,7 +6,6 @@
 {
 
   programs.vscode = {
-    enable = true;
     package = pkgs.vscodium.override {
       commandLineArgs = [
         "--ozone-platform-hint=auto"

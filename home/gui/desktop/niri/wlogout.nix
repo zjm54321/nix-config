@@ -1,7 +1,5 @@
 {
   programs.wlogout = {
-    enable = true;
-
     layout = [
       {
         label = "lock";

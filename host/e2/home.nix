@@ -5,8 +5,6 @@
 {
   imports = [
     ../../home
-    ../../home/gui
-    ../../home/gui/niri
   ];
 
   home.packages = with pkgs; [
@@ -16,4 +14,5 @@
   programs = {
     wiliwili.enable = true;
   };
+  gui.de = "niri";
 }

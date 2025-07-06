@@ -5,6 +5,7 @@
 {
   imports = [
     ./core
+    ./gui
   ];
 
   # Home Manager 需要一些关于您的信息以及它应该管理的路径。

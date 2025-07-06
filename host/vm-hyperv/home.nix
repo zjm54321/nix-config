@@ -1,6 +1,7 @@
 {
   imports = [
     ../../home
-    ../../home/gui
   ];
+
+  gui.de = "sway";
 }

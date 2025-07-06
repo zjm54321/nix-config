@@ -1,17 +1,20 @@
 {
   pkgs,
+  lib,
+  config,
   ...
 }:
+with lib;
 {
-  home.packages = with pkgs; [
-    wezterm
-  ];
+  options.programs.wezterm_with_cfg.enable = mkEnableOption "启用WezTerm终端模拟器";
 
-  programs.wezterm = {
-    enable = true;
-    extraConfig = builtins.readFile ./wezterm.lua;
+  config = mkIf config.programs.wezterm_with_cfg.enable {
+    programs.wezterm = {
+      enable = true;
+      extraConfig = builtins.readFile ./wezterm.lua;
+    };
+
+    home.sessionVariables.TERMINAL = "wezterm";
+
   };
-
-  home.sessionVariables.TERMINAL = "wezterm";
-
 }
