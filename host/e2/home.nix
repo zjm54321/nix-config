@@ -12,4 +12,8 @@
   home.packages = with pkgs; [
     remmina
   ];
+
+  programs = {
+    wiliwili.enable = true;
+  };
 }
