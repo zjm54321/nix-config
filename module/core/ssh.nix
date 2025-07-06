@@ -23,8 +23,8 @@ in
 
   # SSH 密钥设置
   users.users.${vars.username}.openssh.authorizedKeys.keys =
-    vars.gpgAuthorizedKeys ++ vars.sshAuthorizedKeys;
-  users.users.root.openssh.authorizedKeys.keys = vars.gpgAuthorizedKeys;
+    vars.primaryAuthorizedKeys ++ vars.secondaryAuthorizedKeys;
+  users.users.root.openssh.authorizedKeys.keys = vars.primaryAuthorizedKeys;
 
   # 将所有已知终端的 terminfo 数据库添加到系统配置文件中。
   # https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/terminfo.nix
