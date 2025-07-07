@@ -1,5 +1,6 @@
 {
   vars,
+  lib,
   ...
 }:
 {
@@ -39,10 +40,9 @@
     };
 
     # 签名配置
-    signing = {
+    signing = lib.mkDefault {
       format = "ssh";
       key = "~/.ssh/git/signing"; # ssh签名密钥
-      #  key = "EC6024351D2C32CD!"; #gpg签名密钥
       signByDefault = true; # 默认启用签名
     };
 

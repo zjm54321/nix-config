@@ -34,5 +34,25 @@ with lib;
       security.tpm2.tctiEnvironment.enable = true;
       users.users.${vars.username}.extraGroups = [ "tss" ];
     })
+
+    {
+      # GPG 和智能卡支持
+      programs.gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+        pinentryPackage = pkgs.pinentry-gtk2;
+        settings = {
+          default-cache-ttl = 3600;
+          max-cache-ttl = 86400;
+        };
+      };
+      hardware.gpgSmartcards.enable = true;
+      services.pcscd.enable = true;
+      services.udev.packages = with pkgs; [
+        yubikey-personalization
+        libu2f-host
+      ];
+    }
+
   ];
 }
