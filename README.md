@@ -2,7 +2,20 @@
 
 这是我的个人 NixOS 系统配置，使用 Flakes 进行管理。该配置提供了一套完整的桌面环境和开发工具配置。
 
+# 软件配置
+
+| 组件类型   | 软件名称         |
+| ---------- | ---------------- |
+| 系统 Shell | nushell          |
+| 终端模拟器 | wezterm          |
+| 编辑器     | neovim           |
+| IDE        | vscodium         |
+| 配置管理   | git & nix flakes |
+
+
 # 如何使用？
+
+## 更新系统
 
 ```bash
 # 克隆此仓库
@@ -18,15 +31,71 @@ just up
 sudo just deploy
 ```
 
-# 软件配置
+## 全盘加密
 
-| 组件类型   | 软件名称         |
-| ---------- | ---------------- |
-| 系统 Shell | nushell          |
-| 终端模拟器 | wezterm          |
-| 编辑器     | neovim           |
-| IDE        | vscodium         |
-| 配置管理   | git & nix flakes |
+### 第一步：重置 TPM
+
+> [!NOTE]
+> 如果前一个系统为 Windows 且启用了 Bitlocker ，则需要执行以下步骤
+>
+> ```bash
+> sudo su
+> echo 5 > /sys/class/tpm/tpm0/ppi/request
+> ```
+
+```bash
+# 清除 TPM 状态
+sudo tpm2_clear
+
+# 重新初始化 TPM
+sudo tpm2_startup -c
+
+# 验证 TPM 状态
+sudo tpm2_getcap properties-fixed
+```
+
+
+### 第二步：添加 LUKS 恢复密钥
+
+```bash
+# 查看当前 LUKS 分区密码槽
+sudo systemd-cryptenroll /dev/nvme0n1p2
+
+# 添加新的恢复密钥
+sudo systemd-cryptenroll --recovery-key /dev/nvme0n1p2
+
+# 验证密钥槽
+sudo systemd-cryptenroll /dev/nvme0n1p2
+```
+
+> [!NOTE]
+> **不要忘记保存你的恢复密钥！**
+
+### 第三步：添加 TPM 密钥
+```bash
+# 启用带安全加密的 TPM 
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2 /dev/nvme0n1p2
+
+# 或者不使用安全加密
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+2+12 --wipe-slot=tpm2 /dev/nvme0n1p2
+
+# 验证 TPM 密钥已添加
+sudo systemd-cryptenroll /dev/nvme0n1p2
+```
+
+> [!WARNING]
+> 不使用安全加密无法构建完整的信任链，**存在安全风险**。
+
+
+### 第四步：删除旧的 LUKS 密钥
+
+```bash
+# 删除旧的 LUKS 密钥槽
+sudo systemd-cryptenroll --wipe-slot=password /dev/nvme0n1p2
+
+# 验证 LUKS 密钥槽
+sudo systemd-cryptenroll /dev/nvme0n1p2
+```
 
 # 许可证
 
