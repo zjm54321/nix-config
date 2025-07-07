@@ -28,6 +28,11 @@ with lib;
     })
 
     (mkIf config.services.tpm2.enable {
+      /*
+        假如是从 Windows Bitlocker 切换而来:
+        `echo 5 > /sys/class/tpm/tpm0/ppi/request`
+        https://askubuntu.com/questions/1357694/trying-to-understand-errors-from-tpm2-toolshttps://askubuntu.com/questions/1357694/trying-to-understand-errors-from-tpm2-tools
+      */
       boot.initrd.systemd.enable = true;
       security.tpm2.enable = true;
       security.tpm2.pkcs11.enable = true;
