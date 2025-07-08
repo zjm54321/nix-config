@@ -51,15 +51,4 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  # 打印机
-  services.printing = {
-    enable = true;
-    openFirewall = true;
-    drivers = [ pkgs.hplip ];
-  };
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
 }
