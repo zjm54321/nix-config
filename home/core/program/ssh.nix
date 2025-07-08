@@ -32,6 +32,8 @@ in
 
     # 使用 tailscale ip 配置主机
     matchBlocks = {
+      "localhost" = host { hostname = "localhost"; };
+
       "136kf" = host { hostname = "100.100.10.1"; };
       "e3" = host { hostname = "100.100.10.2"; };
       "e2" = host { hostname = "100.100.10.3"; };

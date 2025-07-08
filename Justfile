@@ -23,6 +23,12 @@ default:
 deploy:
   nixos-rebuild switch --flake .
 
+# 远程部署系统配置
+[group('nix')]
+remote config target_host build_host:
+  nixos-rebuild switch --flake .#{{config}} --target-host {{target_host}} --build-host {{build_host}}
+
+
 # 更新所有 flake 输入
 [group('nix')]
 up:
