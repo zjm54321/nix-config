@@ -12,7 +12,7 @@ let
       user ? defaultUser,
       port ? defaultPort,
       identityFile ? null,
-      compression ? true,
+      compression ? false,
       extraOptions ? { },
     }:
     {
