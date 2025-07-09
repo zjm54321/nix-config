@@ -77,6 +77,7 @@
             nixfmt-rfc-style
             nil
             just
+            nushell
           ];
         };
       }
