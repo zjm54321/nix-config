@@ -18,6 +18,11 @@ utils_nu := absolute_path("utils.nu")
 default:
     @just --list
 
+# 全新安装
+[group('nix')]
+install config:
+  nixos-install --flake .#{{config}}
+
 # 部署系统配置
 [group('nix')]
 deploy:
