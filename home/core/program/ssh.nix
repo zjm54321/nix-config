@@ -12,7 +12,6 @@ let
       user ? defaultUser,
       port ? defaultPort,
       identityFile ? null,
-      compression ? false,
       extraOptions ? { },
     }:
     {
@@ -20,7 +19,6 @@ let
         hostname
         user
         port
-        compression
         ;
     }
     // (if identityFile != null then { inherit identityFile; } else { })
@@ -34,7 +32,11 @@ in
     matchBlocks = {
       "localhost" = host { hostname = "localhost"; };
 
-      "136kf" = host { hostname = "100.100.10.1"; };
+      "136kf" = host {
+        # 目前是windows设备
+        hostname = "100.100.10.1";
+        user = vars.useremail;
+      };
       "e3" = host { hostname = "100.100.10.2"; };
       "e2" = host { hostname = "100.100.10.3"; };
 
