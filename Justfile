@@ -21,7 +21,7 @@ default:
 # 全新安装
 [group('nix')]
 install config:
-  nixos-install --flake .#{{config}}
+  nixos-install --no-root-passwd --flake .#{{config}}
 
 # 部署系统配置
 [group('nix')]
