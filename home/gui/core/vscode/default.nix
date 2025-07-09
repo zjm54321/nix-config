@@ -23,4 +23,6 @@
     };
     profiles.default.userSettings = pkgs.lib.importJSON ./settings.json;
   };
+
+  vscode.nix.enable = pkgs.lib.mkDefault true;
 }
