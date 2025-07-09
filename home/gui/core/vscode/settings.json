@@ -30,7 +30,8 @@
         "errorLens.fontStyleItalic",
         "errorLens.followCursor",
         "errorLens.messageTemplate",
-        "extensions.experimental.affinity"
+        "extensions.experimental.affinity",
+        "direnv.restart.automatic"
     ],
 
     "editor.fontFamily": "'Maple Mono NF CN'",
@@ -75,6 +76,7 @@
 
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
-    }
+    },
 
+    "direnv.restart.automatic": true
 }

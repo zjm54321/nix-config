@@ -13,6 +13,7 @@
   pkief.material-icon-theme # Material Icon Theme
   zhuangtongfa.material-theme # One Dark Pro
   asvetliakov.vscode-neovim # Neovim
+  mkhl.direnv # Direnv
   # 闭源
   github.copilot # Copilot
   github.copilot-chat # Copilot Chat
