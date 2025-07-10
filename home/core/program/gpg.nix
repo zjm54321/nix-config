@@ -9,9 +9,10 @@
     publicKeys = [
       {
         # 本人的 GPG 公钥
+        # 更新时请使用 `nix-prefetch-url https://github.com/zjm54321.gpg`
         source = builtins.fetchurl {
           url = "https://github.com/zjm54321.gpg";
-          sha256 = "02lvyp15crcwsxxdb6ppczv0fgj2mf25n3wgd61ncsza4rc941gw";
+          sha256 = "1iyc1irf77szf9v6bc6ffqyhnybghx2shbx31jqj5ckpw9bwnr9f";
         };
         trust = 5;
       }

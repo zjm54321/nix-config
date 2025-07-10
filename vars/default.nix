@@ -11,8 +11,6 @@
 
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8Lh4/f3uEk8joZy9pH3NrRmk5rEsFAGJbr9l6BorOI openpgp@136kf"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvOQM+Ej9fOBgc5IqZaqgBb8/evDR9l4BwCt3dYHu2f openpgp@sgo3"
-
-    # e2 TPM 密钥
-    "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBiclJsws+2d6x1hslry7RAf5CkiP8kJNFOQIpiYHdJ2pVPWejC2ZpzlznDclQwwaju0mnG4GS8XgSK9nr0BPr0="
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO/IlYiZw4HKkHbg63NgRrRSmJ5I93yNjfF2hb21IeF2 openpgp@e2"
   ];
 }
