@@ -14,6 +14,8 @@
   zhuangtongfa.material-theme # One Dark Pro
   asvetliakov.vscode-neovim # Neovim
   mkhl.direnv # Direnv
+  nefrob.vscode-just-syntax # justfile
+  thenuprojectcontributors.vscode-nushell-lang # Nushell
   # 闭源
   github.copilot # Copilot
   github.copilot-chat # Copilot Chat
