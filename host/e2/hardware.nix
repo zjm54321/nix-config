@@ -44,6 +44,10 @@
   # 禁用 pulseaudio，因为它与 pipewire 冲突。
   services.pulseaudio.enable = false;
 
+  # 蓝牙
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   # 打印机
   services.printing = {
     enable = true;
