@@ -7,6 +7,7 @@ with lib;
 {
   imports = [
     ./fcitx5.nix
+    ./fhs.nix
     ./fonts.nix
     ./kmscon.nix
     ./ly.nix
