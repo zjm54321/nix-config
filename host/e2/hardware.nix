@@ -1,5 +1,7 @@
 {
   pkgs,
+  config,
+  vars,
   ...
 }:
 {
@@ -19,7 +21,23 @@
     ANV_DEBUG = "video-decode,video-encode";
   };
 
+  #背光
+  hardware.i2c.enable = true;
+  users.users.${vars.username}.extraGroups = [ "i2c" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+  boot.kernelModules = [ "ddcci-backlight" ];
+  services.udev.extraRules =
+    let
+      bash = "${pkgs.bash}/bin/bash";
+      ddcciDev = "AUX B/DDI B/PHY B";
+      ddcciNode = "/sys/bus/i2c/devices/i2c-5/new_device";
+    in
+    ''
+      SUBSYSTEM=="i2c", ACTION=="add", ATTR{name}=="${ddcciDev}", RUN+="${bash} -c 'sleep 30; printf ddcci\ 0x37 > ${ddcciNode}'"
+    '';
+
   environment.systemPackages = with pkgs; [
+    brightnessctl
     # 音频(PipeWire)
     pulseaudio # 提供 `pactl` 命令，某些应用程序需要此命令（例如 sonic-pi）
   ];
