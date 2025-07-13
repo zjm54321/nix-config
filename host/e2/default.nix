@@ -17,4 +17,5 @@
   services.tpm2.enable = true;
   services.display.bootanmination.enable = true;
   networking.proxy.mihomo.enable = true; # 启用代理
+  dev.probe-rs.enable = true;
 }
