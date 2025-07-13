@@ -1,4 +1,11 @@
 {
+    "workbench.settings.applyToAllProfiles": [
+        "nix.enableLanguageServer",
+        "nix.formatterPath",
+        "nix.serverSettings",
+        "nixEnvSelector.useFlakes"
+    ],
+    
     "nix.enableLanguageServer": true,
     "nix.formatterPath": "nixfmt",
     "nix.serverSettings": {

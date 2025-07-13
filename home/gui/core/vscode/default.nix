@@ -18,11 +18,8 @@
         "--wayland-text-input-version=3"
       ];
     };
-    profiles.default.extensions = import ./extensions.nix {
-      inherit nix-vscode-extensions pkgs;
-    };
+    profiles.default.extensions = import ./extensions.nix { inherit nix-vscode-extensions pkgs; };
     profiles.default.userSettings = pkgs.lib.importJSON ./settings.json;
   };
 
-  vscode.nix.enable = pkgs.lib.mkDefault true;
 }
