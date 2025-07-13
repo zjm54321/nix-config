@@ -7,6 +7,7 @@ with lib;
 {
   imports = [
     ./nix
+    ./rust
   ];
 
   options.dev = {
@@ -31,5 +32,6 @@ with lib;
 
   config = {
     dev.nix.enable = elem "nix" config.dev.environments;
+    dev.rust.enable = elem "rust" config.dev.environments;
   };
 }
