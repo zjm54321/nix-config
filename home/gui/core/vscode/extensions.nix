@@ -28,5 +28,5 @@
   ])
 ++ (
   # 闭源
-  with nix-vscode-extensions.extensions.${pkgs.system}.extensions.vscode-marketplace; [
+  with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
   ])
