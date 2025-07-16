@@ -8,6 +8,7 @@ with lib;
   imports = [
     ./nix
     ./rust
+    ./python
   ];
 
   options.dev = {
@@ -18,6 +19,7 @@ with lib;
           "nix"
           "cpp"
           "rust"
+          "python"
         ]
       );
       default = [ "nix" ];
@@ -33,5 +35,6 @@ with lib;
   config = {
     dev.nix.enable = elem "nix" config.dev.environments;
     dev.rust.enable = elem "rust" config.dev.environments;
+    dev.python.enable = elem "python" config.dev.environments;
   };
 }
