@@ -11,6 +11,7 @@ with lib;
     ./keybindings.nix
 
     ./hypridle.nix
+    ./hyprlock.nix
     ./waybar
     ./wlogout.nix
   ];
@@ -32,7 +33,6 @@ with lib;
 
     # hyprlock 配置
     programs.hyprlock.enable = true;
-    xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
 
     # hypridle 配置
     services.hypridle.enable = true;
