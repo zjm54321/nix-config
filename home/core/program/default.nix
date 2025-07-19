@@ -4,6 +4,6 @@
     ./git.nix
     ./gpg.nix
     ./ssh.nix
-    ./neovim
+    ./neovim.nix
   ];
 }

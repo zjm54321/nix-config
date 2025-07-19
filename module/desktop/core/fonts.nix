@@ -66,5 +66,24 @@ with lib;
         emoji = [ "Noto Color Emoji" ];
       };
     };
+
+    stylix.fonts = {
+      serif = {
+        package = pkgs.source-serif;
+        name = "Source Han Serif SC";
+      };
+      sansSerif = {
+        package = pkgs.source-sans;
+        name = "Source Han Sans SC";
+      };
+      monospace = {
+        package = pkgs.maple-mono.NF-CN;
+        name = "Maple Mono NF CN";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
   };
 }

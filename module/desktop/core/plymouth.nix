@@ -12,7 +12,7 @@ with lib;
     boot = {
       plymouth = {
         enable = true;
-        theme = "bgrt";
+        theme = mkForce "bgrt";
         logo =
           pkgs.runCommand "nixos-logo-small"
             {

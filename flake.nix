@@ -37,6 +37,9 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.2";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{

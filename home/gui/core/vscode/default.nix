@@ -1,10 +1,10 @@
 {
   pkgs,
+  lib,
   nix-vscode-extensions,
   ...
 }:
 {
-
   programs.vscode = {
     package = pkgs.vscodium.override {
       commandLineArgs = [
@@ -19,7 +19,7 @@
       ];
     };
     profiles.default.extensions = import ./extensions.nix { inherit nix-vscode-extensions pkgs; };
-    profiles.default.userSettings = pkgs.lib.importJSON ./settings.json;
+    profiles.default.userSettings = lib.mkForce (pkgs.lib.importJSON ./settings.json);
   };
 
 }

@@ -12,6 +12,7 @@ with lib;
     ./kmscon.nix
     ./ly.nix
     ./plymouth.nix
+    ./stylix.nix
     ./keymap
   ];
 
@@ -34,5 +35,7 @@ with lib;
     services.kanata.enable = mkDefault true;
     # 启用输入法
     services.input.enable = mkDefault true;
+    # 启用 Stylix
+    stylix.enable = true;
   };
 }
