@@ -12,6 +12,7 @@ with lib;
 
     ./hypridle.nix
     ./hyprlock.nix
+    ./mako.nix
     ./waybar
     ./wlogout.nix
   ];
