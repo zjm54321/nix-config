@@ -1,28 +1,6 @@
 local wezterm = require 'wezterm';
 
--- 配置自动切换主题
-function get_appearance() 
-  if wezterm.gui then
-    return wezterm.gui.get_appearance()
-  end
-  return 'Dark'
-end
-
-function scheme_for_appearance(appearance)
-  if appearance:find 'Dark' then
-    return 'OneDark (base16)'
-  --  return 'One Dark (Gogh)' -- 看不清灰色
-  else
-    return 'One Light (base16)'
-  --  return 'One Light (Gogh)'
-  end
-end
-
-
 local config = {
-  -- 主题
-  color_scheme = scheme_for_appearance(get_appearance()),
-
   -- 初始化窗口大小
   initial_cols = 80,
   initial_rows = 24,

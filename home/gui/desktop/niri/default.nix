@@ -67,7 +67,7 @@ with lib;
       input.focus-follows-mouse.enable = true;
       # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
       layout = {
-        gaps = 12;
+        gaps = lib.mkForce 12;
         center-focused-column = "on-overflow";
 
         preset-column-widths = [
@@ -80,14 +80,7 @@ with lib;
           { proportion = 1. / 2.; }
           { proportion = 2. / 3.; }
         ];
-        default-column-width.proportion = 1. / 2.;
-
-        focus-ring = {
-          enable = true;
-          width = 2;
-          active.color = "#7fc8ff";
-          inactive.color = "#505050";
-        };
+        default-column-width.proportion = lib.mkForce 1. / 2.;
       };
 
       prefer-no-csd = true;
