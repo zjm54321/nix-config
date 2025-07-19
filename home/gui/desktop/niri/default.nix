@@ -10,6 +10,7 @@ with lib;
   imports = [
     ./keybindings.nix
 
+    ./anyrun.nix
     ./hypridle.nix
     ./hyprlock.nix
     ./mako.nix
@@ -21,7 +22,6 @@ with lib;
 
   config = mkIf config.gui.desktop.niri.enable {
     home.packages = with pkgs; [
-      anyrun # 应用程序启动器
       libnotify # 提供 notify-send 命令
       xwayland-satellite # XWayland 适配器
       wlr-randr # 用于调整显示器设置
@@ -31,6 +31,9 @@ with lib;
       enable = true;
       systemd.enable = true;
     };
+
+    # anyrun 配置
+    programs.anyrun.enable = true;
 
     # hyprlock 配置
     programs.hyprlock.enable = true;
