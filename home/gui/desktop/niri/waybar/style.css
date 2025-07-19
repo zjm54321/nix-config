@@ -1,0 +1,167 @@
+/* 全局设置 */
+* {
+  border: none;
+  padding: 0;
+  font-family: "Maple Mono NF CN";
+}
+
+window#waybar {
+  background: transparent;
+}
+window#waybar > box {
+  background: transparent;
+  margin-top: 4px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+tooltip {
+  background: @theme_bg_color;
+  border: 1.5px solid @borders;
+  border-radius: 8px;
+}
+tooltip label {
+  color: @theme_text_color;
+  margin: -1.5px 3px;
+  text-shadow: none;
+}
+
+/* 模块样式 */
+
+/* general */
+#workspace,
+#window,
+#tray-group,
+#system-status,
+#clock,
+#privacy {
+  /* 颜色 */
+  background: @theme_bg_color;
+  color: @theme_text_color;
+  /* 字体 */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* general hover  */
+#custom-nixos:hover,
+#workspaces button:hover,
+#window:hover,
+#custom-tray-toggle:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover,
+#privacy:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    @theme_bg_color;
+}
+
+/* 左侧 */
+
+#workspace {
+  border-radius: 16px;
+}
+
+/* nixos按键 */
+#custom-nixos {
+  min-width: 32px;
+  border-radius: 16px;
+}
+
+/* 工作区 */
+#workspaces {
+  border-radius: 16px;
+}
+
+#workspaces button {
+  margin: 2px 0;
+  padding: 0 2px;
+  transition: none;
+}
+
+#workspaces button.active {
+  color: @theme_selected_fg_color;
+  background: @theme_selected_bg_color;
+  margin: 2px;
+  border-radius: 16px;
+  padding: 0 16px;
+}
+
+/* 状态栏 */
+#tray-group {
+  margin: 0 4px;
+  border-radius: 16px;
+}
+#custom-tray-toggle {
+  border-radius: 50px;
+  transition: all 200ms ease;
+  min-width: 28px;
+}
+#tray {
+  padding: 0 8px;
+  border-radius: 16px;
+}
+
+/* 中间 */
+#window {
+  padding: 0 16px;
+  border-radius: 16px;
+}
+
+window#waybar.empty #window {
+  background: transparent;
+}
+
+/* 右侧 */
+
+/* 系统状态 */
+#system-status {
+  margin: 0 4px;
+  border-radius: 16px;
+}
+
+#network,
+#pulseaudio,
+#battery {
+  padding: 0 8px;
+  box-shadow: none;
+  min-width: 12px;
+  transition: none;
+}
+
+#network:hover,
+#pulseaudio:hover,
+#battery:hover {
+  border-radius: 16px;
+}
+
+#network.disconnected {
+  color: @error_color;
+}
+
+#battery.warning {
+  color: @warning_color;
+}
+#battery.critical {
+  color: @error_color;
+}
+
+/* 时钟 */
+#clock {
+  border-radius: 16px;
+  padding: 0 8px;
+  margin-left: 4px;
+}
+
+/* 隐私 */
+#privacy {
+  padding: 0 8px;
+  border-radius: 16px;
+  margin-left: 8px;
+}
+#privacy-item.screenshare {
+  color: #008000;
+}
+#privacy-item.audio-in {
+  color: #ff0000;
+}

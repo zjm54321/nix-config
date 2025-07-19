@@ -11,6 +11,7 @@ with lib;
     ./keybindings.nix
 
     ./hypridle.nix
+    ./waybar
     ./wlogout.nix
   ];
 
