@@ -655,17 +655,17 @@
     "rime-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1752827953,
-        "narHash": "sha256-ROIYLaKY8PMxOjtrmMzyT3X+rM8KjaD9QvwlYCpevoE=",
+        "lastModified": 1752413470,
+        "narHash": "sha256-+8ZiAifaeSSD13T6kIvMfs3HXGs2WXbpwZujNN9EEz4=",
         "owner": "Mintimate",
         "repo": "oh-my-rime",
-        "rev": "24db9d9ea0dbdfeb16c2e5794294d4f7a0645cc3",
+        "rev": "de1fa23fadcdad3c6ecd05ead3dfb1f756916fcb",
         "type": "github"
       },
       "original": {
         "owner": "Mintimate",
-        "ref": "main",
         "repo": "oh-my-rime",
+        "rev": "de1fa23fadcdad3c6ecd05ead3dfb1f756916fcb",
         "type": "github"
       }
     },
