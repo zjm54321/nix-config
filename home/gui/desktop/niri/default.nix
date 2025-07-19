@@ -80,7 +80,7 @@ with lib;
           { proportion = 1. / 2.; }
           { proportion = 2. / 3.; }
         ];
-        default-column-width.proportion = lib.mkForce 1. / 2.;
+        default-column-width.proportion = lib.mkForce (1. / 2.);
       };
 
       prefer-no-csd = true;
