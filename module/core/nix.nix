@@ -30,10 +30,12 @@
 
         "https://cache.nixos.org"
         "https://anyrun.cachix.org"
+        "https://mingz.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        "mingz.cachix.org-1:MIJJywbhWpGBBWxy7OWc/2H8KdrGQ0XEwnsYl7Lnr+4="
       ];
       builders-use-substitutes = true;
 

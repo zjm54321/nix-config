@@ -45,6 +45,9 @@
 
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
+    nur-personal.url = "github:zjm54321/NUR";
+    nur-personal.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{

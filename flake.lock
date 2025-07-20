@@ -625,6 +625,26 @@
         "type": "github"
       }
     },
+    "nur-personal": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752987358,
+        "narHash": "sha256-qGe+F8RIbDkHMD6BC/YISKcyDiahL57UiQCL/wXc0wk=",
+        "owner": "zjm54321",
+        "repo": "NUR",
+        "rev": "fef7aa13e019c9c949baa3ccd0d68828e32ccde0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zjm54321",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -682,6 +702,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nur-personal": "nur-personal",
         "rime-config": "rime-config",
         "stylix": "stylix"
       }
