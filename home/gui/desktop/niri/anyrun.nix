@@ -21,6 +21,7 @@
         ])
         ++ (with inputs.nur-personal.packages.${pkgs.system}; [
           anyrun-weather
+          anyrun-qalculate
         ]);
     };
     extraConfigFiles."shell.ron".text = ''
@@ -33,4 +34,5 @@
         engines: [DuckDuckGo] 
       )'';
   };
+  home.packages = with pkgs; [ libqalculate ];
 }
