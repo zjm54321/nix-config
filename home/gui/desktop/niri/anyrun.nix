@@ -12,11 +12,16 @@
       width.fraction = 0.5;
       hidePluginInfo = true;
 
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
-        applications
-        shell
-        websearch
-      ];
+      plugins =
+        (with inputs.anyrun.packages.${pkgs.system}; [
+          applications
+          shell
+          translate
+          websearch
+        ])
+        ++ (with inputs.nur-personal.packages.${pkgs.system}; [
+          anyrun-weather
+        ]);
     };
     extraConfigFiles."shell.ron".text = ''
       Config(
