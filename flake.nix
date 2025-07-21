@@ -87,6 +87,7 @@
         vm-wsl = mknixosConfigurations "vm-wsl";
         sgo3 = mknixosConfigurations "sgo3";
         e2 = mknixosConfigurations "e2";
+        home-server = mknixosConfigurations "home-server";
       };
     }
     // flake-utils.lib.eachDefaultSystem (
