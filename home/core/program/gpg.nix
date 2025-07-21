@@ -12,7 +12,7 @@
         # 更新时请使用 `nix-prefetch-url https://github.com/zjm54321.gpg`
         source = builtins.fetchurl {
           url = "https://github.com/zjm54321.gpg";
-          sha256 = "1iyc1irf77szf9v6bc6ffqyhnybghx2shbx31jqj5ckpw9bwnr9f";
+          sha256 = "06dxhchmdih094qrghrfxnwwv41iv8mfa4l5vyrz3i657nkjnwiv";
         };
         trust = 5;
       }

@@ -44,6 +44,8 @@ in
       "x40" = host { hostname = "100.100.10.102"; };
 
       "wsl" = host { hostname = "100.100.10.201"; };
+
+      "home-server" = host { hostname = "100.100.1.1"; };
     };
   };
 }
