@@ -36,6 +36,6 @@ with lib;
     # 启用输入法
     services.input.enable = mkDefault true;
     # 启用 Stylix
-    stylix.enable = true;
+    stylix.autoEnable = mkForce true;
   };
 }
