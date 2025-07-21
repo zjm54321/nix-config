@@ -48,12 +48,16 @@
 
     nur-personal.url = "github:zjm54321/NUR";
     nur-personal.inputs.nixpkgs.follows = "nixpkgs";
+
+    mysecrets.url = "git+ssh://git@github.com/zjm54321/secrets.git";
+    mysecrets.flake = false;
   };
   outputs =
     inputs@{
       self,
       nixpkgs,
       flake-utils,
+      mysecrets,
       ...
     }:
     let
@@ -61,8 +65,16 @@
         hostname:
         let
           vars = import ./vars;
+          secret = import "${mysecrets}/secret.nix";
           system = "x86_64-linux";
-          specialArgs = { inherit inputs hostname vars; };
+          specialArgs = {
+            inherit
+              inputs
+              hostname
+              vars
+              secret
+              ;
+          };
         in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;

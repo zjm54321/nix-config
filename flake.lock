@@ -387,6 +387,22 @@
         "url": "ssh://git@github.com/zjm54321/my-rime-config.git"
       }
     },
+    "mysecrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753087240,
+        "narHash": "sha256-JzxNb666l6ZIauP2sM60FrulIaYSGGO3yfo5Yql490k=",
+        "ref": "refs/heads/main",
+        "rev": "f1e41de89fefd704cdc850459ded1010d82e8414",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/zjm54321/secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/zjm54321/secrets.git"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -696,6 +712,7 @@
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "my-rime-config": "my-rime-config",
+        "mysecrets": "mysecrets",
         "niri": "niri",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nix-vscode-server": "nix-vscode-server",

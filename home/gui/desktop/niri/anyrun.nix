@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  secret,
   ...
 }:
 {
@@ -33,6 +34,18 @@
         prefix: "?",
         engines: [DuckDuckGo] 
       )'';
+    extraConfigFiles."weather.ron".text = ''
+      Config(
+        use_ip_location: true,
+        prefix: "&",
+        weather_location: GeoLocation(
+          lat: 31.23,
+          lon: 121.47
+        ),
+        openweatherapi_key: "${secret.OpenWeatherApi_key}",
+        units: Metric
+      )
+    '';
   };
   home.packages = with pkgs; [ libqalculate ];
 }
