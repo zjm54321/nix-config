@@ -1,5 +1,6 @@
 {
   lib,
+  secret,
   ...
 }:
 {
@@ -43,6 +44,10 @@
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
       auto-optimise-store = true;
     };
+
+    extraOptions = ''
+      access-tokens = ${secret.nix-github-access-tokens}
+    '';
 
     channel.enable = false; # 移除 nix-channel 相关工具和配置，我们使用 flakes 代替
   };

@@ -411,11 +411,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753087240,
-        "narHash": "sha256-JzxNb666l6ZIauP2sM60FrulIaYSGGO3yfo5Yql490k=",
+        "lastModified": 1753163878,
+        "narHash": "sha256-9rcPYJ5AKN4sEliFRBZIlx8Pu5gdsjCozw42c+/EPOc=",
         "ref": "refs/heads/main",
-        "rev": "f1e41de89fefd704cdc850459ded1010d82e8414",
-        "revCount": 1,
+        "rev": "9a4c92fed281b649d4c07c481a4f1a9b91156dab",
+        "revCount": 2,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/secrets.git"
       },
