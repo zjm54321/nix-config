@@ -21,12 +21,7 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [
-    "dm-snapshot"
-    "dm-raid"
-    "dm-cache-default"
-  ];
-  services.lvm.boot.thin.enable = true;
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
 
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -66,11 +61,6 @@
       "fmask=0022"
       "dmask=0022"
     ];
-  };
-
-  fileSystems."/data" = {
-    device = "/dev/disk/by-uuid/b4334e57-8ad7-4675-b29f-e6852b24cd48";
-    fsType = "ext4";
   };
 
   swapDevices = [ ];
