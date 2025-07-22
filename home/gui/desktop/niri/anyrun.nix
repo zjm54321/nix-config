@@ -20,7 +20,7 @@
           translate
           websearch
         ])
-        ++ (with inputs.nur-personal.packages.${pkgs.system}; [
+        ++ (with inputs.nur.legacyPackages.${pkgs.system}.repos.zjm54321; [
           anyrun-weather
           anyrun-qalculate
         ]);

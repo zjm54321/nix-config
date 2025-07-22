@@ -46,8 +46,8 @@
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
-    nur-personal.url = "github:zjm54321/NUR";
-    nur-personal.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
 
     mysecrets.url = "git+ssh://git@github.com/zjm54321/secrets.git";
     mysecrets.flake = false;
