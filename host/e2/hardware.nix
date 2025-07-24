@@ -5,6 +5,11 @@
   ...
 }:
 {
+  boot.kernelModules = [
+    "ddcci-backlight"
+    "kvm-intel"
+  ];
+
   # Intel UHD Graphics 630
   hardware.graphics = {
     enable = true;
@@ -25,7 +30,7 @@
   hardware.i2c.enable = true;
   users.users.${vars.username}.extraGroups = [ "i2c" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
-  boot.kernelModules = [ "ddcci-backlight" ];
+
   services.udev.extraRules =
     let
       bash = "${pkgs.bash}/bin/bash";
@@ -77,4 +82,7 @@
     nssmdns4 = true;
     openFirewall = true;
   };
+
+  # 虚拟化
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
 }

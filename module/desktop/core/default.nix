@@ -13,6 +13,7 @@ with lib;
     ./ly.nix
     ./plymouth.nix
     ./stylix.nix
+    ./virtualisation.nix
     ./keymap
   ];
 

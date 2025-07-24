@@ -18,4 +18,5 @@
   services.display.bootanmination.enable = true;
   networking.proxy.mihomo.enable = true; # 启用代理
   dev.probe-rs.enable = true;
+  kvm.enable = true; # 启用 KVM 虚拟化支持
 }
