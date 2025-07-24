@@ -36,11 +36,8 @@
   };
 
   config = lib.mkMerge [
-    {
-      boot.kernelModules = [ "vfio-pci" ];
-      services.flatpak.enable = true;
-    }
     (lib.mkIf config.kvm.enable {
+      boot.kernelModules = [ "vfio-pci" ];
       virtualisation = {
         libvirtd = {
           enable = true;
