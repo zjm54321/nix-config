@@ -13,7 +13,7 @@ let
       name = "wanxiang-lts-zh-hans.gram";
       path = pkgs.fetchurl {
         url = "https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram";
-        sha256 = "bd62b64b2211ce0c8a3f3faa7818792193dc818e73857617dfcc88b792ec516e";
+        sha256 = "1ccb506240c1a3217659cd19ebad1e1c67f2142369c5fb6acfaeb49546ee4a75";
       };
     }
   ];
