@@ -7,6 +7,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -17,15 +18,22 @@ with lib;
   };
 
   config = mkIf config.networking.proxy.mihomo.enable {
-    programs.clash-verge = {
-      enable = true;
-      package = pkgs.clash-verge-rev;
-      autoStart = true;
-    };
+    /*
+      programs.clash-verge = {
+         enable = true;
+         package = pkgs.clash-verge-rev;
+         autoStart = true;
+       };
+    */
     services.mihomo = {
+      enable = true;
       tunMode = true;
-      #webui = pkgs.zashboard;
+      webui = pkgs.zashboard;
+      configFile = "${inputs.mysecrets}/mihomo/mihomo.yaml";
     };
-    networking.firewall.trustedInterfaces = [ "Mihomo" ];
+    networking.firewall.trustedInterfaces = [
+      "Mihomo"
+      "Meta"
+    ];
   };
 }

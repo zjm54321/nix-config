@@ -411,11 +411,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753163878,
-        "narHash": "sha256-9rcPYJ5AKN4sEliFRBZIlx8Pu5gdsjCozw42c+/EPOc=",
+        "lastModified": 1754381017,
+        "narHash": "sha256-sjzGtIgoqeoXLaxFL28ng1uq/wRgniyl3UKpIhsemZY=",
         "ref": "refs/heads/main",
-        "rev": "9a4c92fed281b649d4c07c481a4f1a9b91156dab",
-        "revCount": 2,
+        "rev": "8bd9ba53992422d781c6c46e22fb268cfc1c1644",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/secrets.git"
       },
@@ -436,11 +436,11 @@
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
       },
       "locked": {
-        "lastModified": 1754339402,
-        "narHash": "sha256-z3ja58v3oc4p7/4adKukJ6ZRCY2CJ6SPs3Xt78UgKsg=",
+        "lastModified": 1754369929,
+        "narHash": "sha256-TFvkTvIttUzbbBoC4a7T3nu2oiYm6MExRwkhJtyDNbA=",
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "a90552d35a9603ed32c8269029ac2b4caf958103",
+        "rev": "ea4d0cb2b0dc5b9ebc0de800f423f5433eee2276",
         "type": "github"
       },
       "original": {
@@ -644,11 +644,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1754359704,
-        "narHash": "sha256-Hv5FgHASSALoj2ooV/eo501zVVr0xpR58BBsklEPtQc=",
+        "lastModified": 1754379719,
+        "narHash": "sha256-/FBFyBv+mg+Cl+zhDGdEk8Sz9/58c/ofJFnnBeNDs28=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "24615e65ddbb87121696af57341e502d7e3bab1d",
+        "rev": "127ab73088f6bac90002d029917ae221843ef746",
         "type": "github"
       },
       "original": {
@@ -1000,11 +1000,11 @@
     "xwayland-satellite-unstable": {
       "flake": false,
       "locked": {
-        "lastModified": 1752338000,
-        "narHash": "sha256-Fxlp/yKtynug0jyuauAmvZU2SzHCfwlwWf85j+IvQ0U=",
+        "lastModified": 1754367142,
+        "narHash": "sha256-U0gbn4Qe2NfdaQHvSerzjn3iLhrH+Ah0DMBJfRh1OT8=",
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
-        "rev": "ba78881a68182ce338041846164cbfed0d70935c",
+        "rev": "ecbe57e7be12452d6fe477f2154a6d93f60c41e0",
         "type": "github"
       },
       "original": {
