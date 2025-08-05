@@ -23,5 +23,13 @@ with lib;
       configFile = "${inputs.mysecrets}/mihomo/mihomo.yaml";
     };
     networking.firewall.trustedInterfaces = [ "Mihomo" ];
+    systemd.services."mihomo" = {
+      after = lib.mkForce [ "network-online.target"  "tailscaled.service" ];
+      wants = ["tailscaled.service"];
+
+      serviceConfig = {
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
+      };
+    };
   };
 }
