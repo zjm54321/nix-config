@@ -3,8 +3,6 @@ $env.config.history.max_size = 5_000_000
 
 $env.config.show_banner   = false
 
-$env.config.buffer_editor = ["nvim", "--clean"]
-
 $env.config.edit_mode     = "vi"
 # 类似 vim 的按键样式
 $env.config.cursor_shape.vi_insert = "line"      

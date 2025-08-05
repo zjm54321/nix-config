@@ -1,3 +1,3 @@
 {
-  environment.variables.EDITOR = "nvim --clean";
+  environment.variables.EDITOR = "hx";
 }
