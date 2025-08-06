@@ -3,5 +3,6 @@
     ./core
     ./desktop
     ./dev
+    ./server
   ];
 }
