@@ -11,17 +11,34 @@
 {
   config,
   lib,
+  inputs,
   ...
 }:
 with lib;
 {
+  imports = [
+    inputs.harmonia.nixosModules.harmonia
+  ];
 
-  options.server.nix-binary-cache.harmonia.enable = mkEnableOption "harmonia binary cache 服务";
+  options.server.nix-binary-cache.harmonia = {
+    enable = mkEnableOption "harmonia binary cache 服务";
+    path = mkOption {
+      type = types.str;
+      default = "";
+      description = "The path to the real Nix store that Harmonia will use.";
+    };
+  };
 
   config = mkIf config.server.nix-binary-cache.harmonia.enable {
     # 启用 harmonia binary cache 服务
-    services.harmonia = {
+    services.harmonia-dev.daemon = {
       enable = true;
+      storeDir = "${config.server.nix-binary-cache.harmonia.path}/nix/store";
+      dbPath = "${config.server.nix-binary-cache.harmonia.path}/nix/var/nix/db/db.sqlite";
+    };
+
+    services.harmonia-dev.cache = {
+      # enable = true;
       signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
     };
     # 打开防火墙端口

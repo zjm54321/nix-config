@@ -91,6 +91,21 @@
     },
     "crane": {
       "locked": {
+        "lastModified": 1754269165,
+        "narHash": "sha256-0tcS8FHd4QjbCVoxN9jI+PjHgA4vc/IjkUSp+N3zy0U=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "444e81206df3f7d92780680e45858e31d2f07a08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
         "lastModified": 1731098351,
         "narHash": "sha256-HQkYvKvaLQqNa10KEFGgWHfMAbWBfFp+4cAgkut+NNE=",
         "owner": "ipetkov",
@@ -176,6 +191,27 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
+          "harmonia",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754487366,
+        "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": [
           "lanzaboote",
           "nixpkgs"
         ]
@@ -194,7 +230,7 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_4": {
       "inputs": {
         "nixpkgs-lib": [
           "nur",
@@ -215,7 +251,7 @@
         "type": "github"
       }
     },
-    "flake-parts_4": {
+    "flake-parts_5": {
       "inputs": {
         "nixpkgs-lib": [
           "stylix",
@@ -345,6 +381,29 @@
         "type": "github"
       }
     },
+    "harmonia": {
+      "inputs": {
+        "crane": "crane",
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1754533664,
+        "narHash": "sha256-2k478f/MpLThuszK2k2QPn+enL82FC3iJYetpSvo3oM=",
+        "owner": "nix-community",
+        "repo": "harmonia",
+        "rev": "9c163a339f5d41faa1b860002de941d4698dc395",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "harmonia",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -368,9 +427,9 @@
     },
     "lanzaboote": {
       "inputs": {
-        "crane": "crane",
+        "crane": "crane_2",
         "flake-compat": "flake-compat",
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts_3",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -638,7 +697,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_4",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -667,7 +726,7 @@
           "stylix",
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
         "lastModified": 1751320053,
@@ -731,6 +790,7 @@
       "inputs": {
         "anyrun": "anyrun",
         "flake-utils": "flake-utils",
+        "harmonia": "harmonia",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "my-rime-config": "my-rime-config",
@@ -774,7 +834,7 @@
         "base16-helix": "base16-helix",
         "base16-vim": "base16-vim",
         "firefox-gnome-theme": "firefox-gnome-theme",
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_5",
         "gnome-shell": "gnome-shell",
         "nixpkgs": [
           "nixpkgs"
@@ -959,6 +1019,27 @@
       }
     },
     "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "harmonia",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754492133,
+        "narHash": "sha256-B+3g9+76KlGe34Yk9za8AF3RL+lnbHXkLiVHLjYVOAc=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "1298185c05a56bff66383a20be0b41a307f52228",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "stylix",

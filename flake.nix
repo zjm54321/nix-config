@@ -51,6 +51,9 @@
 
     mysecrets.url = "git+ssh://git@github.com/zjm54321/secrets.git";
     mysecrets.flake = false;
+
+    harmonia.url = "github:nix-community/harmonia";
+    harmonia.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{
