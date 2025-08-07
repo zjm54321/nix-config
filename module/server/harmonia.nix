@@ -38,7 +38,7 @@ with lib;
     };
 
     services.harmonia-dev.cache = {
-      # enable = true;
+      enable = true;
       signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
     };
     # 打开防火墙端口
