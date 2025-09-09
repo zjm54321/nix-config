@@ -29,7 +29,7 @@
 
     # 由于 librime 版本问题，锁定 oh-my-rime 非万象词库版本
     # https://www.mintimate.cc/zh/guide/faQ.html#linux%E8%96%84%E8%8D%B7%E9%85%8D%E7%BD%AE%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8
-    rime-config.url = "github:Mintimate/oh-my-rime/?rev=de1fa23fadcdad3c6ecd05ead3dfb1f756916fcb";
+    rime-config.url = "github:Mintimate/oh-my-rime/?rev=6f503bcb3dbebee53461db67917f764639c1e407";
     my-rime-config.url = "git+ssh://git@github.com/zjm54321/my-rime-config.git";
     rime-config.flake = false;
     my-rime-config.flake = false;
