@@ -21,5 +21,6 @@
     profiles.default.extensions = import ./extensions.nix { inherit nix-vscode-extensions pkgs; };
     profiles.default.userSettings = lib.mkForce (pkgs.lib.importJSON ./settings.json);
   };
+  programs.neovim.enable = true; # 让vscode的neovim插件工作
 
 }
