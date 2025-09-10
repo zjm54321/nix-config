@@ -43,8 +43,8 @@
     stylix.url = "github:danth/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    anyrun.url = "github:anyrun-org/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    # 锁定anyrun版本以解决插件问题 [fixme]
+    anyrun.url = "github:anyrun-org/anyrun/?rev=af1ffe4f17921825ff2a773995604dce2b2df3cd";
 
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
