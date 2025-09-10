@@ -70,12 +70,17 @@
           vars = import ./vars;
           secret = import "${mysecrets}/secret.nix";
           system = "x86_64-linux";
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
           specialArgs = {
             inherit
               inputs
               hostname
               vars
               secret
+              pkgs-unstable
               ;
           };
         in
