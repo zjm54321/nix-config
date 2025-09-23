@@ -15,6 +15,12 @@
   programs = {
     wiliwili.enable = true;
   };
+
+  dev.environments = [
+    "nix"
+    "embedded-c51"
+  ];
+
   gui.de = "niri";
 
   # GPG 设备密钥

@@ -9,6 +9,7 @@ with lib;
     ./nix
     ./rust
     ./python
+    ./embedded/c51
   ];
 
   options.dev = {
@@ -20,6 +21,7 @@ with lib;
           "cpp"
           "rust"
           "python"
+          "embedded-c51"
         ]
       );
       default = [ "nix" ];
@@ -36,5 +38,6 @@ with lib;
     dev.nix.enable = elem "nix" config.dev.environments;
     dev.rust.enable = elem "rust" config.dev.environments;
     dev.python.enable = elem "python" config.dev.environments;
+    dev.embedded.c51.enable = elem "embedded-c51" config.dev.environments;
   };
 }
