@@ -13,4 +13,5 @@
 
   system.stateVersion = "25.05";
 
+  networking.proxy.mihomo.enable = true;
 }

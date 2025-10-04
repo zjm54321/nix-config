@@ -42,4 +42,6 @@
     extraUpFlags = "--accept-routes";
     # authKeyFile = "/var/lib/tailscale/authkey";
   };
+
+  networking.firewall.trustedInterfaces = ["tailscale0"];
 }
