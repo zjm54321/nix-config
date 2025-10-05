@@ -23,7 +23,6 @@ with lib;
   config = mkIf config.gui.desktop.niri.enable {
     home.packages = with pkgs; [
       libnotify # 提供 notify-send 命令
-      xwayland-satellite # XWayland 适配器
       wlr-randr # 用于调整显示器设置
     ];
 
