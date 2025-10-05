@@ -48,9 +48,7 @@ with lib;
     services.mako.enable = true;
 
     programs.niri.settings = {
-      environment = {
-        DISPLAY = ":0";
-      };
+      xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
       spawn-at-startup = [
         {
@@ -62,7 +60,6 @@ with lib;
           ];
         }
         { command = [ "fcitx5" ]; }
-        { command = [ "xwayland-satellite" ]; }
         { command = [ "wezterm" ]; }
       ];
 
@@ -78,11 +75,13 @@ with lib;
           { proportion = 1. / 3.; }
           { proportion = 1. / 2.; }
           { proportion = 2. / 3.; }
+          { proportion = 1.; }
         ];
         preset-window-heights = [
           { proportion = 1. / 3.; }
           { proportion = 1. / 2.; }
           { proportion = 2. / 3.; }
+          { proportion = 1.; }
         ];
         default-column-width.proportion = lib.mkForce (1. / 2.);
       };
