@@ -40,7 +40,7 @@ with lib;
     # hypridle 配置
     services.hypridle.enable = true;
 
-    # wlogout 配置
+    # wlogout 配置 [todo] 使用 wleave 替代
     programs.wlogout.enable = true;
 
     # 通知设置
