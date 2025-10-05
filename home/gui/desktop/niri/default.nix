@@ -59,6 +59,20 @@ with lib;
             "waybar.service"
           ];
         }
+        {
+          command = [
+            "${lib.getExe pkgs.swaybg}"
+            "-i"
+            "${
+              (pkgs.fetchurl {
+                url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/brands/gruvbox-rainbow-nix.png";
+                hash = "sha256-DK5XTD5XQiabnGJaPZ7hT662UKvNri4cETaoneXC6xw=";
+              })
+            }"
+            "-m"
+            "fill"
+          ];
+        }
         { command = [ "fcitx5" ]; }
         { command = [ "wezterm" ]; }
       ];
