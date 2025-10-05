@@ -5,4 +5,6 @@
   # server.nix-binary-cache.harmonia.path = "/data";
   # 启用 qBittorrent 服务
   services.qbittorrent.enable = true;
+  # 使用 podman 容器启用 Home Assistant
+  services.hass.enable = true;
 }

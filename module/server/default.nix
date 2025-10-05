@@ -1,6 +1,7 @@
 {
   imports = [
     ./harmonia.nix
+    ./home-assistant.nix
     ./qBittorrent.nix
   ];
 }
