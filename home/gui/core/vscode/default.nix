@@ -23,4 +23,5 @@
   };
   programs.neovim.enable = true; # 让vscode的neovim插件工作
 
+  home.shellAliases.code = "codium";
 }
