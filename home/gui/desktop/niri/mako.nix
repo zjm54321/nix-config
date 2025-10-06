@@ -15,4 +15,5 @@
       on-touch = "exec makoctl menu ${lib.getExe pkgs-unstable.rofi} -- -dmenu";
     };
   };
+  # [todo] 配置 rofi ，显示为占满全屏的按钮
 }
