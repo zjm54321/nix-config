@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     remmina
+    wineWowPackages.waylandFull
   ];
 
   programs = {
@@ -25,5 +26,11 @@
   services.gpg-agent.sshKeys = [
     # gpg --list-keys --with-keygrip
     "10D278B429062414335B1C5220EF20998B36C60C"
+  ];
+
+  dev.environments = [
+    "nix"
+    "rust"
+    "python"
   ];
 }
