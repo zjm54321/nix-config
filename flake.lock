@@ -469,11 +469,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1759861274,
-        "narHash": "sha256-LqYXj4rrLpruCpEFnEKCKqDYOx14zhI30lmJUDyP5GY=",
+        "lastModified": 1760034032,
+        "narHash": "sha256-a5WeT1VSjUbwW0FqWdCAZV4Dynn7i06nUqMVDDsNT/k=",
         "ref": "refs/heads/main",
-        "rev": "8f67219fdcb6bc3afe942c6be56f1830f76d1c58",
-        "revCount": 80,
+        "rev": "a15465269a982971a47a92fe77454663b7f194c2",
+        "revCount": 82,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/secrets.git"
       },
@@ -548,11 +548,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759887988,
-        "narHash": "sha256-lNl7i/I6ff4leXg5JwATWw4PGWy3Tg+TgXHwPVvlRH0=",
+        "lastModified": 1760071578,
+        "narHash": "sha256-MZUsqax6PoXPDzhpLyduHoPY4CYYrzL97uKbsx/iGPE=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "7d1150b431a17b1768e87738b832dbeb9a5b05b1",
+        "rev": "65365fe8c09b6c1b6bba1885a126723815376b1b",
         "type": "github"
       },
       "original": {
@@ -718,11 +718,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759931405,
-        "narHash": "sha256-3XsDN9/DRbbE+JNnIm0QtDvCU0RH9jfPVc/JjMAqxlE=",
+        "lastModified": 1760074715,
+        "narHash": "sha256-9FgfWFWCWiVlja1KfCRz2pZb9HeNKtqsgmL3QVN+0gg=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "638ddaad78523064b49f6b7f64cd79a50be7bfb3",
+        "rev": "bea0f9e70706590aa730a7fc89862ed5ab86ab02",
         "type": "github"
       },
       "original": {
