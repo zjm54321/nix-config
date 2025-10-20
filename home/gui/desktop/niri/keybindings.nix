@@ -64,10 +64,13 @@
         allow-when-locked = true;
         action = spawn "brightnessctl" "set" "5%-";
       };
-      "Print" = {
-        hotkey-overlay.title = "截图";
-        action = screenshot;
-      };
+      /*
+        # [fixme] 截图功能失效
+        "Print" = {
+          hotkey-overlay.title = "截图";
+          action = screenshot;
+        };
+      */
 
       # 鼠标控制
       "Mod+WheelScrollUp".action = focus-column-left;
