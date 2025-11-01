@@ -7,4 +7,8 @@
   services.qbittorrent.enable = true;
   # 使用 podman 容器启用 Home Assistant
   services.hass.enable = true;
+  # 启用 samba
+  services.samba.enable = true;
+  services.samba.settings."public".path = "/data";
+  services.samba-wsdd.enable = true;
 }
