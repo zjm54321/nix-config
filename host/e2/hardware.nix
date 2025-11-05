@@ -10,6 +10,12 @@
     "kvm-intel"
   ];
 
+  boot.initrd.kernelModules = [
+    "dm-raid"
+    "raid0"
+    "dm-cache-default"
+  ];
+
   # Intel UHD Graphics 630
   hardware.graphics = {
     enable = true;
