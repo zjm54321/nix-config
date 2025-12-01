@@ -6,8 +6,11 @@
         "editor.fontSize",
         "workbench.iconTheme",
         "workbench.productIconTheme",
-        "workbench.colorTheme",
+        "window.autoDetectColorScheme",
+        "workbench.preferredDarkColorTheme",
+        "workbench.preferredLightColorTheme",
         "editor.rulers",
+        "window.newWindowProfile",
         "editor.lineNumbers",
         "workbench.editor.empty.hint",
         "explorer.confirmDelete",
@@ -20,6 +23,12 @@
         "editor.formatOnSave",
         "terminal.external.windowsExec",
         "terminal.integrated.defaultProfile.windows",
+        "extensions.autoCheckUpdates",
+        "extensions.autoUpdate",
+        "editor.cursorBlinking",
+        "editor.cursorSmoothCaretAnimation",
+        "telemetry.feedback.enabled",
+        "chat.disableAIFeatures",
         "git.openRepositoryInParentFolders",
         "git.enableSmartCommit",
         "git.confirmSync",
@@ -30,30 +39,36 @@
         "errorLens.fontStyleItalic",
         "errorLens.followCursor",
         "errorLens.messageTemplate",
+        "remote.SSH.configFile",
+        "remote.SSH.remotePlatform",
         "extensions.experimental.affinity",
-        "direnv.restart.automatic"
+        "todo-tree.general.tags",
+        "todo-tree.highlights.enabled",
+        "todo-tree.highlights.defaultHighlight",
+        "todo-tree.highlights.customHighlight",
+        "oaicopilot.models"
     ],
-
     "editor.fontFamily": "'Maple Mono NF CN'",
     "terminal.integrated.fontFamily": "'Maple Mono NF CN'",
     "editor.fontLigatures": "'cv01','cv03','cv96','cv97','ss03','ss05','ss08'",
     "editor.fontSize": 16,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "fluent-icons",
-    "workbench.colorTheme": "One Dark Pro",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "One Dark Pro",
+    "workbench.preferredLightColorTheme": "One Dark Pro",
     "editor.rulers": [
         80,
         120
     ],
-
+    "window.newWindowProfile": "默认",
     "editor.lineNumbers": "relative",
     "workbench.editor.empty.hint": "hidden",
     "explorer.confirmDelete": false,
     "telemetry.telemetryLevel": "off",
     "security.workspace.trust.untrustedFiles": "open",
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.minimap.autohide": true,
-    "chat.commandCenter.enabled": false,
+    "editor.minimap.autohide": "mouseover",
     "workbench.editorAssociations": {
         "{hexdiff}:/**/*.*": "hexEditor.hexedit",
         "*.hex": "hexEditor.hexedit"
@@ -61,22 +76,92 @@
     "editor.formatOnSave": true,
     "terminal.external.windowsExec": "Nushell",
     "terminal.integrated.defaultProfile.windows": "Nushell",
-
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false,
+    "editor.cursorBlinking": "solid",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "telemetry.feedback.enabled": false,
+    "chat.disableAIFeatures": false,
     "git.openRepositoryInParentFolders": "never",
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "git.openAfterClone": "alwaysNewWindow",
     "git.timeline.showUncommitted": true,
     "git.autofetch": true,
-
     "errorLens.gutterIconsEnabled": true,
     "errorLens.fontStyleItalic": true,
     "errorLens.followCursor": "activeLine",
     "errorLens.messageTemplate": "$message $source($code)",
-
+    "remote.SSH.configFile": "~/.ssh/conf.d/server.conf",
+    "remote.SSH.remotePlatform": {
+        "aliyun": "linux",
+        "47.113.145.165": "linux",
+        "DigitalOcean": "linux",
+        "azure-linux": "linux",
+        "azure-win": "windows",
+        "192.168.1.37": "linux",
+        "debain": "linux"
+    },
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-
-    "direnv.restart.automatic": true
+    "todo-tree.general.tags": [
+        "[TODO)",
+        "TODO))",
+        "[debug]",
+        "[fatal]",
+        "[ ]"
+    ],
+    "todo-tree.highlights.enabled": false,
+    "todo-tree.highlights.defaultHighlight": {
+        "opacity": 0,
+        "icon": "issue-opened",
+        "gutterIcon": true
+    },
+    "todo-tree.highlights.customHighlight": {
+        "[debug]": {
+            "icon": "alert",
+            "iconColour": "#ffc107"
+        },
+        "[TODO)": {
+            "icon": "check-circle",
+            "iconColour": "#00ff00"
+        },
+        "TODO))": {
+            "icon": "check-circle",
+            "iconColour": "#00ff00"
+        },
+        "[fatal]": {
+            "icon": "x-circle",
+            "iconColour": "#ff0000"
+        },
+        "[ ]": {
+            "icon": "issue-opened",
+            "iconColour": "#00ff00"
+        }
+    },
+    "oaicopilot.models": [
+        {
+            "id": "DeepSeek-R1-0528",
+            "owned_by": "协创者号",
+            "family": "deepseek-r1",
+            "displayName": "DeepSeek-R1-0528",
+            "baseUrl": "https://ai.synnovator.com:9443/v1",
+            "context_length": 256000,
+            "max_tokens": 8192,
+            "temperature": 0.7,
+            "top_p": 1
+        },
+        {
+            "id": "DeepSeek-V3.1",
+            "owned_by": "协创者号",
+            "family": "deepseek-v3",
+            "displayName": "DeepSeek-V3",
+            "baseUrl": "https://ai.synnovator.com:9443/v1",
+            "context_length": 256000,
+            "max_tokens": 8192,
+            "temperature": 0.7,
+            "top_p": 1
+        }
+    ]
 }

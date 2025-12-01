@@ -16,9 +16,9 @@
   mkhl.direnv # Direnv
   nefrob.vscode-just-syntax # justfile
   thenuprojectcontributors.vscode-nushell-lang # Nushell
+  github.copilot-chat # Copilot Chat
   # 闭源
   github.copilot # Copilot
-  github.copilot-chat # Copilot Chat
 ])
 ++ (
   # 开源
@@ -29,4 +29,5 @@
 ++ (
   # 闭源
   with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    johnny-zhao.oai-compatible-copilot # 开源的 Copilot 兼容插件
   ])
