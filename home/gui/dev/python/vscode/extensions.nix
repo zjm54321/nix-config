@@ -7,11 +7,5 @@
   # 开源
   ms-python.python
   charliermarsh.ruff
+  detachhead.basedpyright
 ])
-++
-  # [todo] 在 25.11 中将其改为 pkgs.vscode-extensions 的版本
-  (
-    # 开源
-    with nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
-      detachhead.basedpyright
-    ])

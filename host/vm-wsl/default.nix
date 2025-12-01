@@ -15,7 +15,7 @@ with lib;
     port = 3390;
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   services.display.desktop = "i3"; # Use the core desktop environment
   services.kanata.enable = mkForce false; # wsl 下无需 kanata

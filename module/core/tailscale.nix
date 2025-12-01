@@ -1,5 +1,5 @@
 {
-  pkgs-unstable,
+  pkgs,
   ...
 }:
 /*
@@ -26,13 +26,12 @@
   https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/services/networking/tailscale.nix
 */
 {
-  # 由于 stable 版本无法编译，因此使用 unstable 版本 [fixme]
   # 让用户可以使用 tailscale 命令
-  environment.systemPackages = [ pkgs-unstable.tailscale ];
+  environment.systemPackages = [ pkgs.tailscale ];
 
   # 启用 tailscale 服务
   services.tailscale = {
-    package = pkgs-unstable.tailscale;
+    package = pkgs.tailscale;
     enable = true;
     port = 41641;
     interfaceName = "tailscale0";
@@ -43,5 +42,5 @@
     # authKeyFile = "/var/lib/tailscale/authkey";
   };
 
-  networking.firewall.trustedInterfaces = ["tailscale0"];
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
 }

@@ -10,7 +10,7 @@
   networking.hostName = "sgo3";
   networking.networkmanager.enable = true;
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   services.tpm2.enable = true;
   services.display.desktop = "niri";

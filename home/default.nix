@@ -17,7 +17,7 @@
     #
     # 您可以在不更改此值的情况下更新 Home Manager。
     # 请参阅 Home Manager 发布说明，了解每个版本中的状态版本更改列表。
-    stateVersion = "25.05";
+    stateVersion = "25.11";
   };
 
   # 让 Home Manager 安装并管理自身。

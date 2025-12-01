@@ -1,13 +1,12 @@
 {
   services.samba = {
-    securityType = "user";
     openFirewall = true;
     settings = {
       global = {
         "workgroup" = "ZJ";
         "server string" = "smbnix";
         "netbios name" = "smbnix";
-        "security" = "user";
+        security = "user";
         # 仅允许 100.100.x.x、本机访问；其他全部拒绝
         "hosts allow" = "100.100.0.0/16 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
@@ -31,7 +30,7 @@
     openFirewall = true;
   };
 
-  users.groups.smbuser = {};
+  users.groups.smbuser = { };
   users.users.smbuser = {
     isSystemUser = true;
     group = "smbuser";

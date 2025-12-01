@@ -47,15 +47,6 @@
             # 如遇此问题，请手动将 /var/lib/libvirt/qemu 下相关文件的所有权改为 qemu-libvirtd。
             runAsRoot = true;
             swtpm.enable = true;
-            ovmf = {
-              enable = true;
-              packages = [
-                (pkgs.OVMF.override {
-                  secureBoot = true;
-                  tpmSupport = true;
-                }).fd
-              ];
-            };
           };
         };
       };

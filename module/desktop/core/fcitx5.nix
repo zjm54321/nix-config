@@ -19,8 +19,8 @@ with lib;
           # 用于rime中文输入法
           fcitx5-rime
           # 安装后需要使用配置工具启用 rime
-          fcitx5-configtool
-          fcitx5-chinese-addons
+          qt6Packages.fcitx5-configtool
+          qt6Packages.fcitx5-chinese-addons
           fcitx5-gtk # gtk 输入法模块
         ];
 

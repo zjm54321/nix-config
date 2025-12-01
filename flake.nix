@@ -15,10 +15,10 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -27,9 +27,7 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    # 由于 librime 版本问题，锁定 oh-my-rime 非万象词库版本
-    # https://www.mintimate.cc/zh/guide/faQ.html#linux%E8%96%84%E8%8D%B7%E9%85%8D%E7%BD%AE%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8
-    rime-config.url = "github:Mintimate/oh-my-rime/?rev=6f503bcb3dbebee53461db67917f764639c1e407";
+    rime-config.url = "github:Mintimate/oh-my-rime/";
     my-rime-config.url = "git+ssh://git@github.com/zjm54321/my-rime-config.git";
     rime-config.flake = false;
     my-rime-config.flake = false;
@@ -37,10 +35,11 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
-    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.2";
+    # [fixme] lanzaboote 0.4.3 不支持
+    lanzaboote.url = "github:nix-community/lanzaboote/";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-25.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # 锁定anyrun版本以解决插件问题 [fixme]

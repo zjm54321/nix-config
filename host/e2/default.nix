@@ -10,7 +10,7 @@
   networking.hostName = "e2";
   networking.networkmanager.enable = true;
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   services.display.desktop = "niri";
   services.secureboot.enable = true;

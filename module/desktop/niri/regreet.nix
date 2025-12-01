@@ -40,7 +40,7 @@ with lib;
             command = concatStringsSep " " [
               "${pkgs.dbus}/bin/dbus-run-session --"
               "${getExe pkgs.niri} -c ${logincfg} --"
-              "${getExe pkgs.greetd.regreet};"
+              "${getExe pkgs.regreet};"
               "${getExe pkgs.niri} msg action quit --skip-confirmation"
             ];
           };

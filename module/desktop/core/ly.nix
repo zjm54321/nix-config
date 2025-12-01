@@ -6,12 +6,11 @@
 {
   services.displayManager = {
     ly = {
-      # package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ly; # [todo] 版本为1.1.0
-      #x11Support = false;
+      x11Support = false;
       settings = {
-        #animation = "colormix";
+        animation = "colormix";
 
-        #bigclock = "en"; 在下个版本中修复
+        bigclock = "en";
         clock = "%Y/%m/%d";
 
         numlock = true;

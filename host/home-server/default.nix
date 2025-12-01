@@ -11,7 +11,7 @@
   networking.hostName = "home-server";
   networking.networkmanager.enable = true;
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   networking.proxy.mihomo.enable = true;
 }
