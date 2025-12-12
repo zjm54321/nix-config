@@ -35,6 +35,9 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
+    howdy.url = "github:fufexan/nixpkgs/howdy";
+    howdy.inputs.nixpkgs.follows = "nixpkgs";
+
     # [fixme] lanzaboote 0.4.3 不支持
     lanzaboote.url = "github:nix-community/lanzaboote/";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";

@@ -10,6 +10,12 @@ with lib;
 {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
+
+    # howdy
+    { disabledModules = [ "security/pam.nix" ]; }
+    "${inputs.howdy}/nixos/modules/security/pam.nix"
+    "${inputs.howdy}/nixos/modules/services/security/howdy"
+    "${inputs.howdy}/nixos/modules/services/misc/linux-enable-ir-emitter.nix"
   ];
 
   options = {

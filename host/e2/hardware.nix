@@ -2,6 +2,7 @@
   pkgs,
   config,
   vars,
+  inputs,
   ...
 }:
 {
@@ -91,4 +92,25 @@
 
   # 虚拟化
   boot.extraModprobeConfig = "options kvm_intel nested=1";
+
+  # 启用人脸识别 (1080p 摄像头)
+  services.howdy = {
+    enable = true;
+    package = inputs.howdy.legacyPackages.${pkgs.system}.howdy;
+    settings = {
+      core = {
+        abort_if_ssh = true;
+      };
+
+      video = {
+        max_height = 540;
+        frame_width = 1920;
+        frame_height = 1080;
+
+        dark_threshold = 10;
+        device_path = "/dev/video0";
+      };
+    };
+
+  };
 }
