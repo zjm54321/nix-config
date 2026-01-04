@@ -10,6 +10,7 @@
     ./misc.nix
     ./network.nix
     ./nix.nix
+    ./power_management.nix
     ./programs.nix
     ./security.nix
     ./ssh.nix

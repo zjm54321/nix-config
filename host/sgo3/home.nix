@@ -22,6 +22,14 @@
   ];
 
   gui.de = "niri";
+  # 设置熄屏时间
+  services.hypridle.settings.listener = [
+    {
+      timeout = 600; # 10 minutes
+      on-timeout = "systemctl suspend-then-hibernate";
+      on-resume = "niri msg action power-on-monitors && brightnessctl -r";
+    }
+  ];
 
   # GPG 设备密钥
   programs.git.signing = lib.mkForce {

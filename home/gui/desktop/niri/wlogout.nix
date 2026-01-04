@@ -15,8 +15,8 @@
       }
       {
         label = "suspend";
-        action = "systemctl suspend";
-        text = "睡眠";
+        action = "systemctl suspend-then-hibernate";
+        text = "混合睡眠";
         keybind = "s";
       }
       {
