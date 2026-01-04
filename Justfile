@@ -26,7 +26,7 @@ install config:
 # 部署系统配置
 [group('nix')]
 deploy:
-  nixos-rebuild switch --flake .
+  nixos-rebuild switch --flake . --sudo
 
 # 远程部署系统配置
 [group('nix')]
