@@ -51,4 +51,6 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  # CPU 温度监控，防止过热关机
+  services.thermald.enable = true;
 }
