@@ -14,7 +14,7 @@ with lib;
     ./hyprlock.nix
     ./mako.nix
     ./waybar
-    ./wlogout.nix
+    ./wleave.nix
   ];
 
   options.gui.desktop.niri.enable = mkEnableOption "启用niri桌面环境配置";
@@ -39,8 +39,8 @@ with lib;
     # hypridle 配置
     services.hypridle.enable = true;
 
-    # wlogout 配置 [todo] 使用 wleave 替代
-    programs.wlogout.enable = true;
+    # wleave 配置
+    programs.wleave.enable = true;
 
     # 通知设置
     services.mako.enable = true;
