@@ -42,7 +42,7 @@
     let
       bash = "${pkgs.bash}/bin/bash";
       ddcciDev = "AUX B/DDI B/PHY B";
-      ddcciNode = "/sys/bus/i2c/devices/i2c-5/new_device";
+      ddcciNode = "/sys/bus/i2c/devices/i2c-7/new_device";
     in
     ''
       SUBSYSTEM=="i2c", ACTION=="add", ATTR{name}=="${ddcciDev}", RUN+="${bash} -c 'sleep 30; printf ddcci\ 0x37 > ${ddcciNode}'"
