@@ -9,7 +9,8 @@
   services.hass.enable = true;
   # 启用 samba
   services.samba.enable = true;
-  services.samba.settings."public".path = "/data";
+  services.samba.settings."public".path = "/data/public";
+  services.samba.settings."private".path = "/data";
   services.samba-wsdd.enable = true;
   # 启用 webdav 服务
   services.webdav.enable = true;
