@@ -15,4 +15,6 @@
   # 启用 webdav 服务
   services.webdav.enable = true;
   services.webdav.settings.directory = "/data/webdav";
+  # 启用newapi
+  services.newapi.enable = true;
 }
