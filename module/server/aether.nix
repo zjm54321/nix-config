@@ -58,8 +58,8 @@ in
           environment = {
             DATABASE_URL = "postgresql://postgres:aether@aether-postgres:5432/aether";
             REDIS_URL = "redis://aether-redis:6379/0";
-            JWT_SECRET_KEY = "aether";
-            ENCRYPTION_KEY = "aether";
+            JWT_SECRET_KEY = "aether-jwt-secret-key-internal-2025aa";
+            ENCRYPTION_KEY = "aether-encryption-key-internal-2025aa";
             ADMIN_EMAIL = vars.useremail;
             ADMIN_USERNAME = vars.username;
             ADMIN_PASSWORD = "aether";

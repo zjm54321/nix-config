@@ -17,4 +17,6 @@
   services.webdav.settings.directory = "/data/webdav";
   # 启用newapi
   services.newapi.enable = true;
+  # 启用 Aether AI API 网关
+  services.aether.enable = true;
 }
