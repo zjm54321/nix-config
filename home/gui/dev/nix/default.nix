@@ -13,7 +13,7 @@
     vscode.nix.enable = true;
 
     home.packages = with pkgs; [
-      nixfmt-rfc-style
+      nixfmt
       nil
     ];
   };

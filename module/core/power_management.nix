@@ -4,5 +4,5 @@
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchExternalPower = "ignore";
   };
-  systemd.sleep.extraConfig = "HibernateDelaySec=5400"; # 90分钟后休眠
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "5400"; # 90分钟后休眠
 }

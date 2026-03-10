@@ -15,10 +15,9 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -35,14 +34,10 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
-    howdy.url = "github:fufexan/nixpkgs/howdy";
-    howdy.inputs.nixpkgs.follows = "nixpkgs";
-
-    # [fixme] lanzaboote 0.4.3 不支持
     lanzaboote.url = "github:nix-community/lanzaboote/";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:danth/stylix/release-25.11";
+    stylix.url = "github:danth/stylix/master";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     anyrun.url = "github:anyrun-org/anyrun";
@@ -71,17 +66,12 @@
           vars = import ./vars;
           secret = import "${mysecrets}/secret.nix";
           system = "x86_64-linux";
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
           specialArgs = {
             inherit
               inputs
               hostname
               vars
               secret
-              pkgs-unstable
               ;
           };
         in
