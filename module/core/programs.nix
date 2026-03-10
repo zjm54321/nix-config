@@ -7,7 +7,7 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
-    evil-helix # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    helix # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nushell
     just
     git
