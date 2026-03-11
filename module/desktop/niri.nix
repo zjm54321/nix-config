@@ -1,16 +1,44 @@
 {
+  vars,
+  ...
+}:
+{
 
   services.displayManager.dms-greeter = {
     enable = true;
     compositor.name = "niri";
+    compositor.customConfig = ''
+      animations {
+       off
+      }
+      window-rule {
+        open-focused true
+      }
+      hotkey-overlay {
+        skip-at-startup
+      }
+      environment {
+          DMS_RUN_GREETER "1"
+      }
+      gestures {
+        hot-corners {
+          off
+        }
+      }
+      layout {
+        background-color "#000000"
+      }
+    '';
+    configHome = "/home/${vars.username}";
+
   };
+
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
   programs.niri.enable = true;
 
-  security.pam.services.hyprlock = { };
   i18n.inputMethod.fcitx5.waylandFrontend = true;
 
 }
