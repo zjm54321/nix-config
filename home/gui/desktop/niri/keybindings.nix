@@ -28,15 +28,10 @@
         hotkey-overlay.title = "打开终端: wezterm";
         action = spawn "wezterm";
       };
-      "Mod+Space" = {
-        repeat = false;
-        hotkey-overlay.title = "运行应用程序: anyrun";
-        action = spawn "anyrun";
-      };
       "Mod+Alt+L" = {
         repeat = false;
-        hotkey-overlay.title = "锁定屏幕: hyprlock";
-        action = spawn "hyprlock";
+        hotkey-overlay.title = "锁定屏幕";
+        action = spawn "dms" "ipc" "call" "lock" "lock";
       };
 
       # 多媒体按键
