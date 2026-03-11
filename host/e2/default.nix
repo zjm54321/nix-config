@@ -12,7 +12,6 @@
 
   system.stateVersion = "25.11";
 
-  services.display.desktop = "niri";
   services.secureboot.enable = true;
   services.tpm2.enable = true;
   services.display.bootanmination.enable = true;

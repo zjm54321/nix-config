@@ -21,7 +21,6 @@
     "embedded-c51"
   ];
 
-  gui.de = "niri";
   # 设置熄屏时间
   services.hypridle.settings.listener = [
     {

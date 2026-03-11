@@ -16,7 +16,6 @@
   programs = {
     wiliwili.enable = true;
   };
-  gui.de = "niri";
 
   # GPG 设备密钥
   programs.git.signing = lib.mkForce {
