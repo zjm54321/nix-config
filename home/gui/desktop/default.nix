@@ -57,7 +57,6 @@
     xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
     spawn-at-startup = [
-      { command = [ "fcitx5" ]; }
       { command = [ "wezterm" ]; }
     ];
 

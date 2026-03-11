@@ -48,11 +48,5 @@ in
       INPUT_METHOD = "fcitx5";
     };
 
-    /*
-      不需要这个服务(由 XDGautostart 配置)
-      这个服务会在 niri 启动前提前启动 fcitx5，导致 dbus 卡住，并影响 waybar 的加载
-      现在会通过 niri 的启动脚本来启动 fcitx5
-    */
-    systemd.user.services."app-org.fcitx.Fcitx5@autostart" = lib.mkForce { };
   };
 }
