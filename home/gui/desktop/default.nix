@@ -9,7 +9,6 @@ let
 in
 {
   imports = [
-    ./i3
     ./niri
   ];
 
@@ -17,9 +16,7 @@ in
     description = "Desktop environment configuration.";
     type = types.nullOr (
       types.enum [
-        "i3"
         "niri"
-        "sway"
       ]
     );
     default = null;
@@ -28,9 +25,6 @@ in
   config = mkMerge [
     (mkIf (cfg != null) {
       gui.core.enable = true;
-    })
-    (mkIf (cfg == "i3") {
-      gui.desktop.i3.enable = true;
     })
     (mkIf (cfg == "niri") {
       gui.desktop.niri.enable = true;

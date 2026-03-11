@@ -19,6 +19,7 @@ with lib;
       "/share/applications"
       "/share/xdg-desktop-portal"
     ];
+    programs.niri.enable = true;
 
     security.pam.services.hyprlock = { };
     i18n.inputMethod.fcitx5.waylandFrontend = true;
