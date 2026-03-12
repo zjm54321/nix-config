@@ -1,5 +1,6 @@
 {
   vars,
+  lib,
   ...
 }:
 {
@@ -41,4 +42,10 @@
 
   i18n.inputMethod.fcitx5.waylandFrontend = true;
 
+  # dms需要upower
+  services.upower.enable = lib.mkDefault true;
+
+  services.power-profiles-daemon.enable = lib.mkDefault true;
+  services.accounts-daemon.enable = lib.mkDefault true;
+  services.geoclue2.enable = lib.mkDefault true;
 }
