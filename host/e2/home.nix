@@ -10,7 +10,7 @@
 
   home.packages = with pkgs; [
     remmina
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
   ];
 
   programs = {
