@@ -27,7 +27,7 @@ in
 {
   programs.ssh = {
     enable = true;
-
+    enableDefaultConfig = false;
     # 使用 tailscale ip 配置主机
     matchBlocks = {
       "localhost" = host { hostname = "localhost"; };
