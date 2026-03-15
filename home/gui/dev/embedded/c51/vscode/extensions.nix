@@ -3,7 +3,7 @@
   pkgs,
   ...
 }:
-(with nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
+(with nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system}.open-vsx; [
   # 开源
   cl.eide
 ])

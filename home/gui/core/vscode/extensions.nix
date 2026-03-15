@@ -22,12 +22,12 @@
 ])
 ++ (
   # 开源
-  with nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
+  with nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system}.open-vsx; [
     miguelsolorio.fluent-icons # Fluent Icons
     jeanp413.open-remote-ssh # SSH
   ])
 ++ (
   # 闭源
-  with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+  with nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system}.vscode-marketplace; [
     johnny-zhao.oai-compatible-copilot # 开源的 Copilot 兼容插件
   ])

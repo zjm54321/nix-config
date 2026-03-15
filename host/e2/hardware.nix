@@ -97,7 +97,7 @@
   /*
     services.howdy = {
       enable = true;
-      package = inputs.howdy.legacyPackages.${pkgs.system}.howdy;
+      package = inputs.howdy.legacyPackages.${pkgs.stdenv.hostPlatform.system}.howdy;
       settings = {
         core = {
           abort_if_ssh = true;
