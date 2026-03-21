@@ -148,11 +148,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1772034342,
-        "narHash": "sha256-InX8kRyrpVL+MP/gW1qhH9tGtDx2z2gmJ9NfmvUJ35I=",
+        "lastModified": 1774051185,
+        "narHash": "sha256-rfWvWbPVrpujmBp/q9My/70fWgRLaELdrnZB3CZKlWg=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "47b12d09fc8526f9c231de60848a41b5990b4a37",
+        "rev": "1f64bb80311e0169e75a6a507fc07d909117c90c",
         "type": "github"
       },
       "original": {
@@ -418,11 +418,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773962693,
-        "narHash": "sha256-nf9pgktDE4E2TCavUT1vh3Nd/tfKixL1BK6P32Zp3hI=",
+        "lastModified": 1774007980,
+        "narHash": "sha256-FOnZjElEI8pqqCvB6K/1JRHTE8o4rer8driivTpq2uo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9d3c1d636e7b8ab10f357cd9bee653cd400437de",
+        "rev": "9670de2921812bc4e0452f6e3efd8c859696c183",
         "type": "github"
       },
       "original": {
@@ -474,11 +474,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1773944219,
-        "narHash": "sha256-l1IchLe6kr79xdY5BbQt3FP1M76lPl3wZqbhTLjcxLA=",
+        "lastModified": 1774030306,
+        "narHash": "sha256-lOZun3xfEbjmF9iv38ixp7QhPyeMsFCRXEiZKwjZLcc=",
         "ref": "refs/heads/main",
-        "rev": "15adf770016aece3596f2feb228642abc1378176",
-        "revCount": 240,
+        "rev": "0f7fe65dd9f3c416d0485f94ae9310057cd6c9e6",
+        "revCount": 241,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/secrets.git"
       },
@@ -568,11 +568,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773974569,
-        "narHash": "sha256-Y71Afv2mVpus+EqUj0qAwPgyaABIvEtjnUAlw5EUo3A=",
+        "lastModified": 1774060605,
+        "narHash": "sha256-Cu6MK16Wr03tiX3tLFw/e39l2DSn0khHAd8nC8wz+n0=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "5b8548f9e2cbe14146df30858bd281404957846f",
+        "rev": "7caa45250be3fcb9b3695522fc2e2156c717569a",
         "type": "github"
       },
       "original": {
@@ -706,11 +706,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773993454,
-        "narHash": "sha256-d3+sjz7fCFt8HTstcCGnT1wLsz1CcqhQHOZx6TM7Es0=",
+        "lastModified": 1774077133,
+        "narHash": "sha256-seaMLqcOqVmXxflfCo/porVj8mcX8qn8HMHUPXC4Now=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "2f0fb7dcdb76f1e3e9c68da6f6225d59f834170c",
+        "rev": "800657aa193a98b84f8262300a4ccc4f5de4e7c9",
         "type": "github"
       },
       "original": {
@@ -792,11 +792,11 @@
     "rime-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1773964680,
-        "narHash": "sha256-e6+95drHOHu7OLy6omaoKCcXAn0w2lAyRtkvwDZc/VE=",
+        "lastModified": 1774051446,
+        "narHash": "sha256-Ggp/tI3axD6C9ciC1TVmm6xEtsMDG/ugvTetrtMqRJs=",
         "owner": "Mintimate",
         "repo": "oh-my-rime",
-        "rev": "57c0409a6d81379b1bc58e5aca03c085d57d099e",
+        "rev": "ce43a2ccdbaed1e02dae22b58630babb85596499",
         "type": "github"
       },
       "original": {
