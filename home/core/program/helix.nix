@@ -1,12 +1,5 @@
 {
-  pkgs,
-  ...
-}:
-{
-  programs.helix = {
-    enable = true;
-    package = pkgs.evil-helix;
-  };
+  programs.helix.enable = true;
 
   home.shellAliases = {
     vi = "hx";
