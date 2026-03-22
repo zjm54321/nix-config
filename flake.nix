@@ -52,6 +52,9 @@
 
     harmonia.url = "github:nix-community/harmonia";
     harmonia.inputs.nixpkgs.follows = "nixpkgs";
+
+    mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
+    mcp-servers-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{

@@ -1,6 +1,6 @@
 {
   imports = [
-    ./ai.nix
+    ./ai
     ./direnv.nix
     ./git.nix
     ./gpg.nix

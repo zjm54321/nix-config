@@ -455,6 +455,26 @@
         "type": "github"
       }
     },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773774022,
+        "narHash": "sha256-s+EMBn+DlJmMH+ZUp+MrqnAaIomR9q+1xAyHMVF5HGE=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "411638cb2dae8e93415806340f3e7432ee09b8fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "type": "github"
+      }
+    },
     "my-rime-config": {
       "flake": false,
       "locked": {
@@ -474,11 +494,11 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1774030306,
-        "narHash": "sha256-lOZun3xfEbjmF9iv38ixp7QhPyeMsFCRXEiZKwjZLcc=",
+        "lastModified": 1774162729,
+        "narHash": "sha256-AG7JSZRekpuLkZw3NGdcsgPcXXsT9gRmFPlA504AwTU=",
         "ref": "refs/heads/main",
-        "rev": "0f7fe65dd9f3c416d0485f94ae9310057cd6c9e6",
-        "revCount": 241,
+        "rev": "01adf5927eea404947603dff49e76c75860c2271",
+        "revCount": 243,
         "type": "git",
         "url": "ssh://git@github.com/zjm54321/secrets.git"
       },
@@ -813,6 +833,7 @@
         "harmonia": "harmonia",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
+        "mcp-servers-nix": "mcp-servers-nix",
         "my-rime-config": "my-rime-config",
         "mysecrets": "mysecrets",
         "niri": "niri",
