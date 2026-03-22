@@ -1,4 +1,9 @@
-{ secret, ... }:
+{
+  lib,
+  pkgs,
+  secret,
+  ...
+}:
 let
   aetherBaseURL = "http://100.100.1.1:8084/v1";
   aetherApiKey = secret.aether-api-key;
@@ -75,6 +80,19 @@ in
     enableMcpIntegration = true;
 
     settings = {
+      lsp = {
+        marksman = {
+          command = [
+            "${lib.getExe pkgs.marksman}"
+            "server"
+          ];
+          extensions = [
+            ".md"
+            ".markdown"
+          ];
+        };
+      };
+
       plugin = [ "oh-my-opencode@latest" ];
 
       provider = {
