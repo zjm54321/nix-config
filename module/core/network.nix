@@ -20,7 +20,7 @@ with lib;
       enable = true;
       tunMode = true;
       webui = pkgs.metacubexd;
-      configFile = "${inputs.mysecrets}/mihomo/mihomo.yaml";
+      configFile = "${inputs.mysecrets}/mihomo/mihomo-cloud.yaml";
     };
     networking.firewall.trustedInterfaces = [ "Mihomo" ];
     systemd.services."mihomo" = {
