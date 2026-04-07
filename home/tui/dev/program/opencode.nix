@@ -93,7 +93,7 @@ in
         };
       };
 
-      plugin = [ "oh-my-opencode@latest" ];
+      plugin = [ "oh-my-openagent@latest" ];
 
       provider = {
         anthropic = {
