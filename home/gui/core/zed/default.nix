@@ -35,6 +35,17 @@
         ss08 = true;
       };
 
+      agent_servers = {
+        opencode = {
+          type = "custom";
+          command = "${lib.getExe pkgs.opencode} acp";
+        };
+        claude-acp = {
+          type = "custom";
+          command = "${lib.getExe pkgs.claude-agent-acp}";
+        };
+      };
+
       git = {
         inline_blame = {
           show_commit_summary = true;
