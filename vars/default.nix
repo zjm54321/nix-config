@@ -2,6 +2,7 @@
   username = "ming";
   userfullname = "章家铭";
   useremail = "zhang_jia_ming@outlook.com";
+  ai_api_url = "http://100.100.1.1:8084";
   initialHashedPassword = "$7$CU..../....vGtVLf5WylKSnJV2R4IaW1$nnsefqHmGiSxV.IIhh71G2VGBixLpYrORADhXAY8CtB";
   primaryAuthorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIImWd7VyOGb0/yFcBXeKFxDKd6YnoKjroJQvpabZdkOH openpgp@canokey"
