@@ -1,6 +1,0 @@
-{
-    "basedpyright.analysis.diagnosticMode": "workspace",
-    "basedpyright.analysis.inlayHints.callArgumentNamesMatching": true,
-    "basedpyright.analysis.inlayHints.genericTypes": true,
-    "python.missingPackage.severity": "Information"
-}

@@ -17,7 +17,7 @@
 | 系统 Shell | Nushell + Starship |
 | 终端模拟器 | WezTerm |
 | 编辑器 | Helix |
-| IDE | VSCodium |
+| IDE | Zed |
 | 浏览器 | Firefox |
 | 输入法 | Fcitx5 (Rime) |
 | VPN | Tailscale |
@@ -38,7 +38,7 @@ nix-config/
 │   └── server/            # 服务器：Aether、Harmonia、Home Assistant 等
 ├── home/                  # Home Manager 用户配置
 │   ├── core/              # Shell、Git、GPG、SSH、Helix、AI/MCP
-│   ├── gui/               # VSCode、Firefox、WezTerm、桌面快捷键
+│   ├── gui/               # Firefox、WezTerm、Zed、桌面快捷键
 │   └── tui/               # OpenCode、Claude Code、Taskwarrior
 ├── host/                  # 各主机的特定配置和硬件声明
 │   ├── e2/

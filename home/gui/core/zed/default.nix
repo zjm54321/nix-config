@@ -19,7 +19,6 @@
     ];
 
     userSettings = {
-      base_keymap = "VSCode";
       load_direnv = "shell_hook";
 
       theme = lib.mkForce "One Dark Pro";

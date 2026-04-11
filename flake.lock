@@ -580,26 +580,6 @@
         "type": "github"
       }
     },
-    "nix-vscode-extensions": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775875897,
-        "narHash": "sha256-/6yiKV+yW1b1bvM5QxfAovW5nu7JHMfW+1HTCBchrlk=",
-        "owner": "nix-community",
-        "repo": "nix-vscode-extensions",
-        "rev": "517e9639fc0830315bb88af02d5dcacfb96aa342",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix-vscode-extensions",
-        "type": "github"
-      }
-    },
     "nix-vscode-server": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -836,7 +816,6 @@
         "my-rime-config": "my-rime-config",
         "mysecrets": "mysecrets",
         "niri": "niri",
-        "nix-vscode-extensions": "nix-vscode-extensions",
         "nix-vscode-server": "nix-vscode-server",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
