@@ -1,6 +1,7 @@
 {
   vars,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -48,6 +49,13 @@ in
 
       "home-server" = host { hostname = "100.100.1.1"; };
     };
+  };
+
+  home.packages = [ pkgs.waypipe ];
+
+  home.shellAliases = {
+    wsh = "waypipe ssh";
+    xsh = "ssh -Y";
   };
 
   home.file = {
