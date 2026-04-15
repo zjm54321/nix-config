@@ -37,6 +37,8 @@ remote config target_host build_host:
 [group('nix')]
 up:
     nix flake update
+    git add flake.lock
+    if ((git diff --cached --name-only | lines | length) > 0) { git commit -m "chore: nix flake update" }
 
 # 更新特定输入
 
@@ -44,6 +46,8 @@ up:
 [group('nix')]
 upp input:
     nix flake update {{ input }}
+    git add flake.lock
+    if ((git diff --cached --name-only | lines | length) > 0) { git commit -m $"chore: nix flake update ({{ input }})" }
 
 # 列出系统配置文件的所有代数
 [group('nix')]
