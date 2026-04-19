@@ -612,6 +612,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1776581226,
+        "narHash": "sha256-O8m2GVpjc024zcYkd45+LTysAjJOuWwSxGi3+wuz7dc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5eca60ad25c52a961f3352fdf0c070bf509b2343",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1776434932,
@@ -796,6 +812,7 @@
         "nix-vscode-server": "nix-vscode-server",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-master": "nixpkgs-master",
         "nur": "nur",
         "rime-config": "rime-config",
         "stylix": "stylix"
