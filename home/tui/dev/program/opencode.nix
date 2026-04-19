@@ -5,7 +5,7 @@
   ...
 }:
 let
-  aetherBaseURL = "http://100.100.1.1:8084/v1";
+  aetherBaseURL = "http://100.100.10.3:8084/v1";
   aetherApiKey = secret.aether-api-key;
 
   mkAnthropicModel =
@@ -121,7 +121,7 @@ in
         google = {
           name = "Google";
           options = {
-            baseURL = "http://100.100.1.1:8084/v1beta";
+            baseURL = "http://100.100.10.3:8084/v1beta";
             apiKey = aetherApiKey;
           };
           models = {
