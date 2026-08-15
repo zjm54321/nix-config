@@ -1,3 +1,6 @@
 {
-  imports = [ ./program ];
+  imports = [
+    ./agent-relay.nix
+    ./program
+  ];
 }
