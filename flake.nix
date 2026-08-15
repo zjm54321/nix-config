@@ -13,6 +13,8 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    skills-catalog.url = "path:./skills";
   };
 
   outputs =
@@ -20,6 +22,7 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
+      skills-catalog,
       ...
     }:
     let
@@ -29,6 +32,7 @@
     {
       nixosConfigurations."136kf" = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit skills-catalog; };
         modules = [
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager

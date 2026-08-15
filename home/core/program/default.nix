@@ -4,7 +4,6 @@
     ./helix.nix
     ./just.nix
     ./nushell.nix
-    ./opencode.nix
     ./starship.nix
   ];
 }

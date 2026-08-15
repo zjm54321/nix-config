@@ -1,3 +1,4 @@
+{ skills-catalog, ... }:
 {
   imports = [
     ../../module/core
@@ -9,7 +10,12 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.ming = import ./home.nix;
+    users.ming = {
+      imports = [
+        ./home.nix
+        skills-catalog.homeManagerModules.default
+      ];
+    };
   };
 
   system.stateVersion = "26.05";

@@ -1,5 +1,96 @@
 {
   "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "blueprint": "blueprint",
+        "home-manager": "home-manager_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1786379373,
+        "narHash": "sha256-zrvcpGFA8zG6yRLBqQH9bNkJap8xMvLNvkuT4+7w6X8=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "1594ba479be81a7cb6dd19faabefcb1ed5b3f964",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
+    "awesome-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786734973,
+        "narHash": "sha256-sxwBPPgtCdM6oaH2k3ve6vFsdF7+LgP8gC/6By9SsMw=",
+        "owner": "github",
+        "repo": "awesome-copilot",
+        "rev": "a80885b76044550770f60f360f8a0e5ae3524a31",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "awesome-copilot",
+        "type": "github"
+      }
+    },
+    "better-icons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775145257,
+        "narHash": "sha256-g5h1JDRUU/dhRLgtIzw4DZpMtKHPOhai+RF4f4oekAE=",
+        "owner": "better-auth",
+        "repo": "better-icons",
+        "rev": "033316ecb8f4982235af4111a2257e80231f5ab1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "better-auth",
+        "repo": "better-icons",
+        "type": "github"
+      }
+    },
+    "blueprint": {
+      "inputs": {
+        "nixpkgs": [
+          "skills-catalog",
+          "agent-skills",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1776249299,
+        "narHash": "sha256-Dt9t1TGRmJFc0xVYhttNBD6QsAgHOHCArqGa0AyjrJY=",
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "56131e8628f173d24a27f6d27c0215eff57e40dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
+    "cloudflare-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786124673,
+        "narHash": "sha256-r8HeH9XWV9qhbMq3fPASNfT5Y1mrfsgBI5STiUi/LVA=",
+        "owner": "cloudflare",
+        "repo": "skills",
+        "rev": "f96bff754e428838818017f75817f0f9428acd48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cloudflare",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -34,6 +125,60 @@
         "owner": "nix-community",
         "ref": "master",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "skills-catalog",
+          "agent-skills",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785531816,
+        "narHash": "sha256-vkMnV0JIyw+g/NmcfoajlGaAO+9a0ezia+FZohQJrik=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "bf9ce9fec78f95f374e8dd3b503863a3ec128ebe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "make-interfaces-feel-better": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786535129,
+        "narHash": "sha256-jopwqDEexlSTwNx+vsU62Rs31DmRT0VhqYLwHBlyuSs=",
+        "owner": "jakubkrehel",
+        "repo": "make-interfaces-feel-better",
+        "rev": "5a4076ac611d6610b9cb4d67f5275cb4f869411b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jakubkrehel",
+        "repo": "make-interfaces-feel-better",
+        "type": "github"
+      }
+    },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786611981,
+        "narHash": "sha256-jsXcMkhu15MxR0zXnLLJeni0q0Aew2UxUSojl6zmOvg=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "8b78b531ab965735c5dc74f6f7a219e1e37326df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -75,11 +220,147 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1785571196,
+        "narHash": "sha256-KoTsyMQqnXQZq8deCEnu4QkyldkwH/bpMMhUcfMdGIw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "148bab9c1c3c53136ecb44a6ea356a0ed5b39b06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "officecli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786616923,
+        "narHash": "sha256-PSnU9ij9xbFGqe6ziv7x437Y1vWpJ7CRYCpwcUQ0bS0=",
+        "owner": "iOfficeAI",
+        "repo": "OfficeCLI",
+        "rev": "1ced45e900782c5083ed550ddf328ee974e425e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iOfficeAI",
+        "repo": "OfficeCLI",
+        "type": "github"
+      }
+    },
+    "oh-my-opencode-slim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786813164,
+        "narHash": "sha256-ncxuKlqJlK50GLIRzlSRPuFxgLRGxlVYwkaFmxbyZQc=",
+        "owner": "alvinunreal",
+        "repo": "oh-my-opencode-slim",
+        "rev": "220eb2be677cb739f795b97a62909110e04ebfc5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alvinunreal",
+        "repo": "oh-my-opencode-slim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "skills-catalog": "skills-catalog"
+      }
+    },
+    "secretary-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786821967,
+        "narHash": "sha256-kJESiDQ7+GVcaKQ88vFfdLaNVmNtzKRWbrVz43Eaj4U=",
+        "owner": "zjm54321",
+        "repo": "secretary-skills",
+        "rev": "48de9a249b253c1de9f9cbb7f1720b008f96c1d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zjm54321",
+        "repo": "secretary-skills",
+        "type": "github"
+      }
+    },
+    "skills-catalog": {
+      "inputs": {
+        "agent-skills": "agent-skills",
+        "awesome-copilot": "awesome-copilot",
+        "better-icons": "better-icons",
+        "cloudflare-skills": "cloudflare-skills",
+        "make-interfaces-feel-better": "make-interfaces-feel-better",
+        "mattpocock-skills": "mattpocock-skills",
+        "officecli": "officecli",
+        "oh-my-opencode-slim": "oh-my-opencode-slim",
+        "secretary-skills": "secretary-skills",
+        "ui-ux-pro-max-skill": "ui-ux-pro-max-skill",
+        "xiaohongshu-cli": "xiaohongshu-cli"
+      },
+      "locked": {
+        "path": "./skills",
+        "type": "path"
+      },
+      "original": {
+        "path": "./skills",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "ui-ux-pro-max-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786640903,
+        "narHash": "sha256-nqMRolK+lNhE0esQED2Q+9wdJEke7wGhWmZ9chQ0ma4=",
+        "owner": "nextlevelbuilder",
+        "repo": "ui-ux-pro-max-skill",
+        "rev": "a38d04c3d5c298c851dbe5e6ee1965ee3de42cb5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nextlevelbuilder",
+        "repo": "ui-ux-pro-max-skill",
+        "type": "github"
+      }
+    },
+    "xiaohongshu-cli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774072237,
+        "narHash": "sha256-fGAcEnVYoEYlK/o9H8IShSMhz+dUteJ0S0x5BIT0KG4=",
+        "owner": "jackwener",
+        "repo": "xiaohongshu-cli",
+        "rev": "4d63f3c0c85ccd9054fa8e96d7f761aaf2507449",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jackwener",
+        "repo": "xiaohongshu-cli",
+        "type": "github"
       }
     }
   },
