@@ -48,7 +48,7 @@ in
     "ssh-agent@" = {
       Unit.Description = "Windows OpenSSH agent relay connection";
       Service = {
-        ExecStart = "/init ${npiperelay} -ei -s //./pipe/openssh-ssh-agent";
+        ExecStart = "/init ${npiperelay} -ep -ei -s //./pipe/openssh-ssh-agent";
         StandardInput = "socket";
         StandardOutput = "socket";
       };
