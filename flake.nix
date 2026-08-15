@@ -18,7 +18,8 @@
   };
 
   outputs =
-    {
+    inputs@{
+      self,
       nixpkgs,
       nixos-wsl,
       home-manager,
@@ -32,7 +33,7 @@
     {
       nixosConfigurations."136kf" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit skills-catalog; };
+        specialArgs = { inherit self skills-catalog; };
         modules = [
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager

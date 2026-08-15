@@ -10,6 +10,8 @@ let
   };
 in
 {
+  home.packages = [ pkgs.mcp-nixos ];
+
   programs.mcp = {
     enable = true;
 
@@ -21,6 +23,11 @@ in
           "--mcp"
         ];
         env.CODEGRAPH_NO_DAEMON = "1";
+        enabled = true;
+      };
+
+      nixos = {
+        command = lib.getExe pkgs.mcp-nixos;
         enabled = true;
       };
 
