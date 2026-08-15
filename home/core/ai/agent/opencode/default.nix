@@ -1,6 +1,7 @@
 { pkgs, systemFlakeHost, ... }:
 let
   base = import ./base.nix;
+  premission = import ./premission.nix;
   providers = import ./providers.nix;
   plugins = import ./plugins.nix;
   agents = import ./agents.nix;
@@ -15,6 +16,7 @@ in
     agents.raw = ./raw.md;
     settings = base // {
       agent = agents;
+      permission = premission;
       plugin = plugins;
       provider = providers;
     };
