@@ -1,6 +1,0 @@
-{
-  imports = [
-    ./core
-    ./niri.nix
-  ];
-}

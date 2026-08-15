@@ -1,11 +1,6 @@
 {
-  programs.helix.enable = true;
-
-  home.shellAliases = {
-    vi = "hx";
-    vim = "hx";
-    nvim = "hx";
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
   };
-
-  programs.helix.defaultEditor = true;
 }

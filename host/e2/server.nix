@@ -1,5 +1,0 @@
-{
-  services.aether = {
-    enable = true;
-  };
-}

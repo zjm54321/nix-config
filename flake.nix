@@ -1,112 +1,41 @@
 {
-  description = "zjm54321 的 NixOS 配置";
-
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  nixConfig = {
-    # substituers will be appended to the default substituters when fetching packages
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
+  description = "Minimal terminal-only NixOS-WSL configuration for 136kf";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-vscode-server.url = "github:nix-community/nixos-vscode-server";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
-    rime-config.url = "github:Mintimate/oh-my-rime/";
-    my-rime-config.url = "git+ssh://git@github.com/zjm54321/my-rime-config.git";
-    rime-config.flake = false;
-    my-rime-config.flake = false;
-
-    niri.url = "github:sodiboo/niri-flake";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
-    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
-    dms.inputs.nixpkgs.follows = "nixpkgs";
-
-    lanzaboote.url = "github:nix-community/lanzaboote/";
-    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-
-    stylix.url = "github:danth/stylix/master";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-
-    anyrun.url = "github:anyrun-org/anyrun";
-
-    nur.url = "github:nix-community/NUR";
-    nur.inputs.nixpkgs.follows = "nixpkgs";
-
-    mysecrets.url = "git+ssh://git@github.com/zjm54321/secrets.git";
-    mysecrets.flake = false;
-
-    harmonia.url = "github:nix-community/harmonia";
-    harmonia.inputs.nixpkgs.follows = "nixpkgs";
-
-    mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
-    mcp-servers-nix.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
   outputs =
-    inputs@{
-      self,
+    {
       nixpkgs,
-      flake-utils,
-      mysecrets,
+      nixos-wsl,
+      home-manager,
       ...
     }:
     let
-      mknixosConfigurations =
-        hostname:
-        let
-          vars = import ./vars;
-          secret = import "${mysecrets}/secret.nix";
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit
-              inputs
-              hostname
-              vars
-              secret
-              ;
-          };
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          modules = [ ./module ];
-        };
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations = {
-        vm-hyperv = mknixosConfigurations "vm-hyperv";
-        vm-wsl = mknixosConfigurations "vm-wsl";
-        sgo3 = mknixosConfigurations "sgo3";
-        e2 = mknixosConfigurations "e2";
-        home-server = mknixosConfigurations "home-server";
+      nixosConfigurations."136kf" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixos-wsl.nixosModules.default
+          home-manager.nixosModules.home-manager
+          ./host/136kf
+        ];
       };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            nixfmt
-            nil
-            just
-            nushell
-          ];
-        };
-      }
-    );
+
+      formatter.${system} = pkgs.nixfmt-tree;
+    };
 }

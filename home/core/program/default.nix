@@ -1,10 +1,10 @@
 {
   imports = [
-    ./ai
-    ./direnv.nix
     ./git.nix
-    ./gpg.nix
     ./helix.nix
-    ./ssh.nix
+    ./just.nix
+    ./nushell.nix
+    ./opencode.nix
+    ./starship.nix
   ];
 }
