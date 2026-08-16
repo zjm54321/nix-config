@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     skills-catalog.url = "path:./module/ai/skill";
   };
 
@@ -33,7 +38,9 @@
     {
       nixosConfigurations."136kf" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit self skills-catalog; };
+        specialArgs = {
+          inherit inputs self skills-catalog;
+        };
         modules = [
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager
