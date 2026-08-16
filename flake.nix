@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    skills-catalog.url = "path:./skills";
+    skills-catalog.url = "path:./module/ai/skill";
   };
 
   outputs =

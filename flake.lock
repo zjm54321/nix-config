@@ -307,11 +307,11 @@
         "xiaohongshu-cli": "xiaohongshu-cli"
       },
       "locked": {
-        "path": "./skills",
+        "path": "./module/ai/skill",
         "type": "path"
       },
       "original": {
-        "path": "./skills",
+        "path": "./module/ai/skill",
         "type": "path"
       },
       "parent": []
