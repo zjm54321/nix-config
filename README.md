@@ -7,7 +7,7 @@ NixOS configuration: `136kf`.
 
 - NixOS-WSL with systemd, Windows interop and PATH, `/mnt` automounting, and
   Windows GPU driver support
-- User `ming` (章家铭)
+- User account `ming`
 - Bash login shell, with Nushell and its Starship integration available
 - Git, Helix (the default editor), Just, and OpenCode
 - Windows GnuPG/OpenSSH agent relays through `npiperelay`
@@ -30,6 +30,14 @@ just check
 ```
 
 These recipes use `path:.`, which includes uncommitted and newly created files.
+
+Run `direnv allow` once at the repository root. Thereafter, entering the
+directory automatically loads the flake devShell through the root `.envrc` and
+Home Manager direnv setup. Launch OpenCode from this activated directory; it
+needs no direnv-specific plugin.
+
+`just upgrade` requires a clean worktree and runs update, format, check,
+switch, commit, and push.
 
 ## Layout
 
