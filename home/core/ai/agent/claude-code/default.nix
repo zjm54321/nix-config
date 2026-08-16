@@ -19,9 +19,6 @@
       };
       model = "claude-fable-5[1m]";
       hooks = { };
-      enabledPlugins = {
-        "document-skills@anthropic-agent-skills" = true;
-      };
       extraKnownMarketplaces = {
         anthropic-agent-skills = {
           source = {
@@ -33,7 +30,7 @@
       language = "Chinese";
       alwaysThinkingEnabled = true;
       tui = "fullscreen";
-      effortLevel = "xhigh";
+      effortLevel = "max";
     };
   };
 }

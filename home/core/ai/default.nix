@@ -1,9 +1,7 @@
 {
   imports = [
-    ./claude-code
-    ./codex
+    ./agent
     ./mcp
     ./skill
-    ./agent/opencode
   ];
 }

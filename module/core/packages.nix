@@ -8,6 +8,7 @@
     gnumake
     wget
     curl
+    gh
     nushell
     helix
     just
