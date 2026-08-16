@@ -27,17 +27,25 @@ the WSL GnuPG keyring; private-key and smartcard operations stay on Windows.
 just switch
 just fmt
 just check
+just upgrade
 ```
 
 These recipes use `path:.`, which includes uncommitted and newly created files.
+
+`just upgrade` aggregates the existing Just recipes in this order:
+`clean -> update -> fmt -> check -> switch -> commit -> push`. A failed step
+stops the remaining recipes, so Git commit and push only run after a successful
+update, check, and deployment. If there are no changes, `commit` reports that
+there is nothing to commit.
 
 Run `direnv allow` once at the repository root. Thereafter, entering the
 directory automatically loads the flake devShell through the root `.envrc` and
 Home Manager direnv setup. Launch OpenCode from this activated directory; it
 needs no direnv-specific plugin.
 
-`just upgrade` requires a clean worktree and runs update, format, check,
-switch, commit, and push.
+`just upgrade` requires a clean worktree. For an already modified worktree,
+run `just fmt`, `just check`, and `just switch` first, then commit and push the
+verified result.
 
 ## Layout
 
