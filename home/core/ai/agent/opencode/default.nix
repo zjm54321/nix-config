@@ -24,5 +24,4 @@ in
 
   xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
   xdg.configFile."opencode/AGENTS.md".source = agentsInstructions;
-  home.file."AGENTS.md".source = agentsInstructions;
 }
