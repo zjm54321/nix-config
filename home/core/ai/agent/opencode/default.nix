@@ -2,6 +2,7 @@
 let
   base = import ./base.nix;
   premission = import ./premission.nix;
+  tui = import ./tui.nix;
   providers = import ./providers.nix;
   plugins = import ./plugins.nix;
   agents = import ./agents.nix;
@@ -13,6 +14,7 @@ in
   programs.opencode = {
     enable = true;
     enableMcpIntegration = true;
+    inherit tui;
     agents.raw = ./raw.md;
     settings = base // {
       agent = agents;
