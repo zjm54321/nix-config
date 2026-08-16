@@ -1,15 +1,15 @@
-set shell := ["nu", "-c"]
+set shell := ["bash", "-uc"]
 
 default:
     @just --list
 
-# Rebuild the sole NixOS-WSL configuration.
-switch:
-    sudo nixos-rebuild switch --flake path:.#136kf
+# Rebuild a NixOS configuration, defaulting to the current hostname.
+switch host=`hostname`:
+    sudo nixos-rebuild switch --flake "path:.#{{host}}"
 
 # Format the complete working tree, including untracked Nix files.
 fmt:
-    nix fmt
+    nix fmt path:.
 
 # Evaluate and check the flake.
 check:

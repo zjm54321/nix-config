@@ -8,7 +8,7 @@ NixOS configuration: `136kf`.
 - NixOS-WSL with systemd, Windows interop and PATH, `/mnt` automounting, and
   Windows GPU driver support
 - User `ming` (章家铭)
-- Nushell login shell with Starship integration
+- Bash login shell, with Nushell and its Starship integration available
 - Git, Helix (the default editor), Just, and OpenCode
 - Windows GnuPG/OpenSSH agent relays through `npiperelay`
 
@@ -24,19 +24,12 @@ the WSL GnuPG keyring; private-key and smartcard operations stay on Windows.
 ## Use
 
 ```sh
-nixos-rebuild switch --flake path:.#136kf
-# or, after activating the configuration:
 just switch
+just fmt
+just check
 ```
 
-The `path:.` form includes uncommitted and newly created files. Format and check
-the complete tree with:
-
-```sh
-nix fmt path:.
-nix flake check path:.
-# equivalent Just recipes: just fmt; just check
-```
+These recipes use `path:.`, which includes uncommitted and newly created files.
 
 ## Layout
 

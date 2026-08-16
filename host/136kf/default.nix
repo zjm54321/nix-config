@@ -5,7 +5,7 @@
     ../../module/wsl
   ];
 
-  networking.hostName = "nix";
+  networking.hostName = "136kf";
 
   home-manager = {
     useGlobalPkgs = true;
