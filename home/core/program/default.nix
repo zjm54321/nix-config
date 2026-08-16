@@ -4,6 +4,6 @@
     ./helix.nix
     ./just.nix
     ./nushell.nix
-    ./starship.nix
+    ./starship
   ];
 }

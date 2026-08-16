@@ -3,7 +3,7 @@
 {
   programs.starship = {
     enable = true;
-    enableBashIntegration = true;
+    enableBashIntegration = false;
     enableNushellIntegration = true;
     settings = pkgs.lib.importTOML ./starship.toml;
   };
