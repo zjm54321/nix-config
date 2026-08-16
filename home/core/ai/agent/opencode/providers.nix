@@ -11,6 +11,28 @@
       "gpt-5.6-terra"
       "gpt-5.6-luna"
     ];
+    models = {
+      "gpt-5.5".limit = {
+        context = 400000;
+        input = 272000;
+        output = 128000;
+      };
+      "gpt-5.6-sol".limit = {
+        context = 400000;
+        input = 272000;
+        output = 128000;
+      };
+      "gpt-5.6-terra".limit = {
+        context = 400000;
+        input = 272000;
+        output = 128000;
+      };
+      "gpt-5.6-luna".limit = {
+        context = 400000;
+        input = 272000;
+        output = 128000;
+      };
+    };
   };
 
   openrouter = {
@@ -34,6 +56,22 @@
       "z-ai/glm-5.2"
       "z-ai/glm-5.3"
     ];
+    models = {
+      "deepseek/deepseek-v4-pro" = {
+        provider.npm = "@ai-sdk/openai-compatible";
+        variants = {
+          xhigh.reasoning.effort = "xhigh";
+          max.reasoning.effort = "max";
+        };
+      };
+      "deepseek/deepseek-v4-flash" = {
+        provider.npm = "@ai-sdk/openai-compatible";
+        variants = {
+          xhigh.reasoning.effort = "xhigh";
+          max.reasoning.effort = "max";
+        };
+      };
+    };
   };
 
   google = {
