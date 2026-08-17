@@ -128,6 +128,22 @@
         "type": "github"
       }
     },
+    "hero-anti-overdefense": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786521759,
+        "narHash": "sha256-Ka9MDUo5OadCfWmP8rSidMqsxyNUH4JoYSheJUMXdFw=",
+        "owner": "wanshuiyin",
+        "repo": "HERO-Anti-OverDefense",
+        "rev": "be64527c3cea55ccb7700ee9afaff094cceb40de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wanshuiyin",
+        "repo": "HERO-Anti-OverDefense",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -312,6 +328,7 @@
     },
     "root": {
       "inputs": {
+        "hero-anti-overdefense": "hero-anti-overdefense",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",

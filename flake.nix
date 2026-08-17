@@ -20,6 +20,11 @@
     };
 
     skills-catalog.url = "path:./module/ai/skill";
+
+    hero-anti-overdefense = {
+      url = "github:wanshuiyin/HERO-Anti-OverDefense";
+      flake = false;
+    };
   };
 
   outputs =
