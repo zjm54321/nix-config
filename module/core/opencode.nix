@@ -1,13 +1,6 @@
 { pkgs, ... }:
 
 {
-  environment.sessionVariables = {
-    # Required by Oh My OpenCode Slim's native background task orchestration.
-    OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS = "true";
-    # Enables OpenCode's built-in Exa websearch integration.
-    OPENCODE_ENABLE_EXA = "1";
-  };
-
   # Temporary WSL2 workaround for the OpenCode binary produced by Bun in nixpkgs.
   # The packaged `.opencode-wrapped` currently has an invalid ELF PT_LOAD layout
   # on WSL2 and exits with SIGSEGV (139). Re-applying its existing interpreter

@@ -6,6 +6,11 @@ let
   providers = import ./providers.nix;
   plugins = import ./plugins.nix;
   agents = import ./agents.nix;
+  opencodeWithFeatures = pkgs.writeShellScriptBin "opencode" ''
+    export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+    export OPENCODE_ENABLE_EXA=1
+    exec ${pkgs.lib.getExe pkgs.opencode} "$@"
+  '';
   agentsInstructions = pkgs.replaceVars ./AGENTS.md {
     inherit systemFlakeHost;
   };
@@ -14,6 +19,7 @@ in
   programs.opencode = {
     enable = true;
     enableMcpIntegration = true;
+    package = opencodeWithFeatures;
     inherit tui;
     agents.raw = ./raw.md;
     settings = base // {
