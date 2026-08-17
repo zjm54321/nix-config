@@ -1,9 +1,25 @@
 { pkgs, ... }:
 
+let
+  claudeCodeWithEehub =
+    (pkgs.writeShellScriptBin "claude" ''
+      if [[ -z "''${EEHUB_API_URL:-}" || -z "''${EEHUB_API_KEY:-}" ]]; then
+        echo "claude: EEHUB_API_URL and EEHUB_API_KEY must be set" >&2
+        exit 1
+      fi
+
+      export ANTHROPIC_BASE_URL="''${EEHUB_API_URL%/v1}"
+      export ANTHROPIC_AUTH_TOKEN="$EEHUB_API_KEY"
+      exec ${pkgs.lib.getExe pkgs.claude-code} "$@"
+    '').overrideAttrs {
+      pname = "claude-code";
+      inherit (pkgs.claude-code) version;
+    };
+in
 {
   programs.claude-code = {
     enable = true;
-    package = pkgs.claude-code;
+    package = claudeCodeWithEehub;
     enableMcpIntegration = true;
     settings = {
       env = {
