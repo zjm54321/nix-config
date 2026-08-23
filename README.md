@@ -28,6 +28,7 @@ just switch
 just fmt
 just check
 just upgrade
+just system-update
 ```
 
 These recipes use `path:.`, which includes uncommitted and newly created files.
@@ -46,6 +47,18 @@ needs no direnv-specific plugin.
 `just upgrade` requires a clean worktree. For an already modified worktree,
 run `just fmt`, `just check`, and `just switch` first, then commit and push the
 verified result.
+
+### Repository-only system update
+
+Run `just system-update` at this repository's root for the complete local
+update flow: `clean -> update -> fmt -> check -> switch -> health -> commit ->
+cleanup`. It operates only on this checkout (`path:.`) and does **not** push.
+After deployment, `health` verifies `/run/current-system`, runs
+`nixos-version`, and requires `systemctl is-system-running` to succeed.
+
+The final cleanup keeps the current system generation and the two immediately
+preceding ones by default. Use `just cleanup 5` to keep a different positive
+number of recent system generations; cleanup always runs garbage collection.
 
 ## Layout
 

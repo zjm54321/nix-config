@@ -28,6 +28,16 @@ commit message="chore: update flake inputs":
     git add --all
     @if git diff --cached --quiet; then echo "No changes to commit."; else git commit -m "{{message}}"; fi
 
+# Confirm that the activated system is healthy.
+health:
+    @test -e /run/current-system
+    nixos-version
+    systemctl is-system-running
+
+# Delete system profile generations older than keep, then collect garbage.
+cleanup keep="3":
+    @keep="{{keep}}"; if ! [[ "$keep" =~ ^[1-9][0-9]*$ ]]; then echo "keep must be a positive integer." >&2; exit 2; fi; if ! listing="$(sudo nix-env --profile /nix/var/nix/profiles/system --list-generations)"; then exit 1; fi; generations=(); while read -r generation _; do [[ -n "$generation" ]] && generations+=("$generation"); done <<< "$listing"; if (( ${#generations[@]} > keep )); then count=$(( ${#generations[@]} - keep )); to_delete=("${generations[@]:0:count}"); printf 'Deleting system generations: %s\n' "${to_delete[*]}"; sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations "${to_delete[@]}"; else echo "Keeping all ${#generations[@]} system generations; running garbage collection."; fi; sudo nix-collect-garbage
+
 # Push with the active GitHub CLI credentials without changing Git config.
 push:
     gh auth status --hostname github.com >/dev/null
@@ -35,3 +45,6 @@ push:
 
 # Update, format, check, activate, commit, and push from a clean worktree.
 upgrade: clean update fmt check switch commit push
+
+# Update, activate, verify, commit, and prune system generations without pushing.
+system-update: clean update fmt check switch health commit cleanup
