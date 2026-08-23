@@ -1,4 +1,9 @@
-{ inputs, pkgs, systemFlakeHost, ... }:
+{
+  inputs,
+  pkgs,
+  systemFlakeHost,
+  ...
+}:
 let
   base = import ./base.nix;
   premission = import ./premission.nix;

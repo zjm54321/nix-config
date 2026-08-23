@@ -11,10 +11,11 @@ let
       exec ${pkgs.lib.getExe pkgs.codex} \
         -c "model_providers.eehub.base_url=\"$EEHUB_API_URL\"" \
         "$@"
-    '').overrideAttrs {
-      pname = "codex";
-      inherit (pkgs.codex) version;
-    };
+    '').overrideAttrs
+      {
+        pname = "codex";
+        inherit (pkgs.codex) version;
+      };
 in
 {
   programs.codex = {
