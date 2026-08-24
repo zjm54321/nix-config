@@ -12,6 +12,7 @@ let
   plugins = import ./plugins.nix;
   agents = import ./agents.nix;
   opencodeWithFeatures = pkgs.writeShellScriptBin "opencode" ''
+    export PATH="${pkgs.lib.makeBinPath [ pkgs.bun ]}:$PATH"
     export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
     export OPENCODE_ENABLE_EXA=1
     exec ${pkgs.lib.getExe pkgs.opencode} "$@"
