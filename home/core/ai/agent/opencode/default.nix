@@ -21,7 +21,7 @@ let
     inherit systemFlakeHost;
   };
   agentsInstructions = pkgs.runCommand "AGENTS.md" { } ''
-    printf '%s\n\n' '# HERO Anti-OverDefense' > "$out"
+    printf '%s\n\n' '# **MUST FOLLOW**' > "$out"
     ${pkgs.gawk}/bin/awk '
       $0 == "## The block" {
         inSection = 1
