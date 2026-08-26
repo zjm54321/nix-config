@@ -219,6 +219,22 @@
         "type": "github"
       }
     },
+    "mysecrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776616180,
+        "narHash": "sha256-UMbsJGI3l9rItNZo67+YFmipYoblVHKMhuYPjLhkjcQ=",
+        "owner": "zjm54321",
+        "repo": "secrets",
+        "rev": "71d0f5f7ec3f9db3ca31e1c1244394a35e85bc9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zjm54321",
+        "repo": "secrets",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -330,6 +346,7 @@
       "inputs": {
         "hero-anti-overdefense": "hero-anti-overdefense",
         "home-manager": "home-manager",
+        "mysecrets": "mysecrets",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nur": "nur",

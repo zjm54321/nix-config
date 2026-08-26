@@ -21,6 +21,11 @@
 
     skills-catalog.url = "path:./module/ai/skill";
 
+    mysecrets = {
+      url = "github:zjm54321/secrets";
+      flake = false;
+    };
+
     hero-anti-overdefense = {
       url = "github:wanshuiyin/HERO-Anti-OverDefense";
       flake = false;
@@ -34,17 +39,24 @@
       nixos-wsl,
       home-manager,
       skills-catalog,
+      mysecrets,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      secret = import "${mysecrets}/secret.nix";
     in
     {
       nixosConfigurations."136kf" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs self skills-catalog;
+          inherit
+            inputs
+            self
+            skills-catalog
+            secret
+            ;
         };
         modules = [
           nixos-wsl.nixosModules.default

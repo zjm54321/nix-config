@@ -1,6 +1,10 @@
+{ secret, ... }:
 {
   nix = {
     channel.enable = false;
+    extraOptions = ''
+      access-tokens = ${secret.nix}
+    '';
     settings = {
       experimental-features = [
         "nix-command"
