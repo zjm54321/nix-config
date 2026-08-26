@@ -3,7 +3,7 @@
   nix = {
     channel.enable = false;
     extraOptions = ''
-      access-tokens = ${secret.nix}
+      access-tokens = ${secret.nix-github-access-tokens}
     '';
     settings = {
       experimental-features = [
