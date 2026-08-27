@@ -39,7 +39,7 @@
       },
       "librarian": {
         "model": [
-          { "id": "openai/gpt-5.6-luna", "variant": "max" },
+          { "id": "openai/gpt-5.6-luna", "variant": "xhigh" },
           { "id": "openrouter/deepseek/deepseek-v4-flash", "variant": "max" },
           { "id": "anthropic/claude-haiku-4-5", "variant": "max" }
         ],
