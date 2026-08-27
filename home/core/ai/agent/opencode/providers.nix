@@ -11,28 +11,6 @@
       "gpt-5.6-terra"
       "gpt-5.6-luna"
     ];
-    models = {
-      "gpt-5.5".limit = {
-        context = 400000;
-        input = 272000;
-        output = 128000;
-      };
-      "gpt-5.6-sol".limit = {
-        context = 400000;
-        input = 272000;
-        output = 128000;
-      };
-      "gpt-5.6-terra".limit = {
-        context = 400000;
-        input = 272000;
-        output = 128000;
-      };
-      "gpt-5.6-luna".limit = {
-        context = 400000;
-        input = 272000;
-        output = 128000;
-      };
-    };
   };
 
   openrouter = {
