@@ -15,8 +15,3 @@
 - **Non-FHS system:** NixOS does not follow the conventional FHS layout. Do not assume binaries or libraries exist under `/usr/bin`, `/usr/lib`, or `/lib`; use Nix packages and store paths.
 - Never modify `/nix/store` directly.
 
-## System Updates
-
-- From the system repository root, use `just system-update` for the complete local update flow: update Flake inputs, format, check, deploy, verify, commit, and clean up old system generations.
-- The command requires a clean worktree, does not push, and keeps the current system generation plus the two preceding generations by default.
-- Use `just cleanup <count>` to retain a different positive number of recent system generations.
