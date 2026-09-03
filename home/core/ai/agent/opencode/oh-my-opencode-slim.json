@@ -3,7 +3,7 @@
   "disabled_agents": ["observer"],
   "agents": {
     "secretary": {
-      "model": "google/gemini-3.7-flash",
+      "model": "google/gemini-3.8-flash",
       "temperature": 0.3,
       "skills": ["secretary-humanizer", "output-presentation"],
       "mcps": [],
@@ -57,8 +57,8 @@
       },
       "designer": {
         "model": [
-          "google/gemini-3.7-flash",
-          { "id": "openrouter/qwen/qwen3.8-max", "variant": "max" }
+          "google/gemini-3.8-flash",
+          { "id": "openrouter/z-ai/glm-5.3-flash", "variant": "max" }
         ],
         "skills": ["ui-ux-pro-max", "make-interfaces-feel-better", "better-icons"],
         "mcps": ["codegraph"]
@@ -73,7 +73,7 @@
         "mcps": ["codegraph"]
       },
       "observer": {
-        "model": ["google/gemini-3.5-flash-lite", "openrouter/xiaomi/mimo-v2.5"],
+        "model": ["google/gemini-3.8-flash", "openrouter/z-ai/glm-5.3-flash"],
         "skills": [],
         "mcps": []
       }
@@ -84,7 +84,7 @@
       "default": {
         "alpha": { "model": "openai/gpt-5.6-sol", "variant": "max" },
         "beta": { "model": "openrouter/z-ai/glm-5.3" },
-        "gamma": { "model": "google/gemini-3.7-flash", "variant": "high" }
+        "gamma": { "model": "google/gemini-3.8-flash", "variant": "high" }
       }
     }
   },
