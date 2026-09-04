@@ -19,6 +19,13 @@ let
         mkdir -p "$out"
         ${pkgs.unzip}/bin/unzip "$src" -d "$out"
       '';
+
+  shuorenhuaSkill = pkgs.runCommand "shuorenhua-v2.4.0" { } ''
+    mkdir -p "$out"
+    cp "${inputs.shuorenhua}/SKILL.md" "$out/SKILL.md"
+    cp -r "${inputs.shuorenhua}/references" "$out/references"
+    cp "${inputs.shuorenhua}/LICENSE" "$out/LICENSE"
+  '';
 in
 {
   programs.agent-skills = {
@@ -56,6 +63,7 @@ in
       };
 
       secretary-skills = source inputs.secretary-skills "skills";
+      shuorenhua = source shuorenhuaSkill ".";
     };
 
     skills = {
@@ -95,7 +103,7 @@ in
         "web-perf"
         "zhihu"
 
-        "secretary-humanizer"
+        "shuorenhua"
         "output-presentation"
       ];
       enableAll = false;

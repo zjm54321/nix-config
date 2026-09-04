@@ -51,6 +51,11 @@
       url = "github:zjm54321/secretary-skills";
       flake = false;
     };
+
+    shuorenhua = {
+      url = "github:MrGeDiao/shuorenhua/v2.4.0";
+      flake = false;
+    };
   };
 
   outputs = inputs: {

@@ -369,6 +369,23 @@
         "type": "github"
       }
     },
+    "shuorenhua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788010064,
+        "narHash": "sha256-9S3Bx/o6B3qswvjVtiuR1kCro2F2pf+bjz7KuAfK3gI=",
+        "owner": "MrGeDiao",
+        "repo": "shuorenhua",
+        "rev": "6de1fcfeca5fff6fd15b28c619c11b6d41d1f657",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MrGeDiao",
+        "ref": "v2.4.0",
+        "repo": "shuorenhua",
+        "type": "github"
+      }
+    },
     "skills-catalog": {
       "inputs": {
         "agent-skills": "agent-skills",
@@ -380,6 +397,7 @@
         "officecli": "officecli",
         "oh-my-opencode-slim": "oh-my-opencode-slim",
         "secretary-skills": "secretary-skills",
+        "shuorenhua": "shuorenhua",
         "ui-ux-pro-max-skill": "ui-ux-pro-max-skill",
         "xiaohongshu-cli": "xiaohongshu-cli"
       },
