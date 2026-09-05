@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ranxianglei/opencode-acp/v1.14.26/dcp.schema.json",
+  "autoUpdate": false,
+  "allowSubAgents": false,
+  "pruneNotificationType": "toast",
+  "compress": {
+    "protectedTools": ["task", "skill", "todowrite", "todoread", "compress"]
+  }
+}

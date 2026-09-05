@@ -5,7 +5,6 @@
   title.permission.skill.shuorenhua = "deny";
   summary.model = "openrouter/deepseek/deepseek-v4-flash";
   summary.permission.skill.shuorenhua = "deny";
-  compaction.model = "openrouter/deepseek/deepseek-v4-pro";
   compaction.permission.skill.shuorenhua = "deny";
   explore = {
     disable = true;

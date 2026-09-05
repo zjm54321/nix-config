@@ -4,6 +4,11 @@
   default_agent = "orchestrator";
   disabled_providers = [ "opencode" ];
   instructions = [ "~/.config/opencode/AGENTS.md" ];
+  # ACP owns compression.
+  compaction = {
+    auto = false;
+    prune = false;
+  };
   lsp = {
     nixd = {
       command = [ "nixd" ];

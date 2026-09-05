@@ -4,6 +4,6 @@
   plugin = [
     "oh-my-opencode-slim"
     "opencode-plugin-session-token-summary"
-    "@tarquinen/opencode-dcp@latest"
+    "opencode-acp@1.14.26"
   ];
 }
