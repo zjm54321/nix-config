@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   systemFlakeHost,
   ...
@@ -20,52 +19,6 @@ let
   agentsTemplate = pkgs.replaceVars ./AGENTS.md {
     inherit systemFlakeHost;
   };
-  agentsInstructions = pkgs.runCommand "AGENTS.md" { } ''
-    printf '%s\n\n' '# **MUST FOLLOW**' > "$out"
-    ${pkgs.gawk}/bin/awk '
-      $0 == "## The block" {
-        inSection = 1
-        next
-      }
-
-      inSection && /^##[[:space:]]/ {
-        exit 1
-      }
-
-      inSection && !inBlock && /^```[[:space:]]*$/ {
-        inBlock = 1
-        next
-      }
-
-      inBlock && /^```[[:space:]]*$/ {
-        found = 1
-        exit
-      }
-
-      inBlock {
-        if (!hasFirstLine) {
-          firstLine = $0
-          hasFirstLine = 1
-        }
-        block = block $0 ORS
-      }
-
-      END {
-        if (!found) {
-          exit 1
-        }
-        if (firstLine != "=== SCOPE LIMITS (these bound what you PROPOSE, never what you look for) ===") {
-          exit 1
-        }
-        if (index(block, "Say plainly when something is correct. Do not manufacture findings.") == 0) {
-          exit 1
-        }
-        printf "%s", block
-      }
-    ' "${inputs.hero-anti-overdefense}/RULES.md" >> "$out"
-    printf '\n' >> "$out"
-    ${pkgs.coreutils}/bin/cat "${agentsTemplate}" >> "$out"
-  '';
 in
 {
   programs.opencode = {
@@ -84,6 +37,6 @@ in
 
   xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
   xdg.configFile."opencode/dcp.jsonc".source = ./dcp.jsonc;
-  xdg.configFile."opencode/AGENTS.md".source = agentsInstructions;
+  xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
   xdg.configFile."opencode/plugins/lidguard.js".source = ./lidguard.js;
 }
