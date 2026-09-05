@@ -25,14 +25,13 @@
     "default": {
       "orchestrator": {
         "model": [
-          { "id": "openai/gpt-5.6-sol", "variant": "medium" },
-          { "id": "openrouter/moonshotai/kimi-k3", "variant": "max" }
+          { "id": "openai/gpt-6-astra", "variant": "medium" }
         ],
         "skills": ["*", "!shuorenhua"],
         "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "openai/gpt-5.6-sol",
+        "model": "openai/gpt-6-astra",
         "variant": "max",
         "skills": ["web-perf"],
         "mcps": ["codegraph", "chrome-devtools"]
