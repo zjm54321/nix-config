@@ -52,7 +52,6 @@
     };
     whitelist = [
       "gemini-3.1-pro-preview"
-      "gemini-3.7-flash"
       "gemini-3.8-flash"
     ];
   };
@@ -63,6 +62,7 @@
       apiKey = "{env:EEHUB_API_KEY}";
     };
     whitelist = [
+      "claude-fable-5-1"
       "claude-haiku-4-5"
       "claude-sonnet-4-5"
     ];
