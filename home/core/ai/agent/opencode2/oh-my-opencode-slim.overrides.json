@@ -1,0 +1,14 @@
+{
+  "autoUpdate": false,
+  "companion": {
+    "enabled": false
+  },
+  "multiplexer": {
+    "type": "none"
+  },
+  "backgroundJobs": {
+    "orchestratorWake": {
+      "enabled": false
+    }
+  }
+}
