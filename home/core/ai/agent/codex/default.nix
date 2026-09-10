@@ -1,6 +1,25 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
+  codexConfigDir =
+    if config.home.preferXdgDirectories then
+      "${lib.removePrefix config.home.homeDirectory config.xdg.configHome}/codex"
+    else
+      ".codex";
+  codexConfigTarget = "${codexConfigDir}/config.toml";
+  codexRuntimeHome =
+    if config.home.preferXdgDirectories then "${config.xdg.configHome}/codex" else "${config.home.homeDirectory}/.codex";
+  codexRuntimeConfig = "${codexRuntimeHome}/config.toml";
+  codexStateDir = "${codexRuntimeHome}/.hm-config-state";
+  codexConfigBaseline = config.home.file."${codexConfigTarget}".source;
+  writableConfigHelper = pkgs.writeShellScriptBin "codex-writable-config" ''
+    exec ${lib.getExe pkgs.python3} ${./writable-config.py} "$@"
+  '';
   codexWithEehub =
     (pkgs.writeShellScriptBin "codex" ''
       if [[ -z "''${EEHUB_API_URL:-}" || -z "''${EEHUB_API_KEY:-}" ]]; then
@@ -33,4 +52,19 @@ in
       };
     };
   };
+
+  home.file."${codexConfigTarget}".target = "${codexConfigTarget}.hm-source";
+
+  home.activation.backupCodexManagedConfig = lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ] ''
+    run ${lib.getExe writableConfigHelper} backup-legacy \
+      --target ${lib.escapeShellArg codexRuntimeConfig} \
+      --state-dir ${lib.escapeShellArg codexStateDir}
+  '';
+
+  home.activation.seedCodexWritableConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    run ${lib.getExe writableConfigHelper} seed \
+      --baseline ${lib.escapeShellArg (toString codexConfigBaseline)} \
+      --target ${lib.escapeShellArg codexRuntimeConfig} \
+      --state-dir ${lib.escapeShellArg codexStateDir}
+  '';
 }
