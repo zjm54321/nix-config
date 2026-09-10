@@ -36,7 +36,14 @@ in
       enabled_providers = builtins.attrNames originalProviders;
       disabled_providers = (import ../opencode/base.nix).disabled_providers;
       plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
-      provider = modelPolicy.providers;
+      provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
+      # EEHUB has no eligible Responses WebSocket upstream; use HTTP/SSE. Do not mix legacy/native entries by name.
+      providers.openai = {
+        settings = modelPolicy.providers.openai.options;
+        websocket = false;
+        # Model-level websocket=true takes precedence over the provider setting.
+        models = lib.genAttrs originalProviders.openai.whitelist (_: { websocket = false; });
+      };
       mcp = mcpServers;
       permission = import ../opencode/premission.nix;
     });
