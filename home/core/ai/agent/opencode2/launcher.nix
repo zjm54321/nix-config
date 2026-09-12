@@ -30,6 +30,8 @@ let
     node_modules = nodeModules;
   }).overrideAttrs (old: {
     patches = (old.patches or [ ]) ++ [ ./plugin-resolution.patch ];
+    # Upstream CLI emits `opencode`; retain the local `opencode2` output name.
+    installPhase = lib.replaceStrings [ "dist/cli-*/bin/opencode2" ] [ "dist/cli-*/bin/opencode" ] old.installPhase;
   });
   wrapped = pkgs.writeShellScriptBin "opencode2" ''
     export OPENCODE_CONFIG_DIR="$HOME/.config/opencode2/opencode"
