@@ -2,6 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "openai/gpt-6-astra",
   "default_agent": "orchestrator",
+  "agents": {
+    "title": {
+      "model": {
+        "providerID": "openrouter",
+        "model": "openai/gpt-oss-20b"
+      }
+    }
+  },
   "autoupdate": false,
   "lsp": {
     "nixd": {
