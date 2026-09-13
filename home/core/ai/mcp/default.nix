@@ -1,11 +1,23 @@
 { lib, pkgs, ... }:
 
 let
+  edgeAiStartupScript = pkgs.writeText "start-edge-ai.ps1" (builtins.readFile ./start-edge-ai.ps1);
+  edgeAiRelayScript = pkgs.writeText "edge-ai-relay.mjs" (builtins.readFile ./edge-ai-relay.mjs);
+  windowsCdpRelayScript = pkgs.writeText "windows-cdp-relay.ps1" (
+    builtins.readFile ./windows-cdp-relay.ps1
+  );
+  windowsPowerShell = "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe";
+
   chromeDevtoolsMcp = pkgs.writeShellApplication {
     name = "chrome-devtools-mcp";
     runtimeInputs = [ pkgs.nodejs_24 ];
     text = ''
-      exec npx -y chrome-devtools-mcp@latest "$@"
+      exec node \
+        ${lib.escapeShellArg edgeAiRelayScript} \
+        ${lib.escapeShellArg windowsPowerShell} \
+        ${lib.escapeShellArg edgeAiStartupScript} \
+        ${lib.escapeShellArg windowsCdpRelayScript} \
+        "$@"
     '';
   };
 in
@@ -34,7 +46,6 @@ in
       "chrome-devtools" = {
         command = lib.getExe chromeDevtoolsMcp;
         args = [
-          "--executable-path=${lib.getExe pkgs.google-chrome}"
           "--no-usage-statistics"
         ];
         enabled = true;
