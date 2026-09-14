@@ -5,6 +5,7 @@
   ...
 }:
 let
+  bash = lib.getExe pkgs.bashInteractive;
   system = pkgs.stdenv.hostPlatform.system;
   upstream = inputs.opencode.packages.${system}.opencode;
   upstreamPkgs = inputs.opencode.inputs.nixpkgs.legacyPackages.${system};
@@ -34,6 +35,7 @@ let
     installPhase = lib.replaceStrings [ "dist/cli-*/bin/opencode2" ] [ "dist/cli-*/bin/opencode" ] old.installPhase;
   });
   wrapped = pkgs.writeShellScriptBin "opencode2" ''
+    export SHELL="${bash}"
     export OPENCODE_CONFIG_DIR="$HOME/.config/opencode2/opencode"
     export XDG_DATA_HOME="$HOME/.local/share/opencode2"
     export XDG_CACHE_HOME="$HOME/.cache/opencode2"

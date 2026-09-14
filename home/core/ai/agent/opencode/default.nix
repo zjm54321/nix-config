@@ -4,6 +4,7 @@
   ...
 }:
 let
+  bash = pkgs.lib.getExe pkgs.bashInteractive;
   base = import ./base.nix;
   premission = import ./premission.nix;
   tui = import ./tui.nix;
@@ -12,6 +13,7 @@ let
   agents = import ./agents.nix;
   opencodeWithFeatures = pkgs.writeShellScriptBin "opencode" ''
     export PATH="${pkgs.lib.makeBinPath [ pkgs.bun ]}:$PATH"
+    export SHELL="${bash}"
     export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
     export OPENCODE_EXPERIMENTAL_WEBSOCKETS="false"
     export OPENCODE_ENABLE_EXA=1
@@ -29,6 +31,7 @@ in
     inherit tui;
     agents.raw = ./raw.md;
     settings = base // {
+      shell = bash;
       agent = agents;
       permission = premission;
       plugin = plugins;

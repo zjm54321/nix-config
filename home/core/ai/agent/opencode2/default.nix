@@ -33,6 +33,7 @@ in
 
   xdg.configFile = {
     "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (baseSettings // {
+      shell = lib.getExe pkgs.bashInteractive;
       enabled_providers = builtins.attrNames originalProviders;
       disabled_providers = (import ../opencode/base.nix).disabled_providers;
       plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
