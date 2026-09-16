@@ -21,11 +21,11 @@
     "awesome-copilot": {
       "flake": false,
       "locked": {
-        "lastModified": 1788913397,
-        "narHash": "sha256-wMNloxg/mKRu6yr6pj1crdk08D+wTv/kjIcjrkHriw8=",
+        "lastModified": 1789519843,
+        "narHash": "sha256-jvyiCHIxj27oReU80KFL5bWZqUD5+jUuWLiAEy2OdAk=",
         "owner": "github",
         "repo": "awesome-copilot",
-        "rev": "7568a482ce2df38f8965ab5336a3220db796a4ba",
+        "rev": "9ce814859eaa473178a1463ee3aa0c54a8860b86",
         "type": "github"
       },
       "original": {
@@ -126,11 +126,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789320570,
-        "narHash": "sha256-1Js4AJiWLV7U1SF3ok0J2tKbBEJYE5YpElGU+7fMbfo=",
+        "lastModified": 1789482455,
+        "narHash": "sha256-pD3qVlQ4mUCFoTWrYtxecpSitQMsgJvJIN0FUIDZoEU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "87b3c74df02a2b2e691a24f3c82774f48a70c1bd",
+        "rev": "efa3ccb4c3cc90d832eab232976379058fa75aa3",
         "type": "github"
       },
       "original": {
@@ -159,11 +159,11 @@
     "mattpocock-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1788511407,
-        "narHash": "sha256-dF5i37jHnqfcXD1IRSVzSSm/pfCYSUmOsEhhs5Zx340=",
+        "lastModified": 1789482526,
+        "narHash": "sha256-AbIlPEE0VWJq+NJpa56SDzhM8o7vXDBtlJHS5FCTElE=",
         "owner": "mattpocock",
         "repo": "skills",
-        "rev": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "rev": "959a8e9f1edc3adbe2f7e3054bb6fbefa6696260",
         "type": "github"
       },
       "original": {
@@ -212,11 +212,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1789149629,
-        "narHash": "sha256-H6GwaZzZf+4npqv0tph94w9tZddSjFjmQrVsW0z78uk=",
+        "lastModified": 1789426278,
+        "narHash": "sha256-GnotcvKtbTMnoVx6G4E7ZdUX6487Dky74dqq3pU7iRk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eaad089433ca2bb662274377d33df3d0e51ef28b",
+        "rev": "efe6f071ede9d21c37462d2d6682d5e670099684",
         "type": "github"
       },
       "original": {
@@ -266,11 +266,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789321618,
-        "narHash": "sha256-GcbH1BJu4jcAlSRMbVfoIaHeD3IaNKT4f1wzBMzQr7A=",
+        "lastModified": 1789546520,
+        "narHash": "sha256-zS2TVeD1lT0Fjlut1yrHrMsOyuPYcC2yEFK3LvnFpro=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "d3f73f196fccfd515de42903b5f6151c795fa54b",
+        "rev": "2075af71e09a99fd9ad1653a2b3c0ee774e6c13e",
         "type": "github"
       },
       "original": {
@@ -282,11 +282,11 @@
     "officecli": {
       "flake": false,
       "locked": {
-        "lastModified": 1789091096,
-        "narHash": "sha256-x5OLaax9gGF3OyyVREJ9fue/fm6vfwsRx5TOuxkxlK4=",
+        "lastModified": 1789418394,
+        "narHash": "sha256-BqRzRHGp8QIOb2dA/4CRnx3+u4/TQoVCSGew4RCzKqA=",
         "owner": "iOfficeAI",
         "repo": "OfficeCLI",
-        "rev": "1f0fd1930d14653b9a041f325a952cd23d336c51",
+        "rev": "5a938d2d111ba1873452575c6e3fadb3dd0caae8",
         "type": "github"
       },
       "original": {
@@ -298,11 +298,11 @@
     "oh-my-opencode-slim": {
       "flake": false,
       "locked": {
-        "lastModified": 1789322173,
-        "narHash": "sha256-D/euMgHawNYfv/i+YMbvKC+ndtJHa0o4hQ7JConDHMc=",
+        "lastModified": 1789515287,
+        "narHash": "sha256-2EXe28MNQn7rRfyLyDPzdONkFUZGxpfoJRge30i5buA=",
         "owner": "alvinunreal",
         "repo": "oh-my-opencode-slim",
-        "rev": "f25be077786be21c92c980c14bc5a19c0651b4f0",
+        "rev": "3013dc25e97013a43c24db5ad87c6587d4db5966",
         "type": "github"
       },
       "original": {
@@ -403,11 +403,11 @@
     "ui-ux-pro-max-skill": {
       "flake": false,
       "locked": {
-        "lastModified": 1789023220,
-        "narHash": "sha256-zdyVHyBOOW1WS44WNw5fUMkrrwJhNxcKT30bsgBMClQ=",
+        "lastModified": 1789464569,
+        "narHash": "sha256-fNMBrxnT78j7kYqYMkY0YHMa1Vdd3ggPww7f8ziNz5k=",
         "owner": "nextlevelbuilder",
         "repo": "ui-ux-pro-max-skill",
-        "rev": "7f69fed6a2717900085f1bc3b263721f8ba025e2",
+        "rev": "15de38fb70bc80ae9276fa7703b48ae861a672e6",
         "type": "github"
       },
       "original": {
