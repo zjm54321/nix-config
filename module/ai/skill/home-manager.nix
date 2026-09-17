@@ -30,8 +30,6 @@ in
 {
   programs.agent-skills = {
     sources = {
-      oh-my-opencode-slim = source inputs.oh-my-opencode-slim "src/skills";
-
       domain-modeling = source inputs.mattpocock-skills "skills/engineering/domain-modeling";
       grill-with-docs = source inputs.mattpocock-skills "skills/engineering/grill-with-docs";
       setup-matt-pocock-skills = source inputs.mattpocock-skills "skills/engineering/setup-matt-pocock-skills";
@@ -68,15 +66,6 @@ in
 
     skills = {
       enable = [
-        "simplify"
-        "codemap"
-        "clonedeps"
-        "deepwork"
-        "reflect"
-        "oh-my-opencode-slim"
-        "worktrees"
-        "verification-planning"
-
         "domain-modeling"
         "grill-with-docs"
         "setup-matt-pocock-skills"
