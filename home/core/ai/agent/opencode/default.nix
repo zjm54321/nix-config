@@ -42,5 +42,4 @@ in
   xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
   xdg.configFile."opencode/acp.jsonc".source = ./acp.jsonc;
   xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
-  xdg.configFile."opencode/plugins/lidguard.js".source = ./lidguard.js;
 }
