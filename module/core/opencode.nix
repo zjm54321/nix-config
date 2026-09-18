@@ -12,6 +12,17 @@
       opencode = prev.opencode.overrideAttrs (old: {
         nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.patchelf ];
 
+        # Temporary workaround for the filesystem/search runtime import cycle
+        # in OpenCode 1.18.30/1.18.31. This is sourced from OpenCode PR #49298
+        # / issue #48876; remove it once an upstream version includes the fix.
+        patches = (old.patches or [ ]) ++ [
+          (final.fetchpatch {
+            url = "https://github.com/tstachl/opencode/commit/033e0d18a713675f55e855626604b0735a24e365.patch";
+            hash = "sha256-ZSZXJFEbKyZLAJC7t8JxKuWLBSVhrF/krRw/IGdzEaw=";
+            name = "opencode-fix-filesystem-search-import-cycle";
+          })
+        ];
+
         # Repair before the upstream postInstall because that phase executes
         # OpenCode to generate completions. Appending this workaround would let
         # that first execution crash before the ELF repair can take effect.
