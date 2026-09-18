@@ -9,6 +9,27 @@
   # included in the pinned nixpkgs revision and OpenCode works without it.
   nixpkgs.overlays = [
     (final: prev: {
+      # GitHub republished the playwright-python v1.63.0 source archive. Keep
+      # this limited override until nixpkgs refreshes its fixed-output hash.
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (python-final: python-prev: {
+          playwright = python-prev.playwright.overrideAttrs (
+            old:
+            assert final.lib.assertMsg (
+              old.version == "1.63.0"
+            ) "Refresh the local Playwright source hash override";
+            {
+              src = final.fetchFromGitHub {
+                owner = "microsoft";
+                repo = "playwright-python";
+                tag = "v${old.version}";
+                hash = "sha256-RwIn+0EcHnStjORVFmT7gp4bGjl+qer1FgtI3+aPF2w=";
+              };
+            }
+          );
+        })
+      ];
+
       opencode = prev.opencode.overrideAttrs (old: {
         nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ final.patchelf ];
 

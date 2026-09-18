@@ -1,6 +1,8 @@
 { inputs, pkgs, ... }:
 let
-  nurPackages = inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.zjm54321;
+  # Evaluate NUR against the configured package set so local compatibility
+  # overlays apply to dependencies of NUR packages as well.
+  nurPackages = (pkgs.extend inputs.nur.overlays.default).nur.repos.zjm54321;
 in
 {
   # AI companion package aggregator for agents, MCP servers, and Skills.

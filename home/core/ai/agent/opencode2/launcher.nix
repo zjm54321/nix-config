@@ -10,7 +10,10 @@ let
   upstream = inputs.opencode.packages.${system}.opencode;
   upstreamPkgs = inputs.opencode.inputs.nixpkgs.legacyPackages.${system};
   # Upstream's FOD currently uses Bun 1.3.13. Recheck this hash when its input changes.
-  bun = assert lib.assertMsg (system == "x86_64-linux") "OpenCode2's Bun 1.4.2 workaround supports only x86_64-linux";
+  bun =
+    assert lib.assertMsg (
+      system == "x86_64-linux"
+    ) "OpenCode2's Bun 1.4.2 workaround supports only x86_64-linux";
     upstreamPkgs.bun.overrideAttrs (_: {
       version = "1.4.2";
       src = upstreamPkgs.fetchurl {
@@ -18,22 +21,27 @@ let
         hash = "sha256-NjaPrvdSeHXV/6UuU81IAhdB8qg+tiCKjdZAaNQiqRM=";
       };
     });
-  nodeModules = assert lib.assertMsg
-    (upstream.node_modules.outputHash == "sha256-yzCk746pospz8EVakHRcDhYJkhGYGSt9dHOPbzO4OYo=")
-    "OpenCode's node_modules hash changed; refresh the local Bun 1.4.2 dependency hash/workaround";
+  nodeModules =
+    assert lib.assertMsg (
+      upstream.node_modules.outputHash == "sha256-U9IuP/ev6w4urvogOwQyl3rdumY6W4YaY18NkFaOVHU="
+    ) "OpenCode's node_modules hash changed; refresh the local Bun 1.4.2 dependency hash/workaround";
     upstream.node_modules.override {
       inherit bun;
-      hash = "sha256-I8VHWUQjNNbfIrwWwWrsFKyazAEPa/zqUhFqhvpQ9/8=";
+      hash = "sha256-xAnVAOMKE34h6m6jcFQFkNvIAamBHmZdBmX7zjzd6e0=";
     };
   # Pinned upstream still needs this Bun ResolveMessage compatibility patch.
-  package = (upstream.override {
-    inherit bun;
-    node_modules = nodeModules;
-  }).overrideAttrs (old: {
-    patches = (old.patches or [ ]) ++ [ ./plugin-resolution.patch ];
-    # Upstream CLI emits `opencode`; retain the local `opencode2` output name.
-    installPhase = lib.replaceStrings [ "dist/cli-*/bin/opencode2" ] [ "dist/cli-*/bin/opencode" ] old.installPhase;
-  });
+  package =
+    (upstream.override {
+      inherit bun;
+      node_modules = nodeModules;
+    }).overrideAttrs
+      (old: {
+        patches = (old.patches or [ ]) ++ [ ./plugin-resolution.patch ];
+        # Upstream CLI emits `opencode`; retain the local `opencode2` output name.
+        installPhase =
+          lib.replaceStrings [ "dist/cli-*/bin/opencode2" ] [ "dist/cli-*/bin/opencode" ]
+            old.installPhase;
+      });
   wrapped = pkgs.writeShellScriptBin "opencode2" ''
     export SHELL="${bash}"
     export OPENCODE_CONFIG_DIR="$HOME/.config/opencode2/opencode"

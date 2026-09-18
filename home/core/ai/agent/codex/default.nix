@@ -13,7 +13,10 @@ let
       ".codex";
   codexConfigTarget = "${codexConfigDir}/config.toml";
   codexRuntimeHome =
-    if config.home.preferXdgDirectories then "${config.xdg.configHome}/codex" else "${config.home.homeDirectory}/.codex";
+    if config.home.preferXdgDirectories then
+      "${config.xdg.configHome}/codex"
+    else
+      "${config.home.homeDirectory}/.codex";
   codexRuntimeConfig = "${codexRuntimeHome}/config.toml";
   codexStateDir = "${codexRuntimeHome}/.hm-config-state";
   codexConfigBaseline = config.home.file."${codexConfigTarget}".source;
@@ -55,11 +58,13 @@ in
 
   home.file."${codexConfigTarget}".target = "${codexConfigTarget}.hm-source";
 
-  home.activation.backupCodexManagedConfig = lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ] ''
-    run ${lib.getExe writableConfigHelper} backup-legacy \
-      --target ${lib.escapeShellArg codexRuntimeConfig} \
-      --state-dir ${lib.escapeShellArg codexStateDir}
-  '';
+  home.activation.backupCodexManagedConfig =
+    lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ]
+      ''
+        run ${lib.getExe writableConfigHelper} backup-legacy \
+          --target ${lib.escapeShellArg codexRuntimeConfig} \
+          --state-dir ${lib.escapeShellArg codexStateDir}
+      '';
 
   home.activation.seedCodexWritableConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     run ${lib.getExe writableConfigHelper} seed \

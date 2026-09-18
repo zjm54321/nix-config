@@ -11,9 +11,9 @@ let
     inherit systemFlakeHost;
   };
   baseSettings = builtins.fromJSON (builtins.readFile ./opencode.json);
-  omoConfig = lib.recursiveUpdate (
-    builtins.fromJSON (builtins.readFile ../opencode/oh-my-opencode-slim.json)
-  ) (builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.overrides.json));
+  omoConfig = lib.recursiveUpdate (builtins.fromJSON (builtins.readFile ../opencode/oh-my-opencode-slim.json)) (
+    builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.overrides.json)
+  );
   originalProviders = import ../opencode/providers.nix;
   modelPolicy = import ./model-policy.nix {
     inherit lib pkgs originalProviders;
@@ -32,26 +32,32 @@ in
   imports = [ ./launcher.nix ];
 
   xdg.configFile = {
-    "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (baseSettings // {
-      shell = lib.getExe pkgs.bashInteractive;
-      enabled_providers = builtins.attrNames originalProviders;
-      disabled_providers = (import ../opencode/base.nix).disabled_providers;
-      plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
-      provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
-      # EEHUB has no eligible Responses WebSocket upstream; use HTTP/SSE. Do not mix legacy/native entries by name.
-      providers.openai = {
-        settings = modelPolicy.providers.openai.options;
-        websocket = false;
-        # Model-level websocket=true takes precedence over the provider setting.
-        models = lib.genAttrs originalProviders.openai.whitelist (_: { websocket = false; });
-      };
-      mcp = mcpServers;
-      permission = import ../opencode/premission.nix;
-    });
+    "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (
+      baseSettings
+      // {
+        shell = lib.getExe pkgs.bashInteractive;
+        enabled_providers = builtins.attrNames originalProviders;
+        disabled_providers = (import ../opencode/base.nix).disabled_providers;
+        plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
+        provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
+        # EEHUB has no eligible Responses WebSocket upstream; use HTTP/SSE. Do not mix legacy/native entries by name.
+        providers.openai = {
+          settings = modelPolicy.providers.openai.options;
+          websocket = false;
+          # Model-level websocket=true takes precedence over the provider setting.
+          models = lib.genAttrs originalProviders.openai.whitelist (_: {
+            websocket = false;
+          });
+        };
+        mcp = mcpServers;
+        permission = import ../opencode/premission.nix;
+      }
+    );
 
     "opencode2/opencode/cli.json".source = ./cli.json;
 
-    "opencode2/opencode/oh-my-opencode-slim.json".source = json.generate "opencode2-oh-my-opencode-slim.json" omoConfig;
+    "opencode2/opencode/oh-my-opencode-slim.json".source =
+      json.generate "opencode2-oh-my-opencode-slim.json" omoConfig;
     "opencode2/opencode/AGENTS.md".source = agentsTemplate;
     "opencode2/opencode/agents/raw.md".source = ../opencode/raw.md;
   };

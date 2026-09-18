@@ -4,7 +4,8 @@
   originalProviders,
 }:
 let
-  allowed = provider: modelID:
+  allowed =
+    provider: modelID:
     (!(provider ? whitelist) || builtins.elem modelID provider.whitelist)
     && !(builtins.elem modelID (provider.blacklist or [ ]));
   policy = lib.mapAttrs (
@@ -14,7 +15,10 @@ let
   ) originalProviders;
   providers = lib.mapAttrs (
     _: provider:
-    (builtins.removeAttrs provider [ "whitelist" "blacklist" ])
+    (builtins.removeAttrs provider [
+      "whitelist"
+      "blacklist"
+    ])
     // lib.optionalAttrs (provider ? models) {
       models = lib.filterAttrs (modelID: _: allowed provider modelID) provider.models;
     }
@@ -46,15 +50,17 @@ let
       },
     };
   '';
-  packageJson = pkgs.writeText "opencode2-provider-model-policy-package.json" (builtins.toJSON {
-    name = "provider-model-policy";
-    version = "0.0.0";
-    type = "module";
-    exports = {
-      "." = "./index.js";
-      "./server" = "./index.js";
-    };
-  });
+  packageJson = pkgs.writeText "opencode2-provider-model-policy-package.json" (
+    builtins.toJSON {
+      name = "provider-model-policy";
+      version = "0.0.0";
+      type = "module";
+      exports = {
+        "." = "./index.js";
+        "./server" = "./index.js";
+      };
+    }
+  );
   index = pkgs.writeText "opencode2-provider-model-policy-index.js" javascript;
   package = pkgs.runCommand "opencode2-provider-model-policy" { } ''
     install -Dm644 ${packageJson} "$out/package.json"
@@ -62,5 +68,10 @@ let
   '';
 in
 {
-  inherit javascript package policy providers;
+  inherit
+    javascript
+    package
+    policy
+    providers
+    ;
 }
