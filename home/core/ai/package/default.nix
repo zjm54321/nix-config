@@ -10,7 +10,6 @@ in
     gh
     google-chrome
     nixd
-    nurPackages.officecli
     nurPackages.zhihu-cli
     nurPackages.xiaohongshu-cli
   ];

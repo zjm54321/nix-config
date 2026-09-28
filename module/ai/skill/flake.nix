@@ -12,11 +12,6 @@
       flake = false;
     };
 
-    officecli = {
-      url = "github:iOfficeAI/OfficeCLI";
-      flake = false;
-    };
-
     awesome-copilot = {
       url = "github:github/awesome-copilot";
       flake = false;

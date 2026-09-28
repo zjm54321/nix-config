@@ -1,7 +1,7 @@
 {
   build.disable = true;
   title.model = "openrouter/openai/gpt-oss-20b";
-  summary.model = "openrouter/deepseek/deepseek-v4-flash";
+  summary.model = "openrouter/deepseek/deepseek-v4.1-flash";
   explore = {
     disable = true;
   };

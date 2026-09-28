@@ -18,24 +18,15 @@
       apiKey = "{env:EEHUB_API_KEY}";
     };
     whitelist = [
-      "deepseek/deepseek-v4-flash"
-      "deepseek/deepseek-v4-pro"
+      "deepseek/deepseek-v4.1-flash"
       "minimax/minimax-m3"
       "moonshotai/kimi-k3"
       "openai/gpt-oss-20b"
-      "z-ai/glm-5.2"
       "z-ai/glm-5.3"
       "z-ai/glm-5.3-flash"
     ];
     models = {
-      "deepseek/deepseek-v4-pro" = {
-        provider.npm = "@ai-sdk/openai-compatible";
-        variants = {
-          xhigh.reasoning.effort = "xhigh";
-          max.reasoning.effort = "max";
-        };
-      };
-      "deepseek/deepseek-v4-flash" = {
+      "deepseek/deepseek-v4.1-flash" = {
         provider.npm = "@ai-sdk/openai-compatible";
         variants = {
           xhigh.reasoning.effort = "xhigh";
