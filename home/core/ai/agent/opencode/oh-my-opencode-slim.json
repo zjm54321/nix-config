@@ -25,7 +25,7 @@
     "default": {
       "orchestrator": {
         "model": [
-          { "id": "openai/gpt-6-astra", "variant": "medium" }
+          { "id": "openai/gpt-6.1-sol", "variant": "xhigh" }
         ],
         "skills": ["*", "!shuorenhua"],
         "mcps": ["*", "!context7"]
@@ -71,7 +71,7 @@
       },
       "fixer": {
         "model": [
-          { "id": "openai/gpt-6-sol", "variant": "xhigh" },
+          { "id": "openai/gpt-6.1-sol", "variant": "high" },
           { "id": "openrouter/deepseek/deepseek-v4.1-flash", "variant": "max" }
         ],
         "skills": ["!shuorenhua"],
