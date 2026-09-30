@@ -87,7 +87,7 @@
   "council": {
     "presets": {
       "default": {
-        "alpha": { "model": "openai/gpt-5.6-sol", "variant": "max" },
+        "alpha": { "model": "openai/gpt-6-astra", "variant": "max" },
         "beta": { "model": "openrouter/z-ai/glm-5.3" },
         "gamma": { "model": "google/gemini-3.8-flash", "variant": "high" }
       }
