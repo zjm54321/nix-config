@@ -30,11 +30,11 @@ in
         DISABLE_TELEMETRY = "1";
         ANTHROPIC_DEFAULT_HAIKU_MODEL = "claude-haiku-4-5";
         ANTHROPIC_DEFAULT_SONNET_MODEL = "claude-sonnet-4-5";
-        ANTHROPIC_DEFAULT_OPUS_MODEL = "claude-opus-5[1m]";
-        ANTHROPIC_MODEL = "claude-fable-5[1m]";
-        CLAUDE_CODE_SUBAGENT_MODEL = "claude-fable-5[1m]";
+        ANTHROPIC_DEFAULT_OPUS_MODEL = "claude-opus-5-5[1m]";
+        ANTHROPIC_MODEL = "claude-opus-5-5[1m]";
+        CLAUDE_CODE_SUBAGENT_MODEL = "claude-opus-5-5[1m]";
       };
-      model = "claude-fable-5[1m]";
+      model = "claude-opus-5-5[1m]";
       hooks = { };
       extraKnownMarketplaces = {
         anthropic-agent-skills = {
