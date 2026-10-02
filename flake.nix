@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    opencode.url = "github:anomalyco/opencode/beta";
+    opencode.url = "github:anomalyco/opencode/v2";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";

@@ -1,0 +1,311 @@
+# Temporary OpenCode2 / Aether compatibility workaround (2026-10-02).
+# Aether drops functionResponse.id while retaining functionCall.id; use V1-style
+# ID-less tool history while the gateway remains pinned to Aether 0.7.13.
+#
+# Removal gate: upgrade to an Aether release fixing BOTH issues:
+# - Responses SSE corruption: https://github.com/fawney19/Aether/issues/814
+# - Asymmetric Gemini ID stripping: https://github.com/fawney19/Aether/issues/878
+# Upgrading alone is insufficient: v0.7.19 still strips functionResponse.id.
+# Verify large Responses SSE events remain intact, then verify unpatched OpenCode2
+# single, sequential and same-name parallel Gemini tool calls through that gateway
+# retain matching call/response IDs and correctly paired results.
+# Then remove this file, its launcher.nix entry, and the
+# google.options.omitFunctionCallIds override in default.nix.
+
+diff --git a/packages/ai/src/protocols/gemini.ts b/packages/ai/src/protocols/gemini.ts
+--- a/packages/ai/src/protocols/gemini.ts
++++ b/packages/ai/src/protocols/gemini.ts
+@@ -184,6 +184,7 @@
+ })
+ const Options = Schema.Struct({
+   cachedContent: lenient(Schema.String),
++  omitFunctionCallIds: lenient(Schema.Boolean),
+   safetySettings: lenient(Schema.Array(GeminiSafetySetting)),
+   serviceTier: lenient(knownString<"standard" | "flex" | "priority">()),
+   thinkingConfig: lenient(GeminiThinkingConfigInput),
+@@ -437,6 +438,73 @@
+   return contents
+ })
+ 
++// ID-less compatibility histories pair by position, so validate and order each
++// adjacent response batch by its original IDs before removing either side's IDs.
++const lowerIdlessToolHistory = (contents: GeminiBody["contents"]): Effect.Effect<GeminiBody["contents"], AIError> =>
++  Effect.gen(function* () {
++    const lowered: GeminiContent[] = []
++    let pending: Set<string> | undefined
++    for (const content of contents) {
++      const parts = content.parts ?? []
++      const calls = parts.filter((part) => "functionCall" in part)
++      const responses = parts.filter((part) => "functionResponse" in part)
++      if (pending) {
++        if (content.role !== "user" || calls.length > 0)
++          return yield* ProviderShared.invalidRequest("Gemini ID-less tool history requires an adjacent response batch")
++        const byId = new Map<string, Schema.Schema.Type<typeof GeminiFunctionResponsePart>>()
++        for (const part of responses) {
++          const id = part.functionResponse.id
++          if (!id || !pending.has(id) || byId.has(id))
++            return yield* ProviderShared.invalidRequest("Gemini ID-less tool history has a missing, unexpected, or duplicate response ID")
++          byId.set(id, part)
++        }
++        const ordered: Array<Schema.Schema.Type<typeof GeminiFunctionResponsePart>> = []
++        for (const id of pending) {
++          const part = byId.get(id)
++          if (!part)
++            return yield* ProviderShared.invalidRequest("Gemini ID-less tool history is missing a function response")
++          const functionResponse = { ...part.functionResponse }
++          delete functionResponse.id
++          ordered.push({ ...part, functionResponse })
++        }
++        let index = 0
++        lowered.push({
++          ...content,
++          parts: parts.map((part) => ("functionResponse" in part ? ordered[index++] : part)),
++        })
++        pending = undefined
++        continue
++      }
++      if (responses.length > 0)
++        return yield* ProviderShared.invalidRequest("Gemini ID-less tool history has an unexpected response batch")
++      if (calls.length === 0) {
++        lowered.push(content)
++        continue
++      }
++      if (content.role !== "model")
++        return yield* ProviderShared.invalidRequest("Gemini ID-less tool history requires model function calls")
++      pending = new Set()
++      for (const part of calls) {
++        const id = part.functionCall.id
++        if (!id || pending.has(id))
++          return yield* ProviderShared.invalidRequest("Gemini ID-less tool history has a missing or duplicate call ID")
++        pending.add(id)
++      }
++      lowered.push({
++        ...content,
++        parts: parts.map((part) => {
++          if (!("functionCall" in part)) return part
++          const functionCall = { ...part.functionCall }
++          delete functionCall.id
++          return { ...part, functionCall }
++        }),
++      })
++    }
++    if (pending)
++      return yield* ProviderShared.invalidRequest("Gemini ID-less tool history is missing a response batch")
++    return lowered
++  })
++
+ const fromRequest = Effect.fn("Gemini.fromRequest")(function* (request: LLMRequest) {
+   const flattened = ProviderShared.flattenToolRequest(request)
+   const hasTools = flattened.tools.length > 0
+@@ -469,9 +537,15 @@
+           },
+   }
+ 
++  const lowered = yield* lowerMessages(flattened.request)
++  const contents =
++    options.omitFunctionCallIds === true && !omitsFunctionCallIds(request.model.id)
++      ? yield* lowerIdlessToolHistory(lowered)
++      : lowered
++
+   return {
+     cachedContent: options.cachedContent,
+-    contents: yield* lowerMessages(flattened.request),
++    contents,
+     safetySettings: options.safetySettings,
+     serviceTier: options.serviceTier,
+     systemInstruction:
+diff --git a/packages/ai/test/provider/gemini.test.ts b/packages/ai/test/provider/gemini.test.ts
+--- a/packages/ai/test/provider/gemini.test.ts
++++ b/packages/ai/test/provider/gemini.test.ts
+@@ -5,7 +5,7 @@
+ import { compileRequest } from "../../src/route/client.js"
+ import * as Gemini from "../../src/protocols/gemini.js"
+ import { it } from "../lib/effect.js"
+-import { fixedResponse } from "../lib/http.js"
++import { dynamicResponse, fixedResponse } from "../lib/http.js"
+ import { sseEvents, sseRaw } from "../lib/sse.js"
+ 
+ const model = Gemini.route
+@@ -280,6 +280,182 @@
+     }),
+   )
+ 
++  describe("ID-less tool history compatibility", () => {
++    const call = (id: string) => ToolCallPart.make({ id, name: "lookup", input: { query: id } })
++    const result = (id: string) => Message.tool({ id, name: "lookup", result: id, resultType: "text" })
++    const messages = [Message.assistant([call("call_1")]), result("call_1")]
++    const reply = sseEvents({
++      candidates: [{ content: { parts: [{ text: "done" }] }, finishReason: "STOP" }],
++    })
++
++    for (const omitFunctionCallIds of [undefined, false, true]) {
++      it.effect(`only omits Gemini 3 wire IDs when enabled: ${omitFunctionCallIds}`, () =>
++        Effect.gen(function* () {
++          const input = LLM.request({ model: gemini3, messages, providerOptions: { omitFunctionCallIds } })
++          const before = JSON.stringify(input.messages)
++          const prepared = yield* compileRequest(input)
++          const ids = omitFunctionCallIds === true ? {} : { id: "call_1" }
++          expect(prepared.body.contents).toEqual([
++            {
++              role: "model",
++              parts: [{ functionCall: { ...ids, name: "lookup", args: { query: "call_1" } },
++                thoughtSignature: "skip_thought_signature_validator" }],
++            },
++            { role: "user", parts: [{ functionResponse: { ...ids, name: "lookup",
++              response: { name: "lookup", content: "call_1" } } }] },
++          ])
++          const bodies: string[] = []
++          yield* LLMClient.generate(input).pipe(
++            Effect.provide(dynamicResponse((http) => {
++              bodies.push(http.text)
++              return Effect.succeed(http.respond(reply, { headers: { "content-type": "text/event-stream" } }))
++            })),
++          )
++          expect(bodies).toHaveLength(1)
++          expect(JSON.parse(bodies[0]).contents).toEqual(prepared.body.contents)
++          expect(bodies[0].includes('"id"')).toBe(omitFunctionCallIds !== true)
++          expect(bodies[0]).not.toContain("omitFunctionCallIds")
++          expect(JSON.stringify(input.messages)).toBe(before)
++          expect(input.messages[0].content[0]).toMatchObject({ id: "call_1" })
++          expect(input.messages[1].content[0]).toMatchObject({ id: "call_1" })
++        }),
++      )
++    }
++
++    it.effect("reorders whole same-name responses by ID, preserving signatures, media, and successive batches", () =>
++      Effect.gen(function* () {
++        const input = LLM.request({
++          model: gemini3,
++          providerOptions: { omitFunctionCallIds: true },
++          messages: [
++            Message.user("Before"),
++            Message.assistant([
++              { type: "reasoning", text: "Thinking", providerMetadata: { google: { thoughtSignature: "reason_sig" } } },
++              { type: "text", text: "Reading", providerMetadata: { google: { thoughtSignature: "text_sig" } } },
++              ToolCallPart.make({ ...call("call_1"), input: { id: "argument-id", nested: { keep: true } },
++                providerMetadata: { google: { thoughtSignature: "call_sig" } } }),
++              { type: "media", media: Media.base64("AAEC", "image/png"),
++                providerMetadata: { google: { thoughtSignature: "image_sig" } } },
++              call("call_2"),
++            ]),
++            Message.tool({ id: "call_2", name: "lookup", result: "second failed", resultType: "error" }),
++            Message.tool({ id: "call_1", name: "lookup", result: { type: "content", value: [
++              { type: "text", text: "first image" },
++              { type: "file", uri: "data:image/png;base64,AAECAw==", mime: "image/png", name: "pixel.png" },
++            ] } }),
++            Message.system("Between batches"),
++            Message.assistant([call("call_2"), call("call_1")]),
++            result("call_1"),
++            result("call_2"),
++            Message.user("After"),
++          ],
++        })
++        const before = JSON.stringify(input.messages)
++        const prepared = yield* compileRequest(input)
++        expect(prepared.body.contents).toEqual([
++          { role: "user", parts: [{ text: "Before" }] },
++          { role: "model", parts: [
++            { text: "Thinking", thought: true, thoughtSignature: "reason_sig" },
++            { text: "Reading", thoughtSignature: "text_sig" },
++            { functionCall: { name: "lookup", args: { id: "argument-id", nested: { keep: true } } }, thoughtSignature: "call_sig" },
++            { inlineData: { mimeType: "image/png", data: "AAEC" }, thoughtSignature: "image_sig" },
++            { functionCall: { name: "lookup", args: { query: "call_2" } } },
++          ] },
++          { role: "user", parts: [
++            { functionResponse: { name: "lookup", response: { name: "lookup", content: "first image" },
++              parts: [{ inlineData: { mimeType: "image/png", data: "AAECAw==" } }] } },
++            { functionResponse: { name: "lookup", response: { name: "lookup", content: "second failed" } } },
++          ] },
++          { role: "user", parts: [{ text: "<system-update>\nBetween batches\n</system-update>" }] },
++          { role: "model", parts: [
++            { functionCall: { name: "lookup", args: { query: "call_2" } }, thoughtSignature: "skip_thought_signature_validator" },
++            { functionCall: { name: "lookup", args: { query: "call_1" } }, thoughtSignature: "skip_thought_signature_validator" },
++          ] },
++          { role: "user", parts: [
++            { functionResponse: { name: "lookup", response: { name: "lookup", content: "call_2" } } },
++            { functionResponse: { name: "lookup", response: { name: "lookup", content: "call_1" } } },
++          ] },
++          { role: "user", parts: [{ text: "After" }] },
++        ])
++        expect(JSON.stringify(input.messages)).toBe(before)
++        const disabled = yield* compileRequest(LLMRequest.update(input, { providerOptions: { omitFunctionCallIds: false } }))
++        expect(disabled.body.contents[2].parts.map((part: { functionResponse: { id: string } }) => part.functionResponse.id))
++          .toEqual(["call_2", "call_1"])
++      }),
++    )
++
++    for (const id of ["gemini-1.5-flash", "gemini-2.5-flash"]) {
++      for (const omitFunctionCallIds of [false, true]) {
++        it.effect(`leaves legacy lowering unchanged: ${id}, ${omitFunctionCallIds}`, () =>
++          Effect.gen(function* () {
++            const legacy = model.route.model({ id })
++            const input = LLM.request({ model: legacy, messages: [
++              Message.assistant([call("call_1"), call("call_2")]),
++              result("call_2"),
++              Message.tool({ id: "call_1", name: "lookup", result: { type: "content", value: [
++                { type: "file", uri: "data:image/png;base64,AAEC", mime: "image/png" },
++              ] } }),
++            ] })
++            const baseline = yield* compileRequest(input)
++            const prepared = yield* compileRequest(LLMRequest.update(input, { providerOptions: { omitFunctionCallIds } }))
++            expect(prepared.body).toEqual(baseline.body)
++            expect(JSON.stringify(prepared.body)).not.toContain('"id"')
++            expect(JSON.stringify(prepared.body)).not.toContain("omitFunctionCallIds")
++          }),
++        )
++      }
++    }
++
++    const invalid = [
++      { name: "duplicate calls", messages: [Message.assistant([call("call_1"), call("call_1")]), result("call_1")] },
++      { name: "duplicate responses", messages: [...messages, result("call_1")] },
++      { name: "unmatched response", messages: [messages[0], result("unknown")] },
++      { name: "orphan response", messages: [result("call_1")] },
++      { name: "response across unrelated turn", messages: [messages[0], Message.user("Unrelated"), result("call_1")] },
++      { name: "empty call ID", messages: [Message.assistant([call("")]), result("")] },
++      { name: "empty response ID", messages: [messages[0], result("")] },
++    ]
++    for (const entry of invalid) {
++      it.effect(`rejects ${entry.name} before HTTP`, () =>
++        Effect.gen(function* () {
++          const input = LLM.request({ model: gemini3, messages: entry.messages, providerOptions: { omitFunctionCallIds: true } })
++          const error = yield* compileRequest(input).pipe(Effect.flip)
++          expect(error.reason._tag).toBe("InvalidRequest")
++          expect(error.message).toContain("Gemini ID-less tool history")
++          let sent = 0
++          const generated = yield* LLMClient.generate(input).pipe(
++            Effect.provide(dynamicResponse((http) => {
++              sent++
++              return Effect.succeed(http.respond(reply, { headers: { "content-type": "text/event-stream" } }))
++            })),
++            Effect.flip,
++          )
++          expect(generated.reason._tag).toBe("InvalidRequest")
++          expect(sent).toBe(0)
++        }),
++      )
++    }
++
++    // compileRequest's shared normalizer synthesizes missing results and defers
++    // system updates. Exercise raw protocol lowering for those unrepaired cases.
++    for (const entry of [
++      { name: "missing batch", messages: [messages[0]] },
++      { name: "partial batch", messages: [Message.assistant([call("call_1"), call("call_2")]), result("call_1")] },
++      { name: "intervening user", messages: [messages[0], Message.user("Unrelated"), result("call_1")] },
++      { name: "intervening system", messages: [messages[0], Message.system("Update"), result("call_1")] },
++      { name: "intervening model", messages: [messages[0], Message.assistant("Unrelated"), result("call_1")] },
++    ]) {
++      it.effect(`rejects raw ${entry.name} without searching later turns`, () =>
++        Effect.gen(function* () {
++          const input = LLM.request({ model: gemini3, messages: entry.messages, providerOptions: { omitFunctionCallIds: true } })
++          const error = yield* Gemini.route.body.from(input).pipe(Effect.flip)
++          expect(error.reason._tag).toBe("InvalidRequest")
++          expect(error.message).toContain("Gemini ID-less tool history")
++        }),
++      )
++    }
++  })
++
+   it.effect("omits function call ids entirely for pre-gemini-3 models", () =>
+     Effect.gen(function* () {
+       const messages = [

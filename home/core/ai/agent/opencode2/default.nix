@@ -14,7 +14,10 @@ let
   omoConfig = lib.recursiveUpdate (builtins.fromJSON (builtins.readFile ../opencode/oh-my-opencode-slim.json)) (
     builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.overrides.json)
   );
-  originalProviders = import ../opencode/providers.nix;
+  # Temporary V1 wire compatibility for EEHUB Google; remove if repointed to direct Google.
+  originalProviders = lib.recursiveUpdate (import ../opencode/providers.nix) {
+    google.options.omitFunctionCallIds = true;
+  };
   modelPolicy = import ./model-policy.nix {
     inherit lib pkgs originalProviders;
   };
@@ -40,14 +43,8 @@ in
         disabled_providers = (import ../opencode/base.nix).disabled_providers;
         plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
         provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
-        # EEHUB has no eligible Responses WebSocket upstream; use HTTP/SSE. Do not mix legacy/native entries by name.
-        providers.openai = {
-          settings = modelPolicy.providers.openai.options;
-          websocket = false;
-          # Model-level websocket=true takes precedence over the provider setting.
-          models = lib.genAttrs originalProviders.openai.whitelist (_: {
-            websocket = false;
-          });
+        providers.openai.settings = modelPolicy.providers.openai.options // {
+          transport = "http";
         };
         mcp = mcpServers;
         permission = import ../opencode/premission.nix;

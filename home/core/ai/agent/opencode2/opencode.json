@@ -22,6 +22,8 @@
     }
   },
   "plugin": [
-    "oh-my-opencode-slim@2.2.18"
+    "oh-my-opencode-slim@2.2.18",
+    "opencode-todolist@0.3.0",
+    "opencode-dcp@2.0.0-beta.13"
   ]
 }

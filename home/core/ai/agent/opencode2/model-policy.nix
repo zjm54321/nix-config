@@ -38,12 +38,9 @@ let
     export default {
       id: "provider-model-policy",
       async setup(ctx) {
-        const registration = await ctx.catalog.transform((catalog) => {
-          for (const record of catalog.provider.list()) {
-            const providerID = record.provider.id;
-            for (const modelID of record.models.keys()) {
-              if (!shouldKeep(providerID, modelID)) catalog.model.remove(providerID, modelID);
-            }
+        const registration = await ctx.model.transform((editor) => {
+          for (const model of editor.list()) {
+            if (!shouldKeep(model.providerID, model.id)) editor.remove(model.providerID, model.id);
           }
         });
         return () => registration.dispose();

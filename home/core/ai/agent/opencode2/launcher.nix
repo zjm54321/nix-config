@@ -9,39 +9,13 @@ let
   system = pkgs.stdenv.hostPlatform.system;
   upstream = inputs.opencode.packages.${system}.opencode;
   upstreamPkgs = inputs.opencode.inputs.nixpkgs.legacyPackages.${system};
-  # Upstream's FOD currently uses Bun 1.3.13. Recheck this hash when its input changes.
-  bun =
-    assert lib.assertMsg (
-      system == "x86_64-linux"
-    ) "OpenCode2's Bun 1.4.2 workaround supports only x86_64-linux";
-    upstreamPkgs.bun.overrideAttrs (_: {
-      version = "1.4.2";
-      src = upstreamPkgs.fetchurl {
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip";
-        hash = "sha256-NjaPrvdSeHXV/6UuU81IAhdB8qg+tiCKjdZAaNQiqRM=";
-      };
-    });
-  nodeModules =
-    assert lib.assertMsg (
-      upstream.node_modules.outputHash == "sha256-U9IuP/ev6w4urvogOwQyl3rdumY6W4YaY18NkFaOVHU="
-    ) "OpenCode's node_modules hash changed; refresh the local Bun 1.4.2 dependency hash/workaround";
-    upstream.node_modules.override {
-      inherit bun;
-      hash = "sha256-xAnVAOMKE34h6m6jcFQFkNvIAamBHmZdBmX7zjzd6e0=";
-    };
-  # Pinned upstream still needs this Bun ResolveMessage compatibility patch.
-  package =
-    (upstream.override {
-      inherit bun;
-      node_modules = nodeModules;
-    }).overrideAttrs
-      (old: {
-        patches = (old.patches or [ ]) ++ [ ./plugin-resolution.patch ];
-        # Upstream CLI emits `opencode`; retain the local `opencode2` output name.
-        installPhase =
-          lib.replaceStrings [ "dist/cli-*/bin/opencode2" ] [ "dist/cli-*/bin/opencode" ]
-            old.installPhase;
-      });
+  bun = upstreamPkgs.bun;
+  package = upstream.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      ./plugin-resolution.patch
+      ./gemini-idless-tool-history.patch
+    ];
+  });
   wrapped = pkgs.writeShellScriptBin "opencode2" ''
     export SHELL="${bash}"
     export OPENCODE_CONFIG_DIR="$HOME/.config/opencode2/opencode"
@@ -60,20 +34,19 @@ in
   home.packages = [ wrapped ];
 
   home.activation.opencode2ServicePort = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    serviceConfig="$HOME/.config/opencode2/opencode/service.json"
+    serviceConfig="$HOME/.config/opencode2/opencode/service-prod.json"
+    port=""
     if [[ -e "$serviceConfig" ]]; then
       if ! port="$(${pkgs.jq}/bin/jq -er 'if (.port | type) == "number" then .port else error("service .port must be numeric") end' "$serviceConfig")"; then
         _error "OpenCode2 service configuration has no numeric .port: $serviceConfig"
         exit 1
       fi
-      if [[ "$port" == 49375 ]]; then
-        :
-      elif ${pkgs.procps}/bin/pgrep -u "$UID" -x .opencode2-wrap >/dev/null; then
-        _error "OpenCode2 service is active with port $port; refusing to change it during activation"
-        exit 1
-      else
-        run ${lib.getExe wrapped} service set port 49375
-      fi
+    fi
+    if [[ "$port" == 49375 ]]; then
+      :
+    elif ${pkgs.procps}/bin/pgrep -u "$UID" -f '^/nix/store/[^/]+-opencode-2\.[^/]+/bin/\.?opencode2?(-wrapped)? serve --service( |$)' >/dev/null; then
+      _error "OpenCode2 service is active; refusing to change its port during activation"
+      exit 1
     else
       run ${lib.getExe wrapped} service set port 49375
     fi
