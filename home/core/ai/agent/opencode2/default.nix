@@ -57,5 +57,9 @@ in
       json.generate "opencode2-oh-my-opencode-slim.json" omoConfig;
     "opencode2/opencode/AGENTS.md".source = agentsTemplate;
     "opencode2/opencode/agents/raw.md".source = ../opencode/raw.md;
+    "opencode2/opencode/oh-my-opencode-slim/default/orchestrator_append.md".source =
+      ../opencode/prompts/orchestrator_append.md;
+    "opencode2/opencode/oh-my-opencode-slim/default/secretary_append.md".source =
+      ../opencode/prompts/secretary_append.md;
   };
 }

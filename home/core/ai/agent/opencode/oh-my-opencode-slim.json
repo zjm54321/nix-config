@@ -14,7 +14,20 @@
       "orchestratorPrompt": "Route user-facing questions and answers, explanations, email/message/document drafting, rewriting, polishing, natural expression, humanizing, and removal of AI tone to @secretary. If the expected final user-facing explanatory body exceeds 200 Chinese characters, you MUST call @secretary before responding. Code blocks, raw logs, URLs, and file paths do not count toward this threshold. Send factual investigation, code work, and architecture work to the appropriate specialists first, then give their verified conclusions and relevant context to @secretary. Delegation is optional when the explanatory body is no more than 200 Chinese characters. Pure code or pure commands do not require delegation, but you MUST still call @secretary when the accompanying explanatory body exceeds the threshold. When @secretary returns an HTML path/status or a short final answer, adopt it verbatim or with only minimal wrapping; do not rewrite it into a new long answer."
     },
     "orchestrator": {
-      "skills": ["*", "!shuorenhua", "!output-presentation"],
+      "skills": [
+        "oh-my-opencode-slim",
+        "opencode",
+        "verification-planning",
+        "deepwork",
+        "reflect",
+        "worktrees",
+        "clonedeps",
+        "codemap",
+        "git-commit",
+        "domain-modeling",
+        "grilling",
+        "report"
+      ],
       "permission": {
         "skill": {"shuorenhua": "deny"}
       }

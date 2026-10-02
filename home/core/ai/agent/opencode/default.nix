@@ -40,6 +40,10 @@ in
   };
 
   xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
+  xdg.configFile."opencode/oh-my-opencode-slim/default/orchestrator_append.md".source =
+    ./prompts/orchestrator_append.md;
+  xdg.configFile."opencode/oh-my-opencode-slim/default/secretary_append.md".source =
+    ./prompts/secretary_append.md;
   xdg.configFile."opencode/acp.jsonc".source = ./acp.jsonc;
   xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
 }
