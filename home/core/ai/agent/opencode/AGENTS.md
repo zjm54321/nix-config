@@ -12,6 +12,6 @@
 - **Project development:** declare the toolchain and dependencies in the project's `flake.nix`, commit `flake.lock`, and enter the environment with `nix develop`.
 - **One-time software:** use `nix shell nixpkgs#<package>` without installing it permanently.
 - **Permanent software or system changes:** modify the system repository's Flake/Nix modules, then build and deploy `.#@systemFlakeHost@`.
+- **System update requests:** when the user asks to update the system, deploy, and commit (for example, “更新系统然后部署提交”), default to running `just system-update` from the system repository. Use this existing aggregate recipe, including its health checks and cleanup, rather than splitting it into separate commands or recreating the workflow. Only use a different workflow if the user explicitly requests it. This recipe does not push; run `just push` only when requested.
 - **Non-FHS system:** NixOS does not follow the conventional FHS layout. Do not assume binaries or libraries exist under `/usr/bin`, `/usr/lib`, or `/lib`; use Nix packages and store paths.
 - Never modify `/nix/store` directly.
-
