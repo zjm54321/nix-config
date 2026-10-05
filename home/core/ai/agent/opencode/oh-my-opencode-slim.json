@@ -1,5 +1,13 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "acpAgents": {
+    "claude-code": {
+      "command": "claude-agent-acp",
+      "description": "Claude Code via ACP",
+      "permissionMode": "ask",
+      "orchestratorPrompt": "Delegate to @claude-code when the user explicitly requests Claude Code or Claude ACP execution. Do not replace other specialists by default."
+    }
+  },
   "disabled_agents": ["observer"],
   "agents": {
     "secretary": {
