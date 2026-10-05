@@ -51,7 +51,7 @@
       },
       "council": {
         "model": [
-          { "id": "openai/gpt-5.6-sol", "variant": "max" }
+          { "id": "openai/gpt-6-astra", "variant": "max" }
         ],
         "skills": ["!shuorenhua"]
       },
