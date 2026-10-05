@@ -7,8 +7,15 @@
 let
   bash = lib.getExe pkgs.bashInteractive;
   system = pkgs.stdenv.hostPlatform.system;
-  upstream = inputs.opencode.packages.${system}.opencode;
   upstreamPkgs = inputs.opencode.inputs.nixpkgs.legacyPackages.${system};
+  patchedSource = pkgs.applyPatches {
+    name = "opencode-nix-persistent-pty-source";
+    src = inputs.opencode.outPath;
+    patches = [ ./nix-persistent-pty.patch ];
+  };
+  upstream = upstreamPkgs.callPackage "${patchedSource}/nix/opencode.nix" {
+    node_modules = inputs.opencode.packages.${system}.opencode.node_modules;
+  };
   bun = upstreamPkgs.bun;
   package = upstream.overrideAttrs (old: {
     patches = (old.patches or [ ]) ++ [
