@@ -21,6 +21,7 @@ let
   modelPolicy = import ./model-policy.nix {
     inherit lib pkgs originalProviders;
   };
+  additionalTools = import ./additional-tools.nix { inherit pkgs; };
   mcpServers = lib.mapAttrs (
     _: server:
     {
@@ -41,7 +42,10 @@ in
         shell = lib.getExe pkgs.bashInteractive;
         enabled_providers = builtins.attrNames originalProviders;
         disabled_providers = (import ../opencode/base.nix).disabled_providers;
-        plugin = baseSettings.plugin ++ [ "file://${modelPolicy.package}" ];
+        plugin = baseSettings.plugin ++ [
+          "file://${modelPolicy.package}"
+          "file://${additionalTools}"
+        ];
         provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
         providers.openai.settings = modelPolicy.providers.openai.options // {
           transport = "http";
