@@ -10,6 +10,8 @@ let
   agentsTemplate = pkgs.replaceVars ../opencode/AGENTS.md {
     inherit systemFlakeHost;
   };
+  # opencode.json 暂用本地 slim 插件，等待上游 PR #1465 合并并发布包含修复的版本后，可将插件来源恢复为上游包。
+  # https://github.com/alvinunreal/oh-my-opencode-slim/pull/1465
   baseSettings = builtins.fromJSON (builtins.readFile ./opencode.json);
   omoConfig = lib.recursiveUpdate (builtins.fromJSON (builtins.readFile ../opencode/oh-my-opencode-slim.json)) (
     builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.overrides.json)

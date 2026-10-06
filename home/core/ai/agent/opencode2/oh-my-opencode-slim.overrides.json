@@ -10,5 +10,11 @@
     "orchestratorWake": {
       "enabled": false
     }
+  },
+  "acpAgents": {
+    "claude-code": {
+      "wrapperModel": "openai/gpt-6.1-sol",
+      "orchestratorPrompt": "Delegate to @claude-code when the user explicitly requests Claude Code or Claude ACP execution. Do not replace other specialists by default. Keep the outer OpenCode wrapper on openai/gpt-6.1-sol; native subagent.model selects only that outer wrapper, never the inner model. For each explicit inner-model request, pass a delegation prompt formatted as 'Inner ACP selector: <value>\nTask: ...' with the actual task, constraints, and context. Previously advertised examples are fable for Fable 5.1 and opus for Opus 5.5 (1M context); these are examples, not a whitelist, and the runner validates current advertised values on every explicit selection. The wrapper passes the selector in acp_run.model. Do not infer a selector from the outer model, prior calls, or incidental model names. If an explicitly requested inner model has no known exact selector, clarify the ambiguity instead of guessing or silently defaulting. When no inner model is requested, omit the selector line so the external agent uses its default."
+    }
   }
 }

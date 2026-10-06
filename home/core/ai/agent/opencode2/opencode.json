@@ -11,6 +11,9 @@
     }
   },
   "autoupdate": false,
+  "compaction": {
+    "auto": false
+  },
   "lsp": {
     "nixd": {
       "command": [
@@ -22,8 +25,8 @@
     }
   },
   "plugin": [
-    "oh-my-opencode-slim@latest",
-    "opencode-todolist@0.3.0",
-    "opencode-dcp@2.0.0-beta.13"
+    "file:///home/ming/oh-my-opencode-slim/.slim/worktrees/acp-model-map-3.0.2",
+    "opencode-todolist@0.4.1",
+    "billion-context@0.1.186"
   ]
 }

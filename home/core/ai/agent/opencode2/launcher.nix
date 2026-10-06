@@ -25,6 +25,7 @@ let
   });
   wrapped = pkgs.writeShellScriptBin "opencode2" ''
     export SHELL="${bash}"
+    export BILLION_CONTEXT_NODE="${lib.getExe pkgs.nodejs}"
     export OPENCODE_CONFIG_DIR="$HOME/.config/opencode2/opencode"
     export XDG_DATA_HOME="$HOME/.local/share/opencode2"
     export XDG_CACHE_HOME="$HOME/.cache/opencode2"
