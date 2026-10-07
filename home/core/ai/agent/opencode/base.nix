@@ -2,7 +2,7 @@
   "$schema" = "https://opencode.ai/config.json";
   default_agent = "orchestrator";
   disabled_providers = [ "opencode" ];
-  instructions = [ "~/.config/opencode/AGENTS.md" ];
+  instructions = [ "~/.config/oc1/opencode/AGENTS.md" ];
   # ACP owns compression.
   compaction = {
     auto = false;
