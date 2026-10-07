@@ -38,6 +38,11 @@ in
   imports = [ ./launcher.nix ];
 
   xdg.configFile = {
+    "billion-context/billion-context.json" = {
+      source = ./billion-context.json;
+      force = true;
+    };
+
     "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (
       baseSettings
       // {

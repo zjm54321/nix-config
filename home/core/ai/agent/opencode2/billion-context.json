@@ -1,0 +1,6 @@
+{
+  "providers": {},
+  "compress": {
+    "nudgeGrowthTokens": 300000
+  }
+}
