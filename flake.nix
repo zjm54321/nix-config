@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    opencode.url = "github:anomalyco/opencode/v2";
+    # Keep OpenCode2 at the deployed revision when updating other inputs.
+    opencode.url = "github:anomalyco/opencode/de2cacdac8903d00762867bc3fe094ef92b55719";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";

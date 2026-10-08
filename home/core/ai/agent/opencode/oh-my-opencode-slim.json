@@ -91,6 +91,55 @@
         "skills": ["!shuorenhua"],
         "mcps": ["codegraph"]
       }
+    },
+    "claude": {
+      "orchestrator": {
+        "model": [
+          "anthropic/claude-opus-5-5"
+        ],
+        "skills": ["*", "!shuorenhua"],
+        "mcps": ["*", "!context7"]
+      },
+      "oracle": {
+        "model": "openai/gpt-6-astra",
+        "variant": "max",
+        "skills": ["web-perf"],
+        "mcps": ["codegraph", "chrome-devtools"]
+      },
+      "council": {
+        "model": [
+          { "id": "openai/gpt-6-astra", "variant": "max" }
+        ],
+        "skills": ["!shuorenhua"]
+      },
+      "librarian": {
+        "model": [
+          { "id": "openai/gpt-6-luna", "variant": "high" }
+        ],
+        "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
+        "mcps": ["context7", "gh_grep", "nixos"]
+      },
+      "explorer": {
+        "model": [
+          { "id": "openai/gpt-6-luna", "variant": "medium" }
+        ],
+        "skills": ["!shuorenhua"],
+        "mcps": ["codegraph"]
+      },
+      "designer": {
+        "model": [
+          "anthropic/claude-opus-5-5"
+        ],
+        "skills": ["ui-ux-pro-max", "make-interfaces-feel-better", "better-icons", "!shuorenhua"],
+        "mcps": ["codegraph"]
+      },
+      "fixer": {
+        "model": [
+          { "id": "openai/gpt-6.1-sol", "variant": "high" }
+        ],
+        "skills": ["!shuorenhua"],
+        "mcps": ["codegraph"]
+      }
     }
   },
   "council": {
