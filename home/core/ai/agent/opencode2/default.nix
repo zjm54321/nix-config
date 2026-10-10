@@ -52,6 +52,7 @@ in
         plugin = baseSettings.plugin ++ [
           "file://${modelPolicy.package}"
           "file://${additionalTools}"
+          "file:///home/ming/opencode-hermes-bridge/dist"
         ];
         provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
         providers.openai.settings = modelPolicy.providers.openai.options // {
@@ -61,10 +62,6 @@ in
         permission = import ../opencode/premission.nix;
       }
     );
-
-    "opencode2/opencode/opencode.jsonc".source = json.generate "opencode2-hermes-bridge.jsonc" {
-      plugins = [ "/home/ming/opencode-hermes-bridge/dist" ];
-    };
 
     "opencode2/opencode/cli.json".source = ./cli.json;
 
