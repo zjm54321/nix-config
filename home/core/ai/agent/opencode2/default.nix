@@ -62,6 +62,10 @@ in
       }
     );
 
+    "opencode2/opencode/opencode.jsonc".source = json.generate "opencode2-hermes-bridge.jsonc" {
+      plugins = [ "/home/ming/opencode-hermes-bridge/dist" ];
+    };
+
     "opencode2/opencode/cli.json".source = ./cli.json;
 
     "opencode2/opencode/oh-my-opencode-slim.json".source =
