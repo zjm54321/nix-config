@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   systemFlakeHost,
@@ -24,6 +25,11 @@ let
     inherit lib pkgs originalProviders;
   };
   additionalTools = import ./additional-tools.nix { inherit pkgs; };
+  clearEncrypted = pkgs.runCommand "opencode-clear-encrypted" { } ''
+    mkdir -p "$out"
+    cp -R ${./clear-encrypted}/. "$out/"
+    ln -s ${lib.getExe inputs.opencode.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bun} "$out/bun"
+  '';
   mcpServers = lib.mapAttrs (
     _: server:
     {
@@ -38,6 +44,11 @@ in
   imports = [ ./launcher.nix ];
 
   xdg.configFile = {
+    "opencode2/opencode/plugins/clear-encrypted" = {
+      target = "opencode/plugins/clear-encrypted";
+      source = clearEncrypted;
+      recursive = false; # Keep sibling imports inside one plugin source directory.
+    };
     "billion-context/billion-context.json" = {
       source = ./billion-context.json;
       force = true;
