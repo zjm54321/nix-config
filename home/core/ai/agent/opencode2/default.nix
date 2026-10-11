@@ -34,7 +34,9 @@ let
   clearEncrypted = pkgs.runCommand "opencode-clear-encrypted" { } ''
     mkdir -p "$out"
     cp -R ${./clear-encrypted}/. "$out/"
-    ln -s ${lib.getExe inputs.opencode.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bun} "$out/bun"
+    ln -s ${
+      lib.getExe inputs.opencode.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bun
+    } "$out/bun"
   '';
   mcpServers = lib.mapAttrs (
     _: server:
