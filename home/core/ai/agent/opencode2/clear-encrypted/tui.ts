@@ -1,4 +1,4 @@
-import { definition, id, reasons, safeReason, SUPPORTED_VERSION, type ClearResult } from "./rpc"
+import { definition, id, reasons, safeReason, type ClearResult } from "./rpc"
 
 type Location = { directory: string; workspaceID?: string }
 export interface TuiContext {
@@ -18,6 +18,7 @@ export interface TuiContext {
 export default {
   id,
   setup(ctx: TuiContext) {
+    if (typeof ctx?.keymap?.layer !== "function") throw new Error(reasons.compatibility)
     const pending = new Set<string>()
     ctx.keymap.layer(() => ({
       // ALWAYS registered: disabling it could let typed slash text reach the model.
@@ -26,21 +27,34 @@ export default {
         title: "清理当前会话的加密推理上下文",
         slash: { name: id, arguments: true },
         async run(input?: string) {
+          // Missing operational APIs must not prevent registration/consume of this slash.
+          // Without toast there is no safe UI reporting channel; reject with fixed text.
+          if (typeof ctx.ui?.toast?.show !== "function") throw new Error(reasons.compatibility)
+          if (typeof ctx.ui?.router?.current !== "function" || typeof ctx.data?.session?.get !== "function"
+            || typeof ctx.client?.rpc !== "function" || typeof ctx.data?.session?.message?.invalidate !== "function"
+            || typeof ctx.data?.session?.message?.sync !== "function") {
+            ctx.ui.toast.show({ message: `清理未完成：${reasons.compatibility}`, variant: "error" })
+            return
+          }
           const route = ctx.ui.router.current()
-          const sessionID = route.type === "session" ? route.sessionID : undefined
+          const sessionID = route?.type === "session" && typeof route.sessionID === "string" && route.sessionID.trim()
+            ? route.sessionID : undefined
           const stored = sessionID ? ctx.data.session.get(sessionID)?.location : undefined
           const location = stored ? { ...stored } : undefined
           const toast = (message: string, variant: "info" | "success" | "error") =>
             ctx.ui.toast.show({ message, variant, ...(sessionID ? { sessionID } : {}) })
           if (input?.trim()) return toast("此命令不接受参数", "error")
           if (!sessionID) return toast("当前页面没有会话", "error")
-          if (!location) return toast(`清理未完成：${reasons.location}`, "error")
-          if (ctx.app.version !== SUPPORTED_VERSION) return toast(`清理未完成：${reasons.version}`, "error")
+          if (typeof location?.directory !== "string" || !location.directory.startsWith("/")
+            || (location.workspaceID !== undefined && (typeof location.workspaceID !== "string" || !location.workspaceID.trim())))
+            return toast(`清理未完成：${reasons.location}`, "error")
           if (pending.has(sessionID)) return toast(`清理未完成：${reasons.busy}`, "error")
           pending.add(sessionID)
           toast("正在停止当前会话并备份加密上下文…", "info")
           try {
-            const committed = await ctx.client.rpc(definition).clear({ sessionID }, { location }) as ClearResult
+            const rpc = ctx.client.rpc(definition)
+            if (typeof rpc?.clear !== "function") throw new Error(reasons.compatibility)
+            const committed = await rpc.clear({ sessionID }, { location }) as ClearResult
             toast(committed.removedFields === 0
               ? "当前会话没有可清理的加密推理字段"
               : `已清理加密推理上下文，聊天记录已保留。\n消息 ${committed.changedMessages}，事件 ${committed.changedEvents}，字段 ${committed.removedFields}\n备份：${committed.backupPath ?? "未返回路径"}`, "success")

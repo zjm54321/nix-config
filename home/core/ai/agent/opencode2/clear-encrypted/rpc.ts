@@ -1,4 +1,3 @@
-export const SUPPORTED_VERSION = "2.0.24+de2cacd"
 export const id = "clear-encrypted"
 
 export type ClearResult = {
@@ -40,7 +39,7 @@ export const definition = {
 
 // Never display raw subprocess, provider or RPC error strings (may contain secrets).
 export const reasons = {
-  version: "仅支持 OpenCode 2.0.24+de2cacd，请检查正在运行的客户端和服务版本",
+  compatibility: "当前 OpenCode 缺少清理所需接口，请检查客户端和服务的插件兼容性",
   location: "无法确认当前会话所属位置",
   database: "无法确认服务实际使用的本地数据库",
   runtime: "未配置可信的独立 Bun 运行时，请完成安装并重启服务",

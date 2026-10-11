@@ -3,7 +3,7 @@ import { readdir, realpath, stat } from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { definition, id, reasons, safeReason, SUPPORTED_VERSION, type ClearResult } from "./rpc"
+import { definition, id, reasons, safeReason, type ClearResult } from "./rpc"
 
 type Location = { directory: string; workspaceID?: string }
 type Call = { signal: AbortSignal; error(type: "failed", message: string, data: null): unknown }
@@ -101,13 +101,23 @@ function bounded<T>(work: Promise<T>, signal: AbortSignal): Promise<T> {
 }
 
 export async function setupServer(ctx: ServerContext, deps: Dependencies = { target: resolveTarget, helper: runHelper, timeout: 60_000 }) {
+  if (typeof ctx?.rpc?.register !== "function") throw new Error(reasons.compatibility)
   const pending = new Set<string>()
   await ctx.rpc.register(definition, {
     async clear(input, call) {
       if (!input || typeof input !== "object" || Object.keys(input).length !== 1 || !("sessionID" in input)
         || typeof input.sessionID !== "string" || !input.sessionID.trim()) return call.error("failed", reasons.location, null)
       const sessionID = input.sessionID
-      if (ctx.app.version !== SUPPORTED_VERSION) return call.error("failed", reasons.version, null)
+      // Check ALL stop/settlement capabilities before any session can be interrupted.
+      if (typeof ctx.session?.get !== "function" || typeof ctx.session?.interrupt !== "function"
+        || typeof ctx.session?.wait !== "function") return call.error("failed", reasons.compatibility, null)
+      if (typeof ctx.app?.channel !== "string" || !ctx.app.channel.trim()) return call.error("failed", reasons.database, null)
+      const location = ctx.location
+      if (typeof location?.directory !== "string" || !path.isAbsolute(location.directory)
+        || typeof location.project?.id !== "string" || !location.project.id.trim()
+        || (location.workspaceID !== undefined && (typeof location.workspaceID !== "string" || !location.workspaceID.trim())))
+        return call.error("failed", reasons.location, null)
+      const { directory, workspaceID, project: { id: projectID } } = location
       if (pending.has(sessionID)) return call.error("failed", reasons.busy, null)
       pending.add(sessionID)
       const controller = new AbortController()
@@ -117,9 +127,9 @@ export async function setupServer(ctx: ServerContext, deps: Dependencies = { tar
         signal.throwIfAborted()
         const target = await bounded(deps.target(ctx.app.channel), signal)
         const session = await bounded(ctx.session.get({ sessionID }, { signal }), signal)
-        if (session.id !== sessionID || session.projectID !== ctx.location.project.id
-          || session.location.directory !== ctx.location.directory
-          || session.location.workspaceID !== ctx.location.workspaceID) throw new Error(reasons.location)
+        if (session?.id !== sessionID || session.projectID !== projectID
+          || session.location?.directory !== directory
+          || session.location.workspaceID !== workspaceID) throw new Error(reasons.location)
         try {
           signal.throwIfAborted()
           await bounded(ctx.session.interrupt({ sessionID, resume: false }, { signal }), signal)
@@ -129,7 +139,7 @@ export async function setupServer(ctx: ServerContext, deps: Dependencies = { tar
         } catch { throw new Error(reasons.stopped) }
         // No await between final abort check and helper launch. The helper independently
         // rechecks durable idle/location/identity inside its write transaction.
-        return await deps.helper({ operation: "clear", sessionID, directory: ctx.location.directory,
+        return await deps.helper({ operation: "clear", sessionID, directory,
           dbPath: target.dbPath, backupDir: target.backupDir }, target.bun, signal)
       } catch (error) {
         return call.error("failed", safeReason(error), null)
