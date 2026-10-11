@@ -43,7 +43,12 @@ let
     export OPENCODE_HONCHO_CONFIG_PATH=${lib.escapeShellArg "${config.xdg.configHome}/opencode/honcho.json"}
     unset honcho_token honcho_credentials honcho_uid
     unset -f honcho_fail
-    export PATH="${lib.makeBinPath [ bun pkgs.nodejs ]}:$PATH"
+    export PATH="${
+      lib.makeBinPath [
+        bun
+        pkgs.nodejs
+      ]
+    }:$PATH"
     exec ${lib.getExe package} "$@"
   '';
 in

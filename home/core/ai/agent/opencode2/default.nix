@@ -24,7 +24,13 @@ let
   modelPolicy = import ./model-policy.nix {
     inherit lib pkgs originalProviders;
   };
-  additionalTools = import ./additional-tools.nix { inherit pkgs; };
+  ptyPackage = pkgs.callPackage ./opencode-pty.nix { };
+  # Server-only: the upstream sidebar targets an older TUI API.
+  ptyPlugin = pkgs.runCommand "opencode-pty-v2" { } ''
+    mkdir -p "$out"
+    printf '%s\n' '{"name":"opencode-pty-v2","type":"module"}' > "$out/package.json"
+    printf '%s\n' "export { default } from '${ptyPackage}/dist/src/v2/index.js';" > "$out/server.js"
+  '';
   clearEncrypted = pkgs.runCommand "opencode-clear-encrypted" { } ''
     mkdir -p "$out"
     cp -R ${./clear-encrypted}/. "$out/"
@@ -75,7 +81,7 @@ in
         disabled_providers = (import ../opencode/base.nix).disabled_providers;
         plugins = baseSettings.plugins ++ [
           "file://${modelPolicy.package}"
-          "file://${additionalTools}"
+          "file://${ptyPlugin}"
           "file:///home/ming/opencode-hermes-bridge/dist"
           "@honcho-ai/opencode-honcho@0.2.1"
         ];
