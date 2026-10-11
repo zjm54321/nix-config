@@ -45,6 +45,10 @@ in
 
     # Keep distinct declaration keys: V1 owns opencode/* keys redirected to oc1.
     "opencode2/opencode/opencode.json".target = "opencode/opencode.json";
+    "opencode2/opencode/honcho.json" = {
+      target = "opencode/honcho.json";
+      source = ./honcho.json;
+    };
     "opencode2/opencode/cli.json".target = "opencode/cli.json";
     "opencode2/opencode/oh-my-opencode-slim.json".target = "opencode/oh-my-opencode-slim.json";
     "opencode2/opencode/AGENTS.md".target = "opencode/AGENTS.md";
@@ -58,10 +62,11 @@ in
         shell = lib.getExe pkgs.bashInteractive;
         enabled_providers = builtins.attrNames originalProviders;
         disabled_providers = (import ../opencode/base.nix).disabled_providers;
-        plugin = baseSettings.plugin ++ [
+        plugins = baseSettings.plugins ++ [
           "file://${modelPolicy.package}"
           "file://${additionalTools}"
           "file:///home/ming/opencode-hermes-bridge/dist"
+          "@honcho-ai/opencode-honcho@0.2.1"
         ];
         provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
         providers.openai.settings = modelPolicy.providers.openai.options // {

@@ -24,7 +24,7 @@
       ]
     }
   },
-  "plugin": [
+  "plugins": [
     "file:///home/ming/oh-my-opencode-slim/.slim/worktrees/acp-model-map-3.0.2",
     "opencode-todolist@0.4.1",
     "billion-context@0.1.186"
