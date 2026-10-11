@@ -3,6 +3,8 @@
   "model": "openai/gpt-6-astra",
   "default_agent": "orchestrator",
   "agents": {
+    "plan": { "disabled": true },
+    "build": { "disabled": true },
     "title": {
       "model": {
         "providerID": "openrouter",
@@ -25,8 +27,8 @@
     }
   },
   "plugins": [
-    "oh-my-opencode-slim@latest",
-    "opencode-todolist@0.4.1",
-    "billion-context@0.1.186"
+    "oh-my-opencode-slim@3.0.4",
+    "opencode-todolist@0.5.0",
+    "billion-context@0.1.194"
   ]
 }

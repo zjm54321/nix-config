@@ -3,6 +3,6 @@
     ./codex
     ./claude-code
     ./opencode
-    ./opencode2
+    ./opencode1
   ];
 }
