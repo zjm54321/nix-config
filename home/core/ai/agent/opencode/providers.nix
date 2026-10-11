@@ -19,7 +19,6 @@
     };
     whitelist = [
       "deepseek/deepseek-v4.1-flash"
-      "minimax/minimax-m3"
       "moonshotai/kimi-k3"
       "openai/gpt-oss-20b"
       "z-ai/glm-5.3"
@@ -54,9 +53,8 @@
     };
     whitelist = [
       "claude-fable-5-1"
-      "claude-haiku-4-5"
+      "claude-haiku-5-5"
       "claude-opus-5-5"
-      "claude-sonnet-4-5"
       "claude-sonnet-5-5"
     ];
     models."claude-fable-5-1" = {

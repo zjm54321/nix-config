@@ -16,20 +16,8 @@ let
         pname = "claude-code";
         inherit (pkgs.claude-code) version;
       };
-  claudeAgentAcpWithEehub = pkgs.writeShellScriptBin "claude-agent-acp" ''
-    if [[ -z "''${EEHUB_API_URL:-}" || -z "''${EEHUB_API_KEY:-}" ]]; then
-      echo "claude-agent-acp: EEHUB_API_URL and EEHUB_API_KEY must be set" >&2
-      exit 1
-    fi
-
-    export ANTHROPIC_BASE_URL="''${EEHUB_API_URL%/v1}"
-    export ANTHROPIC_AUTH_TOKEN="$EEHUB_API_KEY"
-    exec ${pkgs.lib.getExe pkgs.claude-agent-acp} "$@"
-  '';
 in
 {
-  home.packages = [ claudeAgentAcpWithEehub ];
-
   programs.claude-code = {
     enable = true;
     package = claudeCodeWithEehub;

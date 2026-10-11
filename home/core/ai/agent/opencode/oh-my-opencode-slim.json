@@ -1,13 +1,5 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "acpAgents": {
-    "claude-code": {
-      "command": "claude-agent-acp",
-      "description": "Claude Code via ACP",
-      "permissionMode": "ask",
-      "orchestratorPrompt": "Delegate to @claude-code when the user explicitly requests Claude Code or Claude ACP execution. Do not replace other specialists by default."
-    }
-  },
   "disabled_agents": ["observer"],
   "agents": {
     "secretary": {
@@ -41,9 +33,9 @@
       }
     }
   },
-  "preset": "default",
+  "preset": "no-fallback",
   "presets": {
-    "default": {
+    "with-fallback": {
       "orchestrator": {
         "model": [
           { "id": "openai/gpt-6.1-sol", "variant": "xhigh" }
@@ -79,6 +71,7 @@
       },
       "designer": {
         "model": [
+          "anthropic/claude-opus-5-5",
           "google/gemini-3.8-flash"
         ],
         "skills": ["ui-ux-pro-max", "make-interfaces-feel-better", "better-icons", "!shuorenhua"],
@@ -86,17 +79,17 @@
       },
       "fixer": {
         "model": [
-          { "id": "openai/gpt-6.1-sol", "variant": "high" }
+          { "id": "openai/gpt-6.1-sol", "variant": "high" },
+          { "id": "openrouter/deepseek/deepseek-v4.1-flash", "variant": "max" }
         ],
         "skills": ["!shuorenhua"],
         "mcps": ["codegraph"]
       }
     },
-    "claude": {
+    "no-fallback": {
       "orchestrator": {
-        "model": [
-          "anthropic/claude-opus-5-5"
-        ],
+        "model": "openai/gpt-6.1-sol",
+        "variant": "xhigh",
         "skills": ["*", "!shuorenhua"],
         "mcps": ["*", "!context7"]
       },
@@ -107,36 +100,30 @@
         "mcps": ["codegraph", "chrome-devtools"]
       },
       "council": {
-        "model": [
-          { "id": "openai/gpt-6-astra", "variant": "max" }
-        ],
+        "model": "openai/gpt-6-astra",
+        "variant": "max",
         "skills": ["!shuorenhua"]
       },
       "librarian": {
-        "model": [
-          { "id": "openai/gpt-6-luna", "variant": "high" }
-        ],
+        "model": "openai/gpt-6-luna",
+        "variant": "high",
         "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
         "mcps": ["context7", "gh_grep", "nixos"]
       },
       "explorer": {
-        "model": [
-          { "id": "openai/gpt-6-luna", "variant": "medium" }
-        ],
+        "model": "openai/gpt-6-luna",
+        "variant": "medium",
         "skills": ["!shuorenhua"],
         "mcps": ["codegraph"]
       },
       "designer": {
-        "model": [
-          "anthropic/claude-opus-5-5"
-        ],
+        "model": "anthropic/claude-opus-5-5",
         "skills": ["ui-ux-pro-max", "make-interfaces-feel-better", "better-icons", "!shuorenhua"],
         "mcps": ["codegraph"]
       },
       "fixer": {
-        "model": [
-          { "id": "openai/gpt-6.1-sol", "variant": "high" }
-        ],
+        "model": "openai/gpt-6.1-sol",
+        "variant": "high",
         "skills": ["!shuorenhua"],
         "mcps": ["codegraph"]
       }
@@ -146,8 +133,8 @@
     "presets": {
       "default": {
         "alpha": { "model": "openai/gpt-6-astra", "variant": "max" },
-        "beta": { "model": "openrouter/z-ai/glm-5.3" },
-        "gamma": { "model": "google/gemini-3.8-flash", "variant": "high" }
+        "beta": { "model": "anthropic/claude-opus-5-5" },
+        "gamma": { "model": "google/gemini-3.1-pro-preview", "variant": "high" }
       }
     }
   },
