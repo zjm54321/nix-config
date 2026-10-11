@@ -54,6 +54,7 @@ let
         pkgs.nodejs
       ]
     }:$PATH"
+    export OPENCODE_CLEAR_ENCRYPTED_BUN=${lib.getExe bun}
     exec ${lib.getExe package} "$@"
   '';
 in
