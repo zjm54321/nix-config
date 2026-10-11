@@ -64,7 +64,15 @@ in
     };
   };
 
+  home.sessionVariablesExtra = ''
+    if [ -z "''${SSH_AUTH_SOCK:-}" ]; then
+      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    fi
+  '';
+
   programs.nushell.extraEnv = ''
-    $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent.socket"
+    if ($env.SSH_AUTH_SOCK? | default "" | is-empty) {
+      $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent.socket"
+    }
   '';
 }

@@ -43,6 +43,15 @@ in
       force = true;
     };
 
+    # Keep distinct declaration keys: V1 owns opencode/* keys redirected to oc1.
+    "opencode2/opencode/opencode.json".target = "opencode/opencode.json";
+    "opencode2/opencode/cli.json".target = "opencode/cli.json";
+    "opencode2/opencode/oh-my-opencode-slim.json".target = "opencode/oh-my-opencode-slim.json";
+    "opencode2/opencode/AGENTS.md".target = "opencode/AGENTS.md";
+    "opencode2/opencode/agents/raw.md".target = "opencode/agents/raw.md";
+    "opencode2/opencode/oh-my-opencode-slim/default/orchestrator_append.md".target =
+      "opencode/oh-my-opencode-slim/default/orchestrator_append.md";
+
     "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (
       baseSettings
       // {
