@@ -20,7 +20,9 @@ let
   package = upstream.overrideAttrs (old: {
     # Embed the selected release tag's version; flake.lock retains commit provenance.
     __intentionallyOverridingVersion = true;
-    version = (builtins.fromJSON (builtins.readFile "${inputs.opencode.outPath}/packages/cli/package.json")).version;
+    version =
+      (builtins.fromJSON (builtins.readFile "${inputs.opencode.outPath}/packages/cli/package.json"))
+      .version;
     patches = (old.patches or [ ]) ++ [
       ./plugin-resolution.patch
       ./gemini-idless-tool-history.patch
