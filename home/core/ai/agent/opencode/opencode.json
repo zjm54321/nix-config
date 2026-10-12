@@ -32,7 +32,7 @@
     "oh-my-opencode-slim@3.0.4",
     "opencode-todolist@0.5.0",
     "billion-context@0.1.194",
-    "opencode-clear-encrypted@0.1.1",
+    "opencode-clear-encrypted@0.1.2",
     "nix:model-policy",
     "nix:pty",
     "file:///home/ming/opencode-hermes-bridge/dist"
