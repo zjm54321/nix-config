@@ -68,6 +68,14 @@ module/core/      Shared Nix and user configuration
 module/wsl/       NixOS-WSL integration
 home/core/program/ Terminal program configuration
 home/core/agent-relay.nix Windows GPG/OpenSSH agent relays
+home/core/ai/agent/opencode/ OpenCode V2 and shared configuration
+home/core/ai/agent/opencode/plugins/ Nix-backed plugins and token resolver
+home/core/ai/agent/opencode/patches/ OpenCode CLI patches
+home/core/ai/agent/opencode1/ Isolated V1 configuration
 ```
+
+V2's `opencode.json` is the complete plugin list; `nix:` entries resolve to local
+Nix packages. V1 uses `plugins.json` and `tui.json`. Each version keeps its full
+slim configuration in its own `oh-my-opencode-slim.json`, without override layers.
 
 `flake.lock` is updated separately when input revisions change.

@@ -57,9 +57,5 @@
       "claude-opus-5-5"
       "claude-sonnet-5-5"
     ];
-    models."claude-fable-5-1" = {
-      headers."anthropic-beta" =
-        "interleaved-thinking-2025-05-14,fine-grained-tool-streaming-2025-05-14,context-1m-2025-08-07";
-    };
   };
 }

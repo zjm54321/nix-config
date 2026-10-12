@@ -10,26 +10,19 @@ let
   agentsTemplate = pkgs.replaceVars ./AGENTS.md {
     inherit systemFlakeHost;
   };
-  # Use the official oh-my-opencode-slim@3.0.4 package registered in opencode.json.
-  # Share the V1 preset configuration, then apply only the V2-specific overrides.
   baseSettings = builtins.fromJSON (builtins.readFile ./opencode.json);
-  omoConfig = lib.recursiveUpdate (builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.json)) (
-    builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.overrides.json)
-  );
+  omoConfig = builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.json);
   # Temporary V1 wire compatibility for EEHUB Google; remove if repointed to direct Google.
   originalProviders = lib.recursiveUpdate (import ./providers.nix) {
     google.options.omitFunctionCallIds = true;
   };
-  modelPolicy = import ./model-policy.nix {
-    inherit lib pkgs originalProviders;
-  };
-  ptyPackage = pkgs.callPackage ./opencode-pty.nix { };
-  # Server-only: the upstream sidebar targets an older TUI API.
-  ptyPlugin = pkgs.runCommand "opencode-pty-v2" { } ''
-    mkdir -p "$out"
-    printf '%s\n' '{"name":"opencode-pty-v2","type":"module"}' > "$out/package.json"
-    printf '%s\n' "export { default } from '${ptyPackage}/dist/src/v2/index.js';" > "$out/server.js"
-  '';
+  inherit
+    (import ./plugins {
+      inherit lib pkgs originalProviders;
+    })
+    modelPolicy
+    resolvePlugin
+    ;
   mcpServers = lib.mapAttrs (
     _: server:
     {
@@ -45,51 +38,53 @@ in
 
   xdg.configFile = {
     "billion-context/billion-context.json" = {
+      target = "billion-context/billion-context.json";
       source = ./billion-context.json;
       force = true;
     };
 
     # Keep distinct declaration keys: V1 owns opencode/* keys redirected to oc1.
-    "opencode2/opencode/opencode.json".target = "opencode/opencode.json";
-    "opencode2/opencode/honcho.json" = {
+    "opencode-config" = {
+      target = "opencode/opencode.json";
+      source = json.generate "opencode.json" (
+        builtins.removeAttrs baseSettings [ "$comment" ]
+        // {
+          shell = lib.getExe pkgs.bashInteractive;
+          enabled_providers = builtins.attrNames originalProviders;
+          disabled_providers = (import ./base.nix).disabled_providers;
+          plugins = map resolvePlugin baseSettings.plugins;
+          provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
+          providers.openai.settings = modelPolicy.providers.openai.options // {
+            transport = "http";
+          };
+          mcp = mcpServers;
+          permission = import ./permissions.nix;
+        }
+      );
+    };
+    "opencode-honcho" = {
       target = "opencode/honcho.json";
       source = ./honcho.json;
     };
-    "opencode2/opencode/cli.json".target = "opencode/cli.json";
-    "opencode2/opencode/oh-my-opencode-slim.json".target = "opencode/oh-my-opencode-slim.json";
-    "opencode2/opencode/AGENTS.md".target = "opencode/AGENTS.md";
-    "opencode2/opencode/agents/raw.md".target = "opencode/agents/raw.md";
-    "opencode2/opencode/oh-my-opencode-slim/default/orchestrator_append.md".target =
-      "opencode/oh-my-opencode-slim/orchestrator_append.md";
-
-    "opencode2/opencode/opencode.json".source = json.generate "opencode2.json" (
-      baseSettings
-      // {
-        shell = lib.getExe pkgs.bashInteractive;
-        enabled_providers = builtins.attrNames originalProviders;
-        disabled_providers = (import ./base.nix).disabled_providers;
-        plugins = baseSettings.plugins ++ [
-          "file://${modelPolicy.package}"
-          "file://${ptyPlugin}"
-          "file:///home/ming/opencode-hermes-bridge/dist"
-          # "@honcho-ai/opencode-honcho@0.2.1" # Disabled until per-agent memory isolation is available.
-        ];
-        provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
-        providers.openai.settings = modelPolicy.providers.openai.options // {
-          transport = "http";
-        };
-        mcp = mcpServers;
-        permission = import ./premission.nix;
-      }
-    );
-
-    "opencode2/opencode/cli.json".source = ./cli.json;
-
-    "opencode2/opencode/oh-my-opencode-slim.json".source =
-      json.generate "opencode2-oh-my-opencode-slim.json" omoConfig;
-    "opencode2/opencode/AGENTS.md".source = agentsTemplate;
-    "opencode2/opencode/agents/raw.md".source = ./raw.md;
-    "opencode2/opencode/oh-my-opencode-slim/default/orchestrator_append.md".source =
-      ./prompts/orchestrator_append.md;
+    "opencode-cli" = {
+      target = "opencode/cli.json";
+      source = ./cli.json;
+    };
+    "opencode-slim" = {
+      target = "opencode/oh-my-opencode-slim.json";
+      source = json.generate "opencode-oh-my-opencode-slim.json" omoConfig;
+    };
+    "opencode-instructions" = {
+      target = "opencode/AGENTS.md";
+      source = agentsTemplate;
+    };
+    "opencode-raw-agent" = {
+      target = "opencode/agents/raw.md";
+      source = ./raw.md;
+    };
+    "opencode-orchestrator-prompt" = {
+      target = "opencode/oh-my-opencode-slim/orchestrator_append.md";
+      source = ./prompts/orchestrator_append.md;
+    };
   };
 }

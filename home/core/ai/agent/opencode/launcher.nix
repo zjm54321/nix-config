@@ -11,7 +11,7 @@ let
   patchedSource = pkgs.applyPatches {
     name = "opencode-nix-persistent-pty-source";
     src = inputs.opencode.outPath;
-    patches = [ ./nix-persistent-pty.patch ];
+    patches = [ ./patches/nix-persistent-pty.patch ];
   };
   upstream = upstreamPkgs.callPackage "${patchedSource}/nix/opencode.nix" {
     node_modules = inputs.opencode.packages.${system}.opencode.node_modules;
@@ -24,8 +24,8 @@ let
       (builtins.fromJSON (builtins.readFile "${inputs.opencode.outPath}/packages/cli/package.json"))
       .version;
     patches = (old.patches or [ ]) ++ [
-      ./plugin-resolution.patch
-      ./gemini-idless-tool-history.patch
+      ./patches/plugin-resolution.patch
+      ./patches/gemini-idless-tool-history.patch
     ];
   });
   wrapped = pkgs.writeShellScriptBin "opencode" ''

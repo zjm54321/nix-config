@@ -47,7 +47,7 @@ let
       },
     };
   '';
-  packageJson = pkgs.writeText "opencode2-provider-model-policy-package.json" (
+  packageJson = pkgs.writeText "opencode-provider-model-policy-package.json" (
     builtins.toJSON {
       name = "provider-model-policy";
       version = "0.0.0";
@@ -58,8 +58,8 @@ let
       };
     }
   );
-  index = pkgs.writeText "opencode2-provider-model-policy-index.js" javascript;
-  package = pkgs.runCommand "opencode2-provider-model-policy" { } ''
+  index = pkgs.writeText "opencode-provider-model-policy-index.js" javascript;
+  package = pkgs.runCommand "opencode-provider-model-policy" { } ''
     install -Dm644 ${packageJson} "$out/package.json"
     install -Dm644 ${index} "$out/index.js"
   '';

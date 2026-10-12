@@ -1,8 +1,0 @@
-{
-  theme = "one-dark";
-
-  plugin = [
-    "oh-my-opencode-slim@3.0.4"
-    "opencode-plugin-session-token-summary@0.4.1"
-  ];
-}

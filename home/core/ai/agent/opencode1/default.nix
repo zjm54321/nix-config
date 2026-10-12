@@ -6,10 +6,10 @@
 let
   bash = pkgs.lib.getExe pkgs.bashInteractive;
   base = import ../opencode/base.nix;
-  premission = import ../opencode/premission.nix;
-  tui = import ./tui.nix;
+  permissions = import ../opencode/permissions.nix;
+  tui = builtins.fromJSON (builtins.readFile ./tui.json);
   providers = import ../opencode/providers.nix;
-  plugins = import ./plugins.nix;
+  plugins = builtins.fromJSON (builtins.readFile ./plugins.json);
   agents = import ./agents.nix;
   opencodeWithFeatures = pkgs.writeShellScriptBin "opencode1" ''
     # Isolate this child even when launched from an older V2 process.
@@ -41,7 +41,7 @@ in
     settings = base // {
       shell = bash;
       agent = agents;
-      permission = premission;
+      permission = permissions;
       plugin = plugins;
       provider = providers;
     };
@@ -53,12 +53,12 @@ in
   xdg.configFile."opencode/tui.json".target = "oc1/opencode/tui.json";
   xdg.configFile."opencode/agents/raw.md".target = "oc1/opencode/agents/raw.md";
   xdg.configFile."opencode/oh-my-opencode-slim.json".target = "oc1/opencode/oh-my-opencode-slim.json";
-  xdg.configFile."opencode/oh-my-opencode-slim/default/orchestrator_append.md".target =
+  xdg.configFile."opencode/oh-my-opencode-slim/orchestrator_append.md".target =
     "oc1/opencode/oh-my-opencode-slim/orchestrator_append.md";
   xdg.configFile."opencode/AGENTS.md".target = "oc1/opencode/AGENTS.md";
 
-  xdg.configFile."opencode/oh-my-opencode-slim.json".source = ../opencode/oh-my-opencode-slim.json;
-  xdg.configFile."opencode/oh-my-opencode-slim/default/orchestrator_append.md".source =
+  xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
+  xdg.configFile."opencode/oh-my-opencode-slim/orchestrator_append.md".source =
     ../opencode/prompts/orchestrator_append.md;
   xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
 }
