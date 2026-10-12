@@ -48,7 +48,7 @@
     };
 
     shuorenhua = {
-      url = "github:MrGeDiao/shuorenhua/v2.4.0";
+      url = "github:MrGeDiao/shuorenhua/v2.5.1";
       flake = false;
     };
   };

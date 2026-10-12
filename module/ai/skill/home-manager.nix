@@ -20,7 +20,7 @@ let
         ${pkgs.unzip}/bin/unzip "$src" -d "$out"
       '';
 
-  shuorenhuaSkill = pkgs.runCommand "shuorenhua-v2.4.0" { } ''
+  shuorenhuaSkill = pkgs.runCommand "shuorenhua-v2.5.1" { } ''
     mkdir -p "$out"
     cp "${inputs.shuorenhua}/SKILL.md" "$out/SKILL.md"
     cp -r "${inputs.shuorenhua}/references" "$out/references"

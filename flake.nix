@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Use an OpenCode V2 release tag rather than a development snapshot.
-    opencode.url = "github:anomalyco/opencode/v2.0.26";
+    opencode.url = "github:anomalyco/opencode/v2.0.27";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
