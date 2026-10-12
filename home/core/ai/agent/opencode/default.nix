@@ -51,7 +51,6 @@ in
         // {
           shell = lib.getExe pkgs.bashInteractive;
           enabled_providers = builtins.attrNames originalProviders;
-          disabled_providers = (import ./base.nix).disabled_providers;
           plugins = map resolvePlugin baseSettings.plugins;
           provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
           providers.openai.settings = modelPolicy.providers.openai.options // {

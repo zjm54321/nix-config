@@ -5,7 +5,7 @@
 }:
 let
   bash = pkgs.lib.getExe pkgs.bashInteractive;
-  base = import ../opencode/base.nix;
+  base = import ./base.nix;
   permissions = import ../opencode/permissions.nix;
   tui = builtins.fromJSON (builtins.readFile ./tui.json);
   providers = import ../opencode/providers.nix;
