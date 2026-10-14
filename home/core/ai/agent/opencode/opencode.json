@@ -31,7 +31,7 @@
   "plugins": [
     "oh-my-opencode-slim@3.0.4",
     "opencode-todolist@0.6.0",
-    "billion-context@0.1.194",
+    "billion-context@0.1.197",
     "opencode-clear-encrypted@0.1.2",
     "nix:model-policy",
     "nix:pty",
