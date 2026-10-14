@@ -3,6 +3,7 @@ let
   # Evaluate NUR against the configured package set so local compatibility
   # overlays apply to dependencies of NUR packages as well.
   nurPackages = (pkgs.extend inputs.nur.overlays.default).nur.repos.zjm54321;
+  zhihuCli = pkgs.callPackage ../../../../module/ai/skill/packages/zhihu-cli.nix { };
 in
 {
   # AI companion package aggregator for agents, MCP servers, and Skills.
@@ -10,7 +11,7 @@ in
     gh
     google-chrome
     nixd
-    nurPackages.zhihu-cli
+    zhihuCli
     nurPackages.xiaohongshu-cli
   ];
 }

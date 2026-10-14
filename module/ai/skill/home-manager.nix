@@ -7,17 +7,22 @@ let
     filter.maxDepth = 1;
   };
 
+  zhihuCli = pkgs.callPackage ./packages/zhihu-cli.nix { };
+
   zhihuSkill =
-    pkgs.runCommand "zhihu-cli-skill-0.3.0"
+    pkgs.runCommand "zhihu-cli-skill-0.7.3"
       {
         src = pkgs.fetchurl {
-          url = "https://developer-cdn.zhihu.com/zhihu-cli/releases/stable/skill/0.3.0/zhihu-cli-skill-0.3.0.zip";
-          hash = "sha256-KvJkfEaKNmBQo53Xi42ETsyutnnZGlbNE0VzwLOD5N8=";
+          url = "https://developer-cdn.zhihu.com/zhihu-cli/releases/stable/skill/0.7.3/zhihu-cli-skill-0.7.3.zip";
+          hash = "sha256-XvMaPY9BQhbm1b4FSkGdeLuxYJRxf65UXdDQhD2vQpw=";
         };
       }
       ''
         mkdir -p "$out"
         ${pkgs.unzip}/bin/unzip "$src" -d "$out"
+        # Use the Nix-managed binary without moving writable CLI state into the store.
+        substituteInPlace "$out/zhihu/scripts/run.sh" \
+          --replace-fail 'BINARY="$CLI_HOME/current/zhihu-cli"' 'BINARY="${zhihuCli}/bin/zhihu-cli"'
       '';
 
   shuorenhuaSkill = pkgs.runCommand "shuorenhua-v2.5.1" { } ''
