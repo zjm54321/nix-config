@@ -1,4 +1,6 @@
 {
+  "autoUpdate": false,
+  "advisoryCheck": false,
   "providers": {},
   "compress": {
     "nudgeGrowthTokens": 300000
