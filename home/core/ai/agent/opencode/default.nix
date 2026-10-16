@@ -81,9 +81,5 @@ in
       target = "opencode/agents/raw.md";
       source = ./raw.md;
     };
-    "opencode-orchestrator-prompt" = {
-      target = "opencode/oh-my-opencode-slim/orchestrator_append.md";
-      source = ./prompts/orchestrator_append.md;
-    };
   };
 }

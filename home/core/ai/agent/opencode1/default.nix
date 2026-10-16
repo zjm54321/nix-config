@@ -53,12 +53,8 @@ in
   xdg.configFile."opencode/tui.json".target = "oc1/opencode/tui.json";
   xdg.configFile."opencode/agents/raw.md".target = "oc1/opencode/agents/raw.md";
   xdg.configFile."opencode/oh-my-opencode-slim.json".target = "oc1/opencode/oh-my-opencode-slim.json";
-  xdg.configFile."opencode/oh-my-opencode-slim/orchestrator_append.md".target =
-    "oc1/opencode/oh-my-opencode-slim/orchestrator_append.md";
   xdg.configFile."opencode/AGENTS.md".target = "oc1/opencode/AGENTS.md";
 
   xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
-  xdg.configFile."opencode/oh-my-opencode-slim/orchestrator_append.md".source =
-    ../opencode/prompts/orchestrator_append.md;
   xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
 }
