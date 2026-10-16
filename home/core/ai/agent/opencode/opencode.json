@@ -35,6 +35,7 @@
     "opencode-clear-encrypted@0.1.2",
     "nix:model-policy",
     "nix:pty",
-    "file:///home/ming/opencode-hermes-bridge/dist"
+    "nix:gpt-prompt",
+    "opencode-hermes-bridge@latest"
   ]
 }
