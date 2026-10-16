@@ -59,7 +59,7 @@
         "model": [
           { "id": "openai/gpt-6-luna", "variant": "high" }
         ],
-        "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
+        "skills": ["!shuorenhua"],
         "mcps": ["context7", "gh_grep", "nixos"]
       },
       "explorer": {
@@ -107,7 +107,7 @@
       "librarian": {
         "model": "openai/gpt-6-luna",
         "variant": "high",
-        "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
+        "skills": ["!shuorenhua"],
         "mcps": ["context7", "gh_grep", "nixos"]
       },
       "explorer": {

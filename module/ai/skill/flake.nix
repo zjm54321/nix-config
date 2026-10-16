@@ -17,11 +17,6 @@
       flake = false;
     };
 
-    xiaohongshu-cli = {
-      url = "github:jackwener/xiaohongshu-cli";
-      flake = false;
-    };
-
     ui-ux-pro-max-skill = {
       url = "github:nextlevelbuilder/ui-ux-pro-max-skill";
       flake = false;
@@ -48,7 +43,7 @@
     };
 
     shuorenhua = {
-      url = "github:MrGeDiao/shuorenhua/v2.5.1";
+      url = "github:MrGeDiao/shuorenhua/v2.6.0";
       flake = false;
     };
   };

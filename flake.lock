@@ -300,16 +300,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1791968597,
-        "narHash": "sha256-qfT8gQCyGahr5v7v95wNArXrBOAnfQZja1WyJkaCpJI=",
+        "lastModified": 1792093702,
+        "narHash": "sha256-w8OJztN6XRZs5lhDneJ3VAOtCEuP/gzFU9kzUQJU01E=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "042d0832f5f3a73eaa039a58a7d565776f6d4290",
+        "rev": "f16ef9ad8878279ea2be3cfab7baeed97aef61aa",
         "type": "github"
       },
       "original": {
         "owner": "anomalyco",
-        "ref": "v2.0.29",
+        "ref": "v2.0.30",
         "repo": "opencode",
         "type": "github"
       }
@@ -345,16 +345,16 @@
     "shuorenhua": {
       "flake": false,
       "locked": {
-        "lastModified": 1790761682,
-        "narHash": "sha256-h5TI658VjDHr98LwvpAFYkGvrLfrThJMv3VW1g0aYfQ=",
+        "lastModified": 1792132379,
+        "narHash": "sha256-8f6HjQNsAvQOn6Wr5pMhwEO09tuoeSNK37jVetnCNkI=",
         "owner": "MrGeDiao",
         "repo": "shuorenhua",
-        "rev": "e7c2b8670bd3e1988bfec199e861cebd87fc5e9c",
+        "rev": "6c4b9353b87185c26e684c4525be1af47f82fee9",
         "type": "github"
       },
       "original": {
         "owner": "MrGeDiao",
-        "ref": "v2.5.1",
+        "ref": "v2.6.0",
         "repo": "shuorenhua",
         "type": "github"
       }
@@ -370,8 +370,7 @@
         "oh-my-opencode-slim": "oh-my-opencode-slim",
         "secretary-skills": "secretary-skills",
         "shuorenhua": "shuorenhua",
-        "ui-ux-pro-max-skill": "ui-ux-pro-max-skill",
-        "xiaohongshu-cli": "xiaohongshu-cli"
+        "ui-ux-pro-max-skill": "ui-ux-pro-max-skill"
       },
       "locked": {
         "path": "./module/ai/skill",
@@ -396,22 +395,6 @@
       "original": {
         "owner": "nextlevelbuilder",
         "repo": "ui-ux-pro-max-skill",
-        "type": "github"
-      }
-    },
-    "xiaohongshu-cli": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774072237,
-        "narHash": "sha256-fGAcEnVYoEYlK/o9H8IShSMhz+dUteJ0S0x5BIT0KG4=",
-        "owner": "jackwener",
-        "repo": "xiaohongshu-cli",
-        "rev": "4d63f3c0c85ccd9054fa8e96d7f761aaf2507449",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jackwener",
-        "repo": "xiaohongshu-cli",
         "type": "github"
       }
     }

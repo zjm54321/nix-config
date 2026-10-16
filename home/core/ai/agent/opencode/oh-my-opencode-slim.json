@@ -50,7 +50,8 @@
     "with-fallback": {
       "orchestrator": {
         "model": [
-          { "id": "openai/gpt-6.1-sol", "variant": "xhigh" }
+          { "id": "anthropic/claude-opus-5-5", "variant": "high" },
+          { "id": "google/gemini-3.8-flash", "variant": "high" }
         ],
         "skills": ["*", "!shuorenhua"],
         "mcps": ["*", "!context7"]
@@ -71,7 +72,7 @@
         "model": [
           { "id": "openai/gpt-6-luna", "variant": "high" }
         ],
-        "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
+        "skills": ["!shuorenhua"],
         "mcps": ["context7", "gh_grep", "nixos"]
       },
       "explorer": {
@@ -100,8 +101,8 @@
     },
     "no-fallback": {
       "orchestrator": {
-        "model": "openai/gpt-6.1-sol",
-        "variant": "xhigh",
+        "model": "anthropic/claude-opus-5-5",
+        "variant": "high",
         "skills": ["*", "!shuorenhua"],
         "mcps": ["*", "!context7"]
       },
@@ -119,7 +120,7 @@
       "librarian": {
         "model": "openai/gpt-6-luna",
         "variant": "high",
-        "skills": ["zhihu", "xiaohongshu-cli", "!shuorenhua"],
+        "skills": ["!shuorenhua"],
         "mcps": ["context7", "gh_grep", "nixos"]
       },
       "explorer": {
