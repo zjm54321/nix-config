@@ -6,6 +6,7 @@
   "agents": {
     "plan": { "disabled": true },
     "build": { "disabled": true },
+    "general": { "disabled": true },
     "title": {
       "model": {
         "providerID": "openrouter",
