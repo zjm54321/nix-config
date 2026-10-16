@@ -17,7 +17,7 @@ let
   localPlugins = {
     "nix:model-policy" = modelPolicy.package;
     "nix:pty" = ptyPlugin;
-    "nix:gpt-prompt" = import ./gpt-prompt.nix { inherit pkgs; };
+    "nix:gpt-taste" = import ./gpt-taste { inherit lib pkgs; };
   };
   resolvePlugin =
     spec:

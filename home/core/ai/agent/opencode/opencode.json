@@ -37,7 +37,7 @@
     "opencode-clear-encrypted@0.1.2",
     "nix:model-policy",
     "nix:pty",
-    "nix:gpt-prompt",
+    "nix:gpt-taste",
     "opencode-hermes-bridge@latest"
   ]
 }
