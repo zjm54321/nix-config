@@ -12,8 +12,8 @@
       flake = false;
     };
 
-    awesome-copilot = {
-      url = "github:github/awesome-copilot";
+    agent-toolkit = {
+      url = "github:softaworks/agent-toolkit";
       flake = false;
     };
 

@@ -18,19 +18,19 @@
         "type": "github"
       }
     },
-    "awesome-copilot": {
+    "agent-toolkit": {
       "flake": false,
       "locked": {
-        "lastModified": 1792126833,
-        "narHash": "sha256-XOA9hpD0ZOwfXCgyHKihBsQwi5fVsO26c0cdQq8mxXI=",
-        "owner": "github",
-        "repo": "awesome-copilot",
-        "rev": "cb64ad12e32737ae764becd6885462e9b4c7cb00",
+        "lastModified": 1772729184,
+        "narHash": "sha256-1q4IP55kvZhJibTLJct0SSifw46lBmAQhp9nSmDzYxs=",
+        "owner": "softaworks",
+        "repo": "agent-toolkit",
+        "rev": "3027f20f3181758385a1bb8c022d4041dfb4de84",
         "type": "github"
       },
       "original": {
-        "owner": "github",
-        "repo": "awesome-copilot",
+        "owner": "softaworks",
+        "repo": "agent-toolkit",
         "type": "github"
       }
     },
@@ -362,7 +362,7 @@
     "skills-catalog": {
       "inputs": {
         "agent-skills": "agent-skills",
-        "awesome-copilot": "awesome-copilot",
+        "agent-toolkit": "agent-toolkit",
         "better-icons": "better-icons",
         "cloudflare-skills": "cloudflare-skills",
         "make-interfaces-feel-better": "make-interfaces-feel-better",

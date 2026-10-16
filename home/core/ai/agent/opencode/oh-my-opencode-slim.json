@@ -35,7 +35,7 @@
         "worktrees",
         "clonedeps",
         "codemap",
-        "git-commit",
+        "commit-work",
         "domain-modeling",
         "grilling",
         "report"

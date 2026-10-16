@@ -23,7 +23,7 @@ in
       grill-me = source inputs.mattpocock-skills "skills/productivity/grill-me";
       grilling = source inputs.mattpocock-skills "skills/productivity/grilling";
 
-      git-commit = source inputs.awesome-copilot "skills/git-commit";
+      commit-work = source inputs.agent-toolkit "skills/commit-work";
       ui-ux-pro-max = source inputs.ui-ux-pro-max-skill ".claude/skills/ui-ux-pro-max";
       make-interfaces-feel-better = source inputs.make-interfaces-feel-better "skills/make-interfaces-feel-better";
       better-icons = source inputs.better-icons "skills";
@@ -41,7 +41,7 @@ in
         "grill-me"
         "grilling"
 
-        "git-commit"
+        "commit-work"
         "ui-ux-pro-max"
         "make-interfaces-feel-better"
         "better-icons"
