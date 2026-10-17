@@ -106,11 +106,11 @@
     "hero-anti-overdefense": {
       "flake": false,
       "locked": {
-        "lastModified": 1791304241,
-        "narHash": "sha256-PhlLx6rjpe0VWDys/8j2sjoTyQMq4cQQE0MCakp34Xs=",
+        "lastModified": 1792228403,
+        "narHash": "sha256-lDHLq6vL0w0lw+Zh3LNIGeih7l/8Pr1YVehGfKOKUJ4=",
         "owner": "wanshuiyin",
         "repo": "HERO-Anti-OverDefense",
-        "rev": "fab4537d9975d97a2b1d430869b224490a36456a",
+        "rev": "fae28f06b6b6f1582b1554b334dc1525b807cedc",
         "type": "github"
       },
       "original": {
@@ -266,11 +266,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792142304,
-        "narHash": "sha256-u12RMlzNxJ1fdZ0d/UqdJQqdjASQOAzUuKzL8PPE6NY=",
+        "lastModified": 1792232125,
+        "narHash": "sha256-qrbD0M8y9nzstxw2JIeKNOuwaP0lfwCrysAA/AE6EEc=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "9a22d474c6baf3c370e56802d778666b9f1895ba",
+        "rev": "2e58a8b15a7f4285f7979cab8394a1877787d42d",
         "type": "github"
       },
       "original": {
@@ -282,11 +282,11 @@
     "oh-my-opencode-slim": {
       "flake": false,
       "locked": {
-        "lastModified": 1792101292,
-        "narHash": "sha256-flXW5bH+zz965wx3k71xqPdp2aYkrk8ZDDAAyotAY3A=",
+        "lastModified": 1792176256,
+        "narHash": "sha256-kPaSvJzs3HW6/a06uQU3iAbdZlKJxrIqyLgPR1EuIIA=",
         "owner": "alvinunreal",
         "repo": "oh-my-opencode-slim",
-        "rev": "06e5d7eb56a861c762f70b32ab75afb2b2803392",
+        "rev": "5ac909c0b3fe192494d33a4ba917d0960771aa0a",
         "type": "github"
       },
       "original": {
