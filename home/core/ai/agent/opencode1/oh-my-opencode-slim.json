@@ -72,7 +72,7 @@
       "designer": {
         "model": [
           "anthropic/claude-opus-5-5",
-          "google/gemini-3.8-flash"
+          "google/gemini-4-argon"
         ],
         "skills": ["ui-ux-pro-max", "make-interfaces-feel-better", "better-icons", "!shuorenhua"],
         "mcps": ["codegraph"]

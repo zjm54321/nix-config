@@ -43,6 +43,7 @@
     whitelist = [
       "gemini-3.1-pro-preview"
       "gemini-3.8-flash"
+      "gemini-4-argon"
     ];
   };
 
