@@ -13,6 +13,11 @@ let
     cp -r "${inputs.shuorenhua}/references" "$out/references"
     cp "${inputs.shuorenhua}/LICENSE" "$out/LICENSE"
   '';
+
+  imageGenSkill = pkgs.runCommand "image-generation" { } ''
+    mkdir -p "$out"
+    cp -r ${./image-generation}/* "$out/"
+  '';
 in
 {
   programs.agent-skills = {
@@ -31,6 +36,7 @@ in
 
       secretary-skills = source inputs.secretary-skills "skills";
       shuorenhua = source shuorenhuaSkill ".";
+      image-generation = source imageGenSkill ".";
     };
 
     skills = {
@@ -49,6 +55,7 @@ in
 
         "shuorenhua"
         "output-presentation"
+        "image-generation"
       ];
       enableAll = false;
     };
