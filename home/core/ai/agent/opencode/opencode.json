@@ -36,7 +36,7 @@
     "file:///mnt/c/Users/Zhang/source/repos/AIFrontend/plugins/opencode-windows-frontend/dist",
     "opencode-session-reader@0.1.0",
     "opencode-clear-encrypted@0.1.2",
-    "@mingzzz/opencode-image@0.1.1",
+    "@mingzzz/opencode-image@0.1.0",
     "nix:model-policy",
     "nix:pty",
     "nix:gpt-taste",
