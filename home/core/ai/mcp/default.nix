@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  secret,
+  ...
+}:
 
 let
   edgeAiStartupScript = pkgs.writeText "start-edge-ai.ps1" (builtins.readFile ./start-edge-ai.ps1);
@@ -20,6 +25,26 @@ let
         "$@"
     '';
   };
+
+  codegraphWrapped = pkgs.writeShellApplication {
+    name = "codegraph";
+    runtimeInputs = [ pkgs.nodejs_24 ];
+    text = ''
+      exec node \
+        --liftoff-only \
+        --disable-warning=ExperimentalWarning \
+        "${pkgs.codegraph}/lib/codegraph/lib/dist/bin/codegraph.js" \
+        "$@"
+    '';
+  };
+
+  context7Mcp = pkgs.writeShellApplication {
+    name = "context7-mcp";
+    runtimeInputs = [ pkgs.bun ];
+    text = ''
+      exec bun x --yes @upstash/context7-mcp "$@"
+    '';
+  };
 in
 {
   home.packages = [ pkgs.mcp-nixos ];
@@ -29,12 +54,18 @@ in
 
     servers = {
       codegraph = {
-        command = lib.getExe pkgs.codegraph;
+        command = lib.getExe codegraphWrapped;
         args = [
           "serve"
           "--mcp"
         ];
         env.CODEGRAPH_NO_DAEMON = "1";
+        enabled = true;
+      };
+
+      context7 = {
+        command = lib.getExe context7Mcp;
+        env.CONTEXT7_API_KEY = secret.context7-api-key;
         enabled = true;
       };
 

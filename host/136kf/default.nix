@@ -1,4 +1,9 @@
-{ inputs, skills-catalog, ... }:
+{
+  inputs,
+  skills-catalog,
+  secret,
+  ...
+}:
 {
   imports = [
     ../../module/core
@@ -8,7 +13,9 @@
   networking.hostName = "136kf";
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs secret;
+    };
     useGlobalPkgs = true;
     useUserPackages = true;
     users.ming = {
