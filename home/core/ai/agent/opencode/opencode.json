@@ -28,7 +28,7 @@
       ]
     }
   },
-  "$comment": "@honcho-ai/opencode-honcho@0.2.1 is disabled until per-agent memory isolation is available.",
+  "$comment": "@honcho-ai/opencode-honcho@0.2.1 is disabled until per-agent memory isolation is available. opencode-hermes-bridge@0.1.2 is temporarily disabled; re-add it to plugins to restore.",
   "plugins": [
     "oh-my-opencode-slim@3.0.5",
     "opencode-todolist@0.6.1",
@@ -39,7 +39,6 @@
     "@mingzzz/opencode-image@0.1.1",
     "nix:model-policy",
     "nix:pty",
-    "nix:gpt-taste",
-    "opencode-hermes-bridge@0.1.2"
+    "nix:gpt-taste"
   ]
 }
