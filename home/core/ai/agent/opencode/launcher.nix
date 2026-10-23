@@ -13,8 +13,17 @@ let
     src = inputs.opencode.outPath;
     patches = [ ./patches/nix-persistent-pty.patch ];
   };
+  upstreamNodeModules = inputs.opencode.packages.${system}.opencode.node_modules;
+  # The v2.1.3 tag ships a stale x86_64-linux node_modules hash; drop this once a tag matches.
+  nodeModules =
+    assert lib.assertMsg (
+      upstreamNodeModules.outputHash == "sha256-y9Zr4/sIxFh5i/6AYl/1N9PzdFBfPnyXEyjqW/idPes="
+    ) "OpenCode's upstream node_modules hash changed; remove the local hash override in launcher.nix";
+    upstreamNodeModules.overrideAttrs {
+      outputHash = "sha256-UCy68yJ2yQSKL7EjmhEEEHrDnPvo/Btpb6krn7rSAeQ=";
+    };
   upstream = upstreamPkgs.callPackage "${patchedSource}/nix/opencode.nix" {
-    node_modules = inputs.opencode.packages.${system}.opencode.node_modules;
+    node_modules = nodeModules;
   };
   bun = upstreamPkgs.bun;
   package = upstream.overrideAttrs (old: {
