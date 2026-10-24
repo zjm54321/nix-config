@@ -15,6 +15,7 @@ let
     printf '%s\n' "export { default } from '${ptyPackage}/dist/src/v2/index.js';" > "$out/server.js"
   '';
   localPlugins = {
+    "nix:desktop-bridge" = import ./desktop-bridge { inherit pkgs; };
     "nix:model-policy" = modelPolicy.package;
     "nix:pty" = ptyPlugin;
     "nix:gpt-taste" = import ./gpt-taste { inherit lib pkgs; };
