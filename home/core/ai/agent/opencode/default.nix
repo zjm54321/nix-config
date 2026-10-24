@@ -12,10 +12,7 @@ let
   };
   baseSettings = builtins.fromJSON (builtins.readFile ./opencode.json);
   omoConfig = builtins.fromJSON (builtins.readFile ./oh-my-opencode-slim.json);
-  # Temporary V1 wire compatibility for EEHUB Google; remove if repointed to direct Google.
-  originalProviders = lib.recursiveUpdate (import ./providers.nix) {
-    google.options.omitFunctionCallIds = true;
-  };
+  originalProviders = import ./providers.nix;
   inherit
     (import ./plugins {
       inherit lib pkgs originalProviders;
@@ -54,7 +51,7 @@ in
           plugins = map resolvePlugin baseSettings.plugins;
           provider = builtins.removeAttrs modelPolicy.providers [ "openai" ];
           providers.openai.settings = modelPolicy.providers.openai.options // {
-            transport = "http";
+            transport = "websocket";
           };
           mcp = mcpServers;
           permission = import ./permissions.nix;

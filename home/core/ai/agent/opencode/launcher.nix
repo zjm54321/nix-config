@@ -34,7 +34,6 @@ let
       .version;
     patches = (old.patches or [ ]) ++ [
       ./patches/plugin-resolution.patch
-      ./patches/gemini-idless-tool-history.patch
     ];
   });
   wrapped = pkgs.writeShellScriptBin "opencode" ''
