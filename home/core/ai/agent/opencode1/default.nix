@@ -1,4 +1,7 @@
 {
+  config,
+  inputs,
+  lib,
   pkgs,
   systemFlakeHost,
   ...
@@ -6,9 +9,9 @@
 let
   bash = pkgs.lib.getExe pkgs.bashInteractive;
   base = import ./base.nix;
-  permissions = import ../opencode/permissions.nix;
+  permissions = import ./permissions.nix;
   tui = builtins.fromJSON (builtins.readFile ./tui.json);
-  providers = import ../opencode/providers.nix;
+  providers = import ./providers.nix;
   plugins = builtins.fromJSON (builtins.readFile ./plugins.json);
   agents = import ./agents.nix;
   opencodeWithFeatures = pkgs.writeShellScriptBin "opencode1" ''
@@ -27,17 +30,49 @@ let
     export OPENCODE_ENABLE_EXA=1
     exec ${pkgs.lib.getExe pkgs.opencode} "$@"
   '';
-  agentsTemplate = pkgs.replaceVars ../opencode/AGENTS.md {
+  agentsTemplate = pkgs.replaceVars ./AGENTS.md {
     inherit systemFlakeHost;
+  };
+  # Keep HM's V1 settings/MCP generation, but isolate its declaration keys too.
+  # Renaming the keys makes the default targets oc1/opencode/* without touching
+  # the generated contents or colliding with QOL's standard opencode/* keys.
+  upstreamModule = import "${inputs.home-manager}/modules/programs/opencode.nix" {
+    inherit config lib pkgs;
+  };
+  upstreamConfig = upstreamModule.config.content;
+  v1Files = upstreamConfig.xdg.configFile // {
+    "opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
+    "opencode/AGENTS.md".source = agentsTemplate;
   };
 in
 {
+  disabledModules = [ "${inputs.home-manager}/modules/programs/opencode.nix" ];
+  imports = [
+    (
+      upstreamModule
+      // {
+        config = upstreamModule.config // {
+          content = upstreamConfig // {
+            xdg = upstreamConfig.xdg // {
+              configFile = builtins.listToAttrs (
+                lib.mapAttrsToList (name: value: {
+                  name = "oc1/${name}";
+                  inherit value;
+                }) v1Files
+              );
+            };
+          };
+        };
+      }
+    )
+  ];
+
   programs.opencode = {
     enable = true;
     enableMcpIntegration = true;
     package = opencodeWithFeatures;
     inherit tui;
-    agents.raw = ../opencode/raw.md;
+    agents.raw = ./raw.md;
     settings = base // {
       shell = bash;
       agent = agents;
@@ -46,15 +81,4 @@ in
       provider = providers;
     };
   };
-
-  # Retain Home Manager's typed settings, MCP integration and ordered JSON
-  # generator; only redirect its output targets away from V2's standard tree.
-  xdg.configFile."opencode/opencode.json".target = "oc1/opencode/opencode.json";
-  xdg.configFile."opencode/tui.json".target = "oc1/opencode/tui.json";
-  xdg.configFile."opencode/agents/raw.md".target = "oc1/opencode/agents/raw.md";
-  xdg.configFile."opencode/oh-my-opencode-slim.json".target = "oc1/opencode/oh-my-opencode-slim.json";
-  xdg.configFile."opencode/AGENTS.md".target = "oc1/opencode/AGENTS.md";
-
-  xdg.configFile."opencode/oh-my-opencode-slim.json".source = ./oh-my-opencode-slim.json;
-  xdg.configFile."opencode/AGENTS.md".source = agentsTemplate;
 }

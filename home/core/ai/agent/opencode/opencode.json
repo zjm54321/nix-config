@@ -1,46 +1,41 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "default_agent": "orchestrator",
   "disabled_providers": ["opencode"],
-  "agents": {
-    "plan": { "disabled": true },
-    "build": { "disabled": true },
-    "general": { "disabled": true },
-    "explore": { "disabled": true },
-    "title": {
-      "model": {
-        "providerID": "openrouter",
-        "model": "openai/gpt-oss-20b"
-      }
-    }
-  },
-  "autoupdate": false,
-  "compaction": {
-    "auto": false
-  },
-  "experimental": {
-    "todo": true
-  },
-  "lsp": {
-    "nixd": {
-      "command": [
-        "nixd"
-      ],
-      "extensions": [
-        ".nix"
+  "enabled_providers": ["anthropic", "google", "openai", "openrouter"],
+  "providers": {
+    "openai": {
+      "settings": {
+        "baseURL": "{env:EEHUB_API_URL}",
+        "apiKey": "{env:EEHUB_API_KEY}",
+        "transport": "websocket"
+      },
+      "whitelist": ["gpt-6-astra", "gpt-6-luna", "gpt-6.1-sol", "gpt-6.1-terra"]
+    },
+    "openrouter": {
+      "settings": {
+        "baseURL": "{env:EEHUB_API_URL}",
+        "apiKey": "{env:EEHUB_API_KEY}"
+      },
+      "whitelist": [
+        "deepseek/deepseek-v4.1-flash",
+        "moonshotai/kimi-k3",
+        "openai/gpt-oss-20b",
+        "z-ai/glm-5.3",
+        "z-ai/glm-5.3-flash"
       ]
+    },
+    "google": {
+      "settings": {
+        "baseURL": "{env:EEHUB_API_URL}",
+        "apiKey": "{env:EEHUB_API_KEY}"
+      },
+      "whitelist": ["gemini-3.1-pro-preview", "gemini-3.8-flash", "gemini-4-argon"]
+    },
+    "anthropic": {
+      "settings": {
+        "baseURL": "{env:EEHUB_API_URL}",
+        "apiKey": "{env:EEHUB_API_KEY}"
+      },
+      "whitelist": ["claude-fable-5-1", "claude-haiku-5-5", "claude-opus-5-5", "claude-sonnet-5-5"]
     }
-  },
-  "$comment": "@honcho-ai/opencode-honcho@0.2.1 is disabled until per-agent memory isolation is available. opencode-hermes-bridge@0.1.2 is temporarily disabled; re-add it to plugins to restore.",
-  "plugins": [
-    "oh-my-opencode-slim@3.0.5",
-    "billion-context@0.1.202",
-    "nix:desktop-bridge",
-    "opencode-session-reader@0.1.2",
-    "opencode-clear-encrypted@0.1.2",
-    "@mingzzz/opencode-image@0.1.1",
-    "nix:model-policy",
-    "nix:pty",
-    "nix:gpt-taste"
-  ]
+  }
 }

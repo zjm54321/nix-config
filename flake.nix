@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Use an OpenCode V2 release tag rather than a development snapshot.
-    opencode.url = "github:anomalyco/opencode/v2.1.3";
+    # v2.1.4-qol: the integrated package owns plugins, skills and MCP defaults.
+    opencode-qol.url = "github:zjm54321/opencode-qol/v2.1.4-qol";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
