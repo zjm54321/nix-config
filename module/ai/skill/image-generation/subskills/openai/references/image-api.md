@@ -1,49 +1,24 @@
-# Image API quick reference
+# Native Image Settings Reference
 
-This file is for the fallback CLI mode only. Use it only after the user explicitly asks to use `scripts/image_gen.py` instead of the built-in `image_gen` tool.
+Adapted from OpenAI's image API reference for OpenCode 2.2.5. Execution uses `experimental_image_generate`; provider endpoints and request encoding are handled by OpenCode, not by the agent.
 
-These parameters describe the Image API and bundled CLI fallback surface. Do not assume they are normal arguments on the built-in `image_gen` tool.
+## Tool inputs
 
-## Scope
-- This fallback CLI is intended for GPT Image models (`gpt-image-1.5`, `gpt-image-1`, and `gpt-image-1-mini`).
-- The built-in `image_gen` tool and the fallback CLI do not expose the same controls.
+The native tool accepts `prompt`, optional `images`, optional `model`, and optional `path`. Each call produces one image asynchronously. See the parent skill for model selection, reference limits, and completion handling.
 
-## Endpoints
-- Generate: `POST /v1/images/generations` (`client.images.generate(...)`)
-- Edit: `POST /v1/images/edits` (`client.images.edit(...)`)
+## OpenAI model settings
 
-## Core parameters for GPT Image models
-- `prompt`: text prompt
-- `model`: image model
-- `n`: number of images (1-10)
-- `size`: `1024x1024`, `1536x1024`, `1024x1536`, or `auto`
-- `quality`: `low`, `medium`, `high`, or `auto`
-- `background`: output transparency behavior (`transparent`, `opaque`, or `auto`) for generated output; this is not the same thing as the prompt's visual scene/backdrop
-- `output_format`: `png` (default), `jpeg`, `webp`
-- `output_compression`: 0-100 (jpeg/webp only)
-- `moderation`: `auto` (default) or `low`
+Provider/model `settings` and variant `settings` can supply supported output controls, including:
 
-## Edit-specific parameters
-- `image`: one or more input images. For GPT Image models, you can provide up to 16 images.
-- `mask`: optional mask image
-- `input_fidelity`: `low` (default) or `high`
+- `size`: a size accepted by the selected model, for example `1024x1024`, `1536x1024`, or `1024x1536`.
+- `quality`: a quality supported by the selected model.
+- `background`: for example `transparent` when supported; this is an output property, distinct from a scene description.
+- `outputFormat`: the output encoding, such as `png`.
 
-Model-specific note for `input_fidelity`:
-- `gpt-image-1` and `gpt-image-1-mini` preserve all input images, but the first image gets richer textures and finer details.
-- `gpt-image-1.5` preserves the first 5 input images with higher fidelity.
+These are configuration fields, not additional native tool arguments. Check the configured model and gateway support before promising an exact output property. A variant reference uses `providerID/modelID#variant` and should be selected only when explicitly requested by the user.
 
-## Output
-- `data[]` list with `b64_json` per image
-- The bundled `scripts/image_gen.py` CLI decodes `b64_json` and writes output files for you.
+## Edits and output
 
-## Limits and notes
-- Input images and masks must be under 50MB.
-- Use the edits endpoint when the user requests changes to an existing image.
-- Masking is prompt-guided; exact shapes are not guaranteed.
-- Large sizes and high quality increase latency and cost.
-- High `input_fidelity` can materially increase input token usage.
-- If a request fails because a specific option is unsupported by the selected GPT Image model, retry manually without that option.
+Pass source images in `images` and state the requested changes and invariants in the prompt. The tool exposes neither a mask parameter nor arbitrary underlying API controls. Do not work around a missing tool parameter with a standalone SDK request.
 
-## Important boundary
-- `quality`, `input_fidelity`, explicit masks, `background`, `output_format`, and related parameters are fallback-only execution controls.
-- Do not assume they are built-in `image_gen` tool arguments.
+Wait for the automatic completion notice, then read the actual saved image. The immediate job ID/path stem is not a finished image or a Markdown preview. On failure, report the actionable error; do not automatically issue another billable request.

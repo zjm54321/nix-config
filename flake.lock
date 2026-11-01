@@ -568,16 +568,16 @@
         "wshobson-agents": "wshobson-agents"
       },
       "locked": {
-        "lastModified": 1793466888,
-        "narHash": "sha256-sxJicy80CKfSJsKqWjYDjPKKXMLGBezgxhO/tBCKodg=",
+        "lastModified": 1793504773,
+        "narHash": "sha256-IDjyDVL8cucJllzS94odZ279wUmOTZlI0dWk/RDqOWY=",
         "owner": "zjm54321",
         "repo": "opencode-qol",
-        "rev": "ca6e9e27d73e915784ad7e381f9015017347e3ad",
+        "rev": "0a56974eb1ef7fbc66a404722aad8bc73d9beb27",
         "type": "github"
       },
       "original": {
         "owner": "zjm54321",
-        "ref": "v2.2.5-qol",
+        "ref": "v2.2.5-qol.1",
         "repo": "opencode-qol",
         "type": "github"
       }

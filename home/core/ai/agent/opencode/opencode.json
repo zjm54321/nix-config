@@ -1,6 +1,11 @@
 {
   "disabled_providers": ["opencode"],
   "enabled_providers": ["anthropic", "google", "openai", "openrouter"],
+  "experimental": {
+    "image_generate": {
+      "model": "openai/gpt-image-2.5-flare"
+    }
+  },
   "providers": {
     "openai": {
       "settings": {
@@ -8,7 +13,72 @@
         "apiKey": "{env:EEHUB_API_KEY}",
         "transport": "http"
       },
-      "whitelist": ["gpt-6-astra", "gpt-6-luna", "gpt-6.1-sol", "gpt-6.1-terra"]
+      "whitelist": [
+        "gpt-6-astra",
+        "gpt-6-luna",
+        "gpt-6.1-sol",
+        "gpt-6.1-terra",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-sunburst"
+      ],
+      "models": {
+        "gpt-image-2.5-flare": {
+          "type": "image",
+          "capabilities": {
+            "input": ["text", "image"],
+            "output": ["image"]
+          },
+          "variants": [
+            {
+              "id": "transparent",
+              "settings": {
+                "background": "transparent",
+                "outputFormat": "png"
+              }
+            },
+            {
+              "id": "landscape",
+              "settings": {
+                "size": "1536x1024"
+              }
+            },
+            {
+              "id": "portrait",
+              "settings": {
+                "size": "1024x1536"
+              }
+            }
+          ]
+        },
+        "gpt-image-2.5-sunburst": {
+          "type": "image",
+          "capabilities": {
+            "input": ["text", "image"],
+            "output": ["image"]
+          },
+          "variants": [
+            {
+              "id": "transparent",
+              "settings": {
+                "background": "transparent",
+                "outputFormat": "png"
+              }
+            },
+            {
+              "id": "landscape",
+              "settings": {
+                "size": "1536x1024"
+              }
+            },
+            {
+              "id": "portrait",
+              "settings": {
+                "size": "1024x1536"
+              }
+            }
+          ]
+        }
+      }
     },
     "openrouter": {
       "settings": {
@@ -28,7 +98,34 @@
         "baseURL": "{env:EEHUB_API_URL}",
         "apiKey": "{env:EEHUB_API_KEY}"
       },
-      "whitelist": ["gemini-3.1-pro-preview", "gemini-3.8-flash", "gemini-4-argon"]
+      "whitelist": ["gemini-3.1-pro-preview", "gemini-3.8-flash", "gemini-4-argon", "gemini-3.1-flash-image"],
+      "models": {
+        "gemini-3.1-flash-image": {
+          "type": "image",
+          "capabilities": {
+            "input": ["text", "image"],
+            "output": ["image"]
+          },
+          "variants": [
+            {
+              "id": "landscape",
+              "settings": {
+                "imageConfig": {
+                  "aspectRatio": "16:9"
+                }
+              }
+            },
+            {
+              "id": "portrait",
+              "settings": {
+                "imageConfig": {
+                  "aspectRatio": "9:16"
+                }
+              }
+            }
+          ]
+        }
+      }
     },
     "anthropic": {
       "settings": {

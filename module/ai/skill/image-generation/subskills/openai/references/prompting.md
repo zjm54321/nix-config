@@ -1,10 +1,6 @@
 # Prompting best practices
 
-These prompting principles are shared by both top-level modes of the skill:
-- built-in `image_gen` tool (default)
-- explicit `scripts/image_gen.py` CLI fallback
-
-This file is about prompt structure, specificity, and iteration. Fallback-only execution controls such as `quality`, `input_fidelity`, masks, output format, and output paths live in the fallback docs.
+Adapted from OpenAI's imagegen skill for OpenCode's native `experimental_image_generate` tool. This file covers prompt structure, specificity and iteration, not execution setup.
 
 ## Contents
 - [Structure](#structure)
@@ -15,7 +11,7 @@ This file is about prompt structure, specificity, and iteration. Fallback-only e
 - [Text in images](#text-in-images)
 - [Input images and references](#input-images-and-references)
 - [Iterate deliberately](#iterate-deliberately)
-- [Fallback-only execution controls](#fallback-only-execution-controls)
+- [Tool controls](#tool-controls)
 - [Use-case tips](#use-case-tips)
 - [Where to find copy/paste recipes](#where-to-find-copypaste-recipes)
 
@@ -68,10 +64,9 @@ Do not add:
 - Re-specify critical constraints when you iterate.
 - Prefer one targeted follow-up at a time over rewriting the whole prompt.
 
-## Fallback-only execution controls
-- `quality`, `input_fidelity`, explicit masks, output format, and output paths are fallback-only execution controls.
-- Do not assume they are built-in `image_gen` tool arguments.
-- If the user explicitly chooses CLI fallback, see `references/cli.md` and `references/image-api.md` for those controls.
+## Tool controls
+- Native tool inputs are `prompt`, `images`, `model` and `path`. Exact quality, aspect ratio, transparency and encoding controls belong in model settings or configured variants.
+- Explicit masks and input-fidelity controls are not native tool arguments; describe the requested edit and invariants in the prompt. Use `path` for an output destination. Do not use a shell workaround.
 
 ## Use-case tips
 Generate:
