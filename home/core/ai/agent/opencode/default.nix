@@ -18,5 +18,6 @@
     };
     settings = builtins.fromJSON (builtins.readFile ./opencode.json);
     slim.settings.preset = "default";
+    billionContext.settings.network.throttle429Enabled = false;
   };
 }
