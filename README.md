@@ -79,3 +79,22 @@ Nix packages. V1 uses `plugins.json` and `tui.json`. Each version keeps its full
 slim configuration in its own `oh-my-opencode-slim.json`, without override layers.
 
 `flake.lock` is updated separately when input revisions change.
+
+## CH552 / SDCC development shell
+
+The `ch552` shell provides SDCC (including the MCS-51 backend and `packihx`),
+GNU Make, and `wchisp` from the existing locked nixpkgs input:
+
+```sh
+nix develop path:/home/ming/nix-config#ch552
+sdcc --version
+wchisp --version
+```
+
+Use `sdcc -mmcs51 --model-small` for native CH552 C sources. CH55xduino Arduino
+examples additionally need that project's core and build tools; this shell does
+not install an Arduino board package. `wchisp` lists CH552 as supported with
+known caveats, so verify programming on the actual chip and bootloader revision.
+On WSL, USB programming also requires forwarding the device from Windows with
+usbipd-win; a Windows browser can configure its HID interface while Windows owns
+the device, rather than while it is attached to WSL.
