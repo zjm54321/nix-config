@@ -70,18 +70,8 @@
 
       formatter.${system} = pkgs.nixfmt-tree;
 
-      devShells.${system} = {
-        default = pkgs.mkShell {
-          packages = [ pkgs.just ];
-        };
-
-        ch552 = pkgs.mkShell {
-          packages = with pkgs; [
-            sdcc
-            gnumake
-            wchisp
-          ];
-        };
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [ pkgs.just ];
       };
     };
 }
