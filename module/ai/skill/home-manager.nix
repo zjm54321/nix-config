@@ -18,6 +18,12 @@ let
     mkdir -p "$out"
     cp -r ${./image-generation}/* "$out/"
   '';
+
+  docToolchainSkill = pkgs.runCommand "doc-toolchain" { } ''
+    mkdir -p "$out"
+    cp -r ${./doc-toolchain}/* "$out/"
+    chmod +x "$out/scripts/doc-nix" "$out/scripts/render-review"
+  '';
 in
 {
   programs.agent-skills = {
@@ -37,6 +43,7 @@ in
       secretary-skills = source inputs.secretary-skills "skills";
       shuorenhua = source shuorenhuaSkill ".";
       image-generation = source imageGenSkill ".";
+      doc-toolchain = source docToolchainSkill ".";
     };
 
     skills = {
@@ -56,6 +63,7 @@ in
         "shuorenhua"
         "output-presentation"
         "image-generation"
+        "doc-toolchain"
       ];
       enableAll = false;
     };

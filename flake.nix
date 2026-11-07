@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # The integrated package owns plugins, skills and MCP defaults.
-    opencode-qol.url = "github:zjm54321/opencode-qol/v2.2.5-qol.1";
+    opencode-qol.url = "github:zjm54321/opencode-qol/v2.2.5-qol.2";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";

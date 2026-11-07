@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf '%s\n' \
+    'Usage: doc-nix <tool> [args…]' \
+    'Tools: typst tectonic pandoc pdfinfo pdftoppm marp soffice python' \
+    'python = python3 with python-pptx, python-docx, and openpyxl.' \
+    'Tools are fetched with nix shell using the system nixpkgs registry pin.' \
+    'Marp uses google-chrome from PATH; pass --allow-local-files only for trusted assets.' \
+    'Soffice uses the temporary profile /tmp/opencode/lo-profile.' \
+    'Examples:' \
+    '  doc-nix typst compile main.typ /tmp/opencode/main.pdf' \
+    '  doc-nix pandoc input.md -o /tmp/opencode/report.pdf --pdf-engine=typst' \
+    '  doc-nix python /tmp/opencode/make_slides.py'
+}
+
+if (( $# == 0 )); then
+  usage >&2
+  exit 2
+fi
+case "$1" in
+  -h|--help) usage; exit 0 ;;
+  typst|tectonic|pandoc|pdfinfo|pdftoppm|marp|soffice|python) tool=$1; shift ;;
+  *) printf 'doc-nix: unknown tool: %s\n' "$1" >&2; usage >&2; exit 2 ;;
+esac
+
+# An invocation-local override prevents a user/global registry from replacing
+# the locked nixpkgs selected by this machine's system configuration.
+system_nixpkgs=$(nix eval --impure --raw --expr '
+  let
+    registry = builtins.fromJSON
+      (builtins.unsafeDiscardStringContext (builtins.readFile /etc/nix/registry.json));
+    entries = builtins.filter
+      (entry: (entry.from.type or "") == "indirect"
+        && (entry.from.id or "") == "nixpkgs") registry.flakes;
+  in
+    if entries == [] then throw "doc-nix: system registry has no nixpkgs entry"
+    else builtins.flakeRefToString (builtins.head entries).to
+')
+nix_shell=(nix shell --override-flake nixpkgs "$system_nixpkgs")
+font_packages=()
+font_config=''
+trap 'if [[ -n "$font_config" ]]; then rm -f -- "$font_config"; fi' EXIT
+
+case "$tool" in
+  typst|tectonic|pandoc|marp|soffice)
+    sans=$(nix eval --raw --override-flake nixpkgs "$system_nixpkgs" nixpkgs#source-han-sans.outPath)
+    serif=$(nix eval --raw --override-flake nixpkgs "$system_nixpkgs" nixpkgs#source-han-serif.outPath)
+    font_packages=(nixpkgs#source-han-sans nixpkgs#source-han-serif)
+    mkdir -p /tmp/opencode/fontconfig-cache
+    font_config=$(mktemp /tmp/opencode/doc-fonts.XXXXXX.conf)
+    printf '%s\n' \
+      '<?xml version="1.0"?>' \
+      '<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">' \
+      '<fontconfig>' \
+      '  <include ignore_missing="yes">/etc/fonts/fonts.conf</include>' \
+      "  <dir>$sans/share/fonts</dir>" \
+      "  <dir>$serif/share/fonts</dir>" \
+      '  <cachedir>/tmp/opencode/fontconfig-cache</cachedir>' \
+      '</fontconfig>' > "$font_config"
+    export FONTCONFIG_FILE="$font_config"
+    export TYPST_FONT_PATHS="$sans/share/fonts:$serif/share/fonts${TYPST_FONT_PATHS:+:$TYPST_FONT_PATHS}"
+    ;;
+esac
+
+case "$tool" in
+  typst)
+    "${nix_shell[@]}" nixpkgs#typst "${font_packages[@]}" -c typst "$@"
+    ;;
+  tectonic)
+    "${nix_shell[@]}" nixpkgs#tectonic "${font_packages[@]}" -c tectonic "$@"
+    ;;
+  pandoc)
+    "${nix_shell[@]}" nixpkgs#pandoc nixpkgs#typst "${font_packages[@]}" -c pandoc "$@"
+    ;;
+  pdfinfo|pdftoppm)
+    "${nix_shell[@]}" nixpkgs#poppler-utils -c "$tool" "$@"
+    ;;
+  marp)
+    if ! chrome=$(command -v google-chrome); then
+      printf 'doc-nix: google-chrome is not on PATH; Marp needs its browser.\n' >&2
+      exit 1
+    fi
+    "${nix_shell[@]}" nixpkgs#marp-cli "${font_packages[@]}" \
+      -c marp --browser chrome --browser-path "$chrome" "$@"
+    ;;
+  soffice)
+    mkdir -p /tmp/opencode/lo-profile
+    "${nix_shell[@]}" nixpkgs#libreoffice "${font_packages[@]}" \
+      -c soffice -env:UserInstallation=file:///tmp/opencode/lo-profile "$@"
+    ;;
+  python)
+    "${nix_shell[@]}" --impure --expr '
+      let pkgs = import (builtins.getFlake "nixpkgs").outPath {};
+      in [ (pkgs.python3.withPackages (ps: with ps; [ python-pptx python-docx openpyxl ])) ]
+    ' -c python3 "$@"
+    ;;
+esac

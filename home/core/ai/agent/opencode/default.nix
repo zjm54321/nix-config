@@ -4,7 +4,10 @@
   ...
 }:
 {
-  imports = [ inputs.opencode-qol.homeManagerModules.default ];
+  imports = [
+    inputs.opencode-qol.homeManagerModules.default
+    ./agents.nix
+  ];
 
   programs.opencode-qol = {
     enable = true;

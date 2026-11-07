@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf '%s\n' \
+    'Usage: render-review <file.pdf|.docx|.pptx> [outdir]' \
+    'Convert Office input to PDF, print PDF page count/size, and render every page at 130 DPI.' \
+    'Default outdir: /tmp/opencode/review/<basename>/' \
+    'Each run creates a fresh subdirectory and prints every PNG path for visual inspection.'
+}
+
+if (( $# == 1 )) && [[ "$1" == --help || "$1" == -h ]]; then
+  usage
+  exit 0
+fi
+if (( $# < 1 || $# > 2 )); then
+  usage >&2
+  exit 2
+fi
+if [[ ! -f "$1" ]]; then
+  printf 'render-review: input file not found: %s\n' "$1" >&2
+  exit 1
+fi
+
+input=$(realpath -- "$1")
+filename=${input##*/}
+stem=${filename%.*}
+extension=${filename##*.}
+case "${extension,,}" in
+  pdf|docx|pptx) ;;
+  *) printf 'render-review: unsupported input: %s\n' "$filename" >&2; exit 2 ;;
+esac
+
+outdir=${2:-/tmp/opencode/review/$stem}
+mkdir -p -- "$outdir"
+outdir=$(realpath -- "$outdir")
+run_dir=$(mktemp -d "$outdir/render.XXXXXX")
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+doc_nix="$script_dir/doc-nix"
+pdf=$input
+
+if [[ "${extension,,}" != pdf ]]; then
+  mkdir -p -- "$run_dir/office"
+  "$doc_nix" soffice --headless --convert-to pdf --outdir "$run_dir/office" "$input"
+  pdf="$run_dir/office/$stem.pdf"
+  if [[ ! -s "$pdf" ]]; then
+    printf 'render-review: LibreOffice produced no PDF: %s; check its log/profile lock.\n' "$pdf" >&2
+    exit 1
+  fi
+fi
+
+printf 'Review PDF: %s\n' "$pdf"
+"$doc_nix" pdfinfo "$pdf"
+"$doc_nix" pdftoppm -png -r 130 "$pdf" "$run_dir/page"
+shopt -s nullglob
+pages=("$run_dir"/page-*.png)
+if (( ${#pages[@]} == 0 )); then
+  printf 'render-review: no PNG pages produced in %s\n' "$run_dir" >&2
+  exit 1
+fi
+printf '\nInspect every PNG (%s pages):\n' "${#pages[@]}"
+printf '%s\n' "${pages[@]}"
