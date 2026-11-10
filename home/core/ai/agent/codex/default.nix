@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -23,6 +24,8 @@ let
   writableConfigHelper = pkgs.writeShellScriptBin "codex-writable-config" ''
     exec ${lib.getExe pkgs.python3} ${./writable-config.py} "$@"
   '';
+  # 临时取自 nixpkgs-codex 输入，原因见 flake.nix。
+  codexPackage = inputs.nixpkgs-codex.legacyPackages.${pkgs.stdenv.hostPlatform.system}.codex;
   codexWithEehub =
     (pkgs.writeShellScriptBin "codex" ''
       if [[ -z "''${EEHUB_API_URL:-}" || -z "''${EEHUB_API_KEY:-}" ]]; then
@@ -30,13 +33,13 @@ let
         exit 1
       fi
 
-      exec ${pkgs.lib.getExe pkgs.codex} \
+      exec ${pkgs.lib.getExe codexPackage} \
         -c "model_providers.eehub.base_url=\"$EEHUB_API_URL\"" \
         "$@"
     '').overrideAttrs
       {
         pname = "codex";
-        inherit (pkgs.codex) version;
+        inherit (codexPackage) version;
       };
 in
 {

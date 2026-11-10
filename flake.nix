@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # 只给 codex 用：nixos-unstable f4a03c0 的 codex 0.167.0 构建失败（缺系统库输入），
+    # master 16b463698 已修复且有官方缓存。固定到这个提交；nixos-unstable 包含该修复后删除。
+    nixpkgs-codex.url = "github:NixOS/nixpkgs/7f19607d4bb849da1dcc4282c626a983144db476";
+
     # The integrated package owns plugins, skills and MCP defaults.
     opencode-qol.url = "github:zjm54321/opencode-qol/v2.2.5-qol.2";
 
